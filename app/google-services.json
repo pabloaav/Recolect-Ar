@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "162694115883",
+    "firebase_url": "https://recolect-ar-75811.firebaseio.com",
+    "project_id": "recolect-ar-75811",
+    "storage_bucket": "recolect-ar-75811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162694115883:android:ad564af82a29cb01",
+        "android_client_info": {
+          "package_name": "com.e.recolectar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162694115883-6cuoc323han1effi61b9qlomcbdfvoli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.recolectar",
+            "certificate_hash": "0aca0bb596df8b4de31feb470a703e30d99dea8a"
+          }
+        },
+        {
+          "client_id": "162694115883-e7m0qlsr5ivtag5d43l78jkhc4g4e94l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIURfDjLlKg0I3say9E0ElDKDmhgzrS00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162694115883-e7m0qlsr5ivtag5d43l78jkhc4g4e94l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
