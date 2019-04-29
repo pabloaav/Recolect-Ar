@@ -1,12 +1,14 @@
 <resources>
+    //main_activity
     <string name="app_name">RecolectAr</string>
-    <string name="txt_Usuario">Nombre De Usuario:</string>
+    <string name="txt_Usuario">Email:</string>
     <string name="txt_Contrasena">Contraseña:</string>
     <string name="bt_Loguear">Iniciar Sesión</string>
     <string name="bt_Registrarse">Crear Una Cuenta</string>
     <string name="tv_olvidoPass">Has Olvidado Tu Contraseña?</string>
-    
-    <string name="txt_Nombre">Nombre De Usuario: </string>
+    //CrearCuenta
+    <string name="txt_dni">Su Numero de DNI:</string>
+    <string name="txt_Nombre">Nombre: </string>
     <string name="txt_Apellido">Apellido: </string>
     <string name="txt_Mail">Correo Electrónico: </string>
     <string name="txt_Pass">Contraseña: </string>
