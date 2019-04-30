@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         inicializarFirebase();
 //        barra de progreso de accion
         progressDialog = new ProgressDialog(this);
-
+        Toast.makeText(this, "Bienvenido a Recolect-Ar", Toast.LENGTH_LONG).show();
     }
 
     private void inicializarFirebase() {
