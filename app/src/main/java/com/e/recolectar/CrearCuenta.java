@@ -157,5 +157,5 @@ public class CrearCuenta extends AppCompatActivity {
     /*Actualizar la UI si ya esta logueado*/
     private void updateUI(FirebaseUser user) {
     }
-
+//COmentario de prueba para git
 }
