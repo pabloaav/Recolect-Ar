@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RecolectAr</string>
     //Activity Inicio de Sesión
-    <string name="txt_Usuario">Ingrese Su DNI:</string>
+    <string name="txt_CorreoLogin">Ingrese Su Correo Electrónico:</string>
     <string name="txt_Contrasena">Ingrese Su Contraseña:</string>
     <string name="bt_Loguear">Iniciar Sesión</string>
     <string name="bt_Registrarse">Crear Una Cuenta</string>

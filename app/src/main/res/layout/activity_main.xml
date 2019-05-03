@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5sp"
                 android:ems="10"
-                android:hint="@string/txt_Usuario"
+                android:hint="@string/txt_CorreoLogin"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorAccent"
                 android:textColorHighlight="@color/colorAccent"
