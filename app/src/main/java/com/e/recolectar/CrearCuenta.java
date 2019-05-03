@@ -50,10 +50,10 @@ public class CrearCuenta extends AppCompatActivity {
         reppass = findViewById(R.id.txt_reppass);
 //        TextInputLayout
         til_dni = findViewById(R.id.til_dni);
-        til_nombre = findViewById(R.id.til_correoLogin);
+        til_nombre = findViewById(R.id.til_nombre);
         til_apellido = findViewById(R.id.til_apellido);
-        til_email = findViewById(R.id.til_email);
-        til_password = findViewById(R.id.til_password);
+        til_email = findViewById(R.id.til_mail);
+        til_password = findViewById(R.id.til_pass);
         til_reppass = findViewById(R.id.til_reppass);
 //        inicializacion de Firebase
         inicializarFirebase();

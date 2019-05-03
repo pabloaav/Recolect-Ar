@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fondo_main_menu_720p"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="72dp">
@@ -23,13 +24,17 @@
 
             <EditText
                 android:id="@+id/txt_correoLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10sp"
-                android:layout_marginTop="10sp"
+                android:layout_width="60mm"
+                android:layout_height="55sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Usuario"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent"
+                android:textColorHighlight="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -41,43 +46,78 @@
 
             <EditText
                 android:id="@+id/txt_contrasena"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10sp"
+                android:layout_width="60mm"
+                android:layout_height="55sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Contrasena"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
 
 
         <Button
             android:id="@+id/bt_loguear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60mm"
+            android:layout_height="55sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/stylo_borde_edittext"
+            android:drawableLeft="@drawable/login_user_32x"
+            android:minWidth="88dip"
             android:onClick="autenticar"
-            android:text="@string/bt_Loguear" />
-
-        <Button
-            android:id="@+id/bt_loggoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="google" />
-
-        <Button
-            android:id="@+id/bt_logface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="face" />
+            android:text="@string/bt_Loguear"
+            android:textColor="@color/colorAccent"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/bt_registrarse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60mm"
+            android:layout_height="55sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/stylo_borde_edittext"
+            android:drawableLeft="@drawable/icono_add_user_32x"
             android:onClick="CrearNuevaCuenta"
-            android:text="@string/bt_Registrarse" />
+            android:text="@string/bt_Registrarse"
+            android:textColor="@color/colorAccent"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/bt_logface"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60mm"
+            android:layout_height="55sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/stylo_borde_edittext"
+            android:drawableLeft="@drawable/facebook_icon_32x"
+            android:text="iniciar con facebook"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/bt_loggoogle"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60mm"
+            android:layout_height="55sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/stylo_borde_edittext"
+            android:drawableLeft="@drawable/google_icon_log_32x"
+            android:text="iniciar con google"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tv_contraolv"
@@ -85,7 +125,11 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_marginVertical="10sp"
-            android:text="@string/tv_olvidoPass" />
+            android:text="@string/tv_olvidoPass"
+            android:textColor="@color/colorAccent"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
