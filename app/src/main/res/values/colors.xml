@@ -3,10 +3,7 @@
     <color name="colorPrimary">#388E3C</color>
     <color name="colorPrimaryDark">#044605</color>
     <color name="colorAccent">#FFFFFF</color>
-
-
-
-
 </resources>
+
    <!--color que tenia por defecto CYAN-->
     <!--<color name="colorAccent">#00BCD4</color>-->

@@ -1,12 +1,10 @@
 package com.e.recolectar;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,8 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.UUID;
-
 public class CrearCuenta extends AppCompatActivity {
 
     //region Declaracion de Variables
@@ -34,7 +30,7 @@ public class CrearCuenta extends AppCompatActivity {
     private ProgressDialog progressDialog;//Objeto que muestra una barra de proceso
     //endregion
 
-
+    //region setUp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +38,19 @@ public class CrearCuenta extends AppCompatActivity {
 
 //        Vinculacion Logica-Grafica
 //        EditText
-        dni = findViewById(R.id.txt_dni);
-        nombre = findViewById(R.id.txt_nombre);
-        apellido = findViewById(R.id.txt_apellido);
-        email = findViewById(R.id.txt_mail);
-        password = findViewById(R.id.txt_pass);
-        reppass = findViewById(R.id.txt_reppass);
+        dni = (EditText) findViewById(R.id.txt_dni);
+        nombre = (EditText) findViewById(R.id.txt_nombre);
+        apellido = (EditText) findViewById(R.id.txt_apellido);
+        email = (EditText) findViewById(R.id.txt_mail);
+        password = (EditText) findViewById(R.id.txt_pass);
+        reppass = (EditText) findViewById(R.id.txt_reppass);
 //        TextInputLayout
-        til_dni = findViewById(R.id.til_dni);
-        til_nombre = findViewById(R.id.til_nombre);
-        til_apellido = findViewById(R.id.til_apellido);
-        til_email = findViewById(R.id.til_mail);
-        til_password = findViewById(R.id.til_pass);
-        til_reppass = findViewById(R.id.til_reppass);
+        til_dni = (TextInputLayout) findViewById(R.id.til_dni);
+        til_nombre = (TextInputLayout) findViewById(R.id.til_nombre);
+        til_apellido = (TextInputLayout) findViewById(R.id.til_apellido);
+        til_email = (TextInputLayout) findViewById(R.id.til_mail);
+        til_password = (TextInputLayout) findViewById(R.id.til_pass);
+        til_reppass = (TextInputLayout) findViewById(R.id.til_reppass);
 //        inicializacion de Firebase
         inicializarFirebase();
 //        barra de progreso
@@ -68,7 +64,9 @@ public class CrearCuenta extends AppCompatActivity {
 //        inicializamos el objeto firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
     }
+    //endregion
 
+    //region Registacion
     public void registrar(View view) {
         //        Obtenemos el string de cada campo
         String p_dni = dni.getText().toString().trim();
@@ -152,10 +150,12 @@ public class CrearCuenta extends AppCompatActivity {
 
         return firebaseAuth.getCurrentUser().getUid();
     }
+    //endregion
 
-
+    //region Otros Metodos
     /*Actualizar la UI si ya esta logueado*/
     private void updateUI(FirebaseUser user) {
     }
+    //endregion
 
 }
