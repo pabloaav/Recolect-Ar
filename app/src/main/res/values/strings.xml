@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">Recolect-Ar</string>
     //Activity Inicio de Sesión
-    <string name="txt_correoLogin">Ingrese Su Correo Electrónico:</string>
-    <string name="txt_Contrasena">Ingrese Su Contraseña:</string>
+    <string name="txt_correoLogin">Ingrese su Correo Electrónico:</string>
+    <string name="txt_Contrasena">Ingrese su Contraseña:</string>
     <string name="bt_Loguear">Iniciar Sesión</string>
     <string name="bt_Registrarse">Crear Una Cuenta</string>
     <string name="tv_olvidoPass">Has Olvidado Tu Contraseña?</string>
 
     //Activity Crear Cuenta
-    <string name="txt_dni">Ingrese Su DNI: </string>
-    <string name="txt_Nombre">Ingrese El Nombre: </string>
-    <string name="txt_Apellido">Ingrese El Apellido: </string>
-    <string name="txt_Mail">Ingrese El Correo Electrónico: </string>
-    <string name="txt_Pass">Ingrese La Contraseña: </string>
+    <string name="txt_dni">Ingrese su DNI: </string>
+    <string name="txt_Nombre">Ingrese su Nombre: </string>
+    <string name="txt_Apellido">Ingrese su Apellido: </string>
+    <string name="txt_Mail">Ingrese su Correo Electrónico: </string>
+    <string name="txt_Pass">Ingrese Contraseña: </string>
     <string name="txt_Reppass">Repetir Contraseña: </string>
     <string name="bt_Registrarme">Registrarme </string>
 
