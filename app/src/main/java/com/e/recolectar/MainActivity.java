@@ -1,6 +1,6 @@
 package com.e.recolectar;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private TextInputLayout til_correoLogin, til_contrasena;
-    private ProgressDialog progressDialog;//Objeto que muestra una barra de proceso
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -66,9 +67,10 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 //        barra de progreso de accion
-        progressDialog = new ProgressDialog(this);
+
         Toast.makeText(this, "Bienvenido a Recolect-Ar", Toast.LENGTH_LONG).show();
-    }
+
+    }// Fin de metodo onCreate()
 
     //Inicializacion de objetos de Firebase
     private void inicializarFirebase() {
@@ -127,12 +129,11 @@ public class MainActivity extends AppCompatActivity {
             passOk = true;
         }
 
-
-        //Si todo esta OK procedemos...
+//        Si todo esta OK procedemos...
         if (correOk && passOk) {
-            progressDialog.setMessage("Realizando registro en linea...");
-            progressDialog.show();
             loguearEmailPassword(p_correoLogin, p_contrasena);
+
+
         }
 
     }
@@ -146,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Bienvenido: " + correoLogin.getText(), Toast.LENGTH_LONG).show();
+                             String correo = firebaseAuth.getInstance().getCurrentUser().getEmail();
+                            Toast.makeText(MainActivity.this, "Bienvenido: " + correo, Toast.LENGTH_LONG).show();
 //                            Intent inicio = new Intent(getApplication(), InicioActivity.class);
 //                            startActivity(inicio);
                         } else {
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
                             }
                         }
-                        progressDialog.dismiss();
+
                     }
                 });
     }
@@ -245,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
     public void crearNuevaCuenta() {
         Intent crearCuenta = new Intent(this, CrearCuenta.class);
         startActivity(crearCuenta);
+
     }
     //endregion
 
