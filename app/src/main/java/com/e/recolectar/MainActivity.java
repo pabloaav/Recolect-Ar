@@ -1,6 +1,5 @@
 package com.e.recolectar;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.e.recolectar.ModeloDatos.Usuario;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -26,8 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout til_correoLogin, til_contrasena;
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private GoogleSignInClient mGoogleSignInClient;
-
     //endregion
 
     //region Metodos del SetUp
@@ -66,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-//        barra de progreso de accion
-
         Toast.makeText(this, "Bienvenido a Recolect-Ar", Toast.LENGTH_LONG).show();
 
+
     }// Fin de metodo onCreate()
+
+    //---------------------------------------------------------------------------------------------
+
 
     //Inicializacion de objetos de Firebase
     private void inicializarFirebase() {
@@ -132,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
 //        Si todo esta OK procedemos...
         if (correOk && passOk) {
             loguearEmailPassword(p_correoLogin, p_contrasena);
-
-
+            Intent irMenuInicio = new Intent(this, MenuInicio.class);
+            startActivity(irMenuInicio);
         }
 
     }
@@ -147,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if (task.isSuccessful()) {
-                             String correo = firebaseAuth.getInstance().getCurrentUser().getEmail();
-                            Toast.makeText(MainActivity.this, "Bienvenido: " + correo, Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(MainActivity.this, "Bienvenido: " + firebaseAuth.getCurrentUser(), Toast.LENGTH_LONG).show();
 //                            Intent inicio = new Intent(getApplication(), InicioActivity.class);
 //                            startActivity(inicio);
                         } else {
@@ -161,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
     }
     //endregion
 
@@ -234,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt_logface:
-                //login Facebook
+                // Hacer loguien en Facebook
                 break;
 
             default:
@@ -249,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(crearCuenta);
 
     }
+
+
     //endregion
 
 }

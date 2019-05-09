@@ -15,5 +15,9 @@
     <string name="txt_Pass">Ingrese Contraseña: </string>
     <string name="txt_Reppass">Repetir Contraseña: </string>
     <string name="bt_Registrarme">Registrarme </string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_menu">Menu</string>
 
 </resources>

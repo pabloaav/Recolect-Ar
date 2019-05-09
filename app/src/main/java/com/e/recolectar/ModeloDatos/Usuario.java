@@ -1,6 +1,9 @@
 package com.e.recolectar.ModeloDatos;
 
-public class Usuario {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Usuario implements Serializable {
 
     //region Atributos
     private String idUsuario;
@@ -14,9 +17,9 @@ public class Usuario {
 
     //region Metodos
 
-//    //Constructor de Persona Vacio
-//    public Usuario() {
-//    }
+    //Constructor de Persona Vacio
+    public Usuario() {
+    }
 
     //Constructor de Persona
     public Usuario(String p_id, String p_dni, String p_nombre, String p_apellido, String p_email, String p_password) {

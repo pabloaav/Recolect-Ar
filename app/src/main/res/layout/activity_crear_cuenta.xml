@@ -28,10 +28,10 @@
                 android:layout_gravity="center"
                 android:layout_marginVertical="10sp"
                 android:layout_marginTop="5sp"
-
                 android:ems="10"
                 android:hint="@string/txt_dni"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:maxLength="8" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -143,5 +143,6 @@
             android:textColor="#FFFFFF"
             android:textColorHint="@color/colorAccent"
             android:textSize="24sp" />
+
     </LinearLayout>
 </LinearLayout>
