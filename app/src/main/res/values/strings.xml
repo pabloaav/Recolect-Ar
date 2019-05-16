@@ -1,19 +1,33 @@
 <resources>
-    <string name="app_name">RecolectAr</string>
+    <string name="app_name">Recolect-Ar</string>
     //Activity Inicio de Sesión
-    <string name="txt_CorreoLogin">Ingrese Su Correo Electrónico:</string>
-    <string name="txt_Contrasena">Ingrese Su Contraseña:</string>
-    <string name="bt_Loguear">Iniciar Sesión</string>
-    <string name="bt_Registrarse">Crear Una Cuenta</string>
-    <string name="tv_olvidoPass">Has Olvidado Tu Contraseña?</string>
+    <string name="txt_correoLogin">INGRESE SU CORREO ELECTRONICO:</string>
+    <string name="txt_Contrasena">INGRESE SU CONTRASEÑA:</string>
+    <string name="bt_Loguear">INICIAR SESION</string>
+    <string name="bt_Registrarse">CREAR UNA CUENTA</string>
+    <string name="tv_olvidoPass">HAS OLVIDADO TU CONTRASEÑA?</string>
 
     //Activity Crear Cuenta
-    <string name="txt_dni">Ingrese Su DNI: </string>
-    <string name="txt_Nombre">Ingrese El Nombre: </string>
-    <string name="txt_Apellido">Ingrese El Apellido: </string>
-    <string name="txt_Mail">Ingrese El Correo Electrónico: </string>
-    <string name="txt_Pass">Ingrese La Contraseña: </string>
-    <string name="txt_Reppass">Repetir Contraseña: </string>
-    <string name="bt_Registrarme">Registrarme </string>
+    <string name="txt_dni">INGRESE SU DNI: </string>
+    <string name="txt_Nombre">INGRESE SU NOMBRE: </string>
+    <string name="txt_Apellido">INGRESE SU APELLIDO: </string>
+    <string name="txt_Mail">INGRESE SU CORREO ELECTRONICO: </string>
+    <string name="txt_Pass">INGRESE SU CONTRASEÑA: </string>
+    <string name="txt_Reppass">REPITA SU CONTRASEÑA: </string>
+    <string name="bt_Registrarme">REGISTRARME </string>
+
+
+    //Activity TAB 1 RECLAMOS
+    <string name="tv_selecTipo">SELECCIONE EL RECLAMO A REALIZAR:</string>
+    <string name="spin_Tipos">SELECCIONE UN TIPO</string>
+    <string name="txt_descripcion">DESCRIBA LA SITUACION:</string>
+    <string name="txt_domicilio">INGRESE SU DOMICILIO:</string>
+    <string name="bt_agregarFoto">AÑADIR FOTO</string>
+    <string name="bt_abrirGaleria">ABRIR GALERIA</string>
+    <string name="bt_enviar">ENVIAR INFORMACION</string>
+    
+    
+    
+    
 
 </resources>
