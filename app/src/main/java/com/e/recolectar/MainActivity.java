@@ -3,8 +3,11 @@ package com.e.recolectar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout til_correoLogin, til_contrasena;
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private GoogleSignInClient mGoogleSignInClient;
+
     //endregion
 
     //region Metodos del SetUp
@@ -53,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        Vinculacion Logica-Grafica
 
-        correoLogin = (EditText) findViewById(R.id.txt_correoLogin);
-        contrasena = (EditText) findViewById(R.id.txt_contrasena);
-        til_correoLogin = (TextInputLayout) findViewById(R.id.til_correoLogin);
-        til_contrasena = (TextInputLayout) findViewById(R.id.til_contrasena);
+        correoLogin = findViewById(R.id.txt_correoLogin);
+        contrasena = findViewById(R.id.txt_contrasena);
+        til_correoLogin = findViewById(R.id.til_correoLogin);
+        til_contrasena = findViewById(R.id.til_contrasena);
 
 
 //        inicializacion de Firebase
@@ -106,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
     public void autenticar() {
 
 //        Obtenemos el string de cada campo
-        String p_correoLogin = correoLogin.getText().toString().trim();
-        String p_contrasena = contrasena.getText().toString().trim();
+//        String p_correoLogin = correoLogin.getText().toString().trim();
+//        String p_contrasena = contrasena.getText().toString().trim();
+        String p_correoLogin = "juanro@gmail.com";
+        String p_contrasena = "prueba3";
         boolean correOk;
         boolean passOk;
 
@@ -137,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
 //        Si todo esta OK procedemos...
         if (correOk && passOk) {
             loguearEmailPassword(p_correoLogin, p_contrasena);
-            Intent irMenuInicio = new Intent(this, MenuInicio.class);
-            startActivity(irMenuInicio);
+           Intent irMenu = new Intent(this, Inicio.class);
+           startActivity(irMenu);
         }
 
     }

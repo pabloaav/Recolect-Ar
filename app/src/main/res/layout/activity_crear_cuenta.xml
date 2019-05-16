@@ -31,7 +31,8 @@
                 android:ems="10"
                 android:hint="@string/txt_dni"
                 android:inputType="number"
-                android:maxLength="8" />
+                android:maxLength="8"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -49,7 +50,8 @@
                 android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Nombre"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +70,8 @@
                 android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Apellido"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -87,7 +90,8 @@
                 android:layout_marginTop="10sp"
                 android:ems="10"
                 android:hint="@string/txt_Mail"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -106,7 +110,8 @@
                 android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Pass"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -126,7 +131,8 @@
                 android:layout_marginTop="5sp"
                 android:ems="10"
                 android:hint="@string/txt_Reppass"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -142,7 +148,7 @@
             android:onClick="registrar"
             android:textColor="@color/colorBotonBlanco"
             android:textColorHint="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 </LinearLayout>

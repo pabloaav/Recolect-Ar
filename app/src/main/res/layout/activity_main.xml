@@ -34,7 +34,7 @@
                 android:textColor="@color/colorAccent"
                 android:textColorHighlight="@color/colorAccent"
                 android:textColorHint="@color/colorAccent"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -54,7 +54,7 @@
                 android:ems="10"
                 android:hint="@string/txt_Contrasena"
                 android:inputType="textPassword"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +74,7 @@
             android:textColor="@color/colorBotonBlanco"
             android:textColorHighlight="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/bt_registrarse"
@@ -90,7 +90,7 @@
             android:textColor="@color/colorBotonBlanco"
             android:textColorHighlight="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/bt_loggoogle"
@@ -104,7 +104,7 @@
             android:onClick="onClick"
             android:text="iniciar con google"
             android:textColor="@color/colorBotonBlanco"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="normal" />
 
         <Button
@@ -119,7 +119,7 @@
             android:onClick="onClick"
             android:text="iniciar con facebook"
             android:textColor="@color/colorBotonBlanco"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="normal" />
 
     </LinearLayout>

@@ -31,6 +31,7 @@ public class CrearCuenta extends AppCompatActivity {
     //endregion
 
     //region setUp
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +39,19 @@ public class CrearCuenta extends AppCompatActivity {
 
 //        Vinculacion Logica-Grafica
 //        EditText
-        dni = (EditText) findViewById(R.id.txt_dni);
-        nombre = (EditText) findViewById(R.id.txt_nombre);
-        apellido = (EditText) findViewById(R.id.txt_apellido);
-        email = (EditText) findViewById(R.id.txt_mail);
-        password = (EditText) findViewById(R.id.txt_pass);
-        reppass = (EditText) findViewById(R.id.txt_reppass);
+        dni = findViewById(R.id.txt_dni);
+        nombre = findViewById(R.id.txt_nombre);
+        apellido = findViewById(R.id.txt_apellido);
+        email = findViewById(R.id.txt_mail);
+        password = findViewById(R.id.txt_pass);
+        reppass = findViewById(R.id.txt_reppass);
 //        TextInputLayout
-        til_dni = (TextInputLayout) findViewById(R.id.til_dni);
-        til_nombre = (TextInputLayout) findViewById(R.id.til_nombre);
-        til_apellido = (TextInputLayout) findViewById(R.id.til_apellido);
-        til_email = (TextInputLayout) findViewById(R.id.til_mail);
-        til_password = (TextInputLayout) findViewById(R.id.til_pass);
-        til_reppass = (TextInputLayout) findViewById(R.id.til_reppass);
+        til_dni = findViewById(R.id.til_dni);
+        til_nombre = findViewById(R.id.til_nombre);
+        til_apellido = findViewById(R.id.til_apellido);
+        til_email = findViewById(R.id.til_mail);
+        til_password = findViewById(R.id.til_pass);
+        til_reppass = findViewById(R.id.til_reppass);
 //        inicializacion de Firebase
         inicializarFirebase();
 //        barra de progreso
