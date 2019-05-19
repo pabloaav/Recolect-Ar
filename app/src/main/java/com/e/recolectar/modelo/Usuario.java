@@ -1,4 +1,4 @@
-package com.e.recolectar.ModeloDatos;
+package com.e.recolectar.modelo;
 
 import java.io.Serializable;
 

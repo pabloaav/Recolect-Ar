@@ -1,4 +1,4 @@
-package com.e.recolectar;
+package com.e.recolectar.Logica;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.e.recolectar.ModeloDatos.Usuario;
+import com.e.recolectar.R;
+import com.e.recolectar.modelo.Usuario;
+import com.e.recolectar.validaciones.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;

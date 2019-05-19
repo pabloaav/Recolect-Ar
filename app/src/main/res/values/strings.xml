@@ -25,9 +25,12 @@
     <string name="bt_agregarFoto">AÑADIR FOTO</string>
     <string name="bt_abrirGaleria">ABRIR GALERIA</string>
     <string name="bt_enviar">ENVIAR INFORMACION</string>
-    
-    
-    
-    
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>

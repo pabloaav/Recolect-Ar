@@ -1,20 +1,17 @@
-package com.e.recolectar;
+package com.e.recolectar.Logica;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
-import com.e.recolectar.ModeloDatos.Usuario;
+import com.e.recolectar.R;
+import com.e.recolectar.validaciones.Validar;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,12 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,8 +136,13 @@ public class MainActivity extends AppCompatActivity {
 //        Si todo esta OK procedemos...
         if (correOk && passOk) {
             loguearEmailPassword(p_correoLogin, p_contrasena);
-           Intent irMenu = new Intent(this, Inicio.class);
-           startActivity(irMenu);
+
+            try {
+                Intent irMenu = new Intent(this, MenuInicio.class);
+                startActivity(irMenu);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
