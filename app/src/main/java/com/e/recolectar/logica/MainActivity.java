@@ -1,4 +1,4 @@
-package com.e.recolectar.Logica;
+package com.e.recolectar.logica;
 
 import android.content.Intent;
 import android.os.Bundle;

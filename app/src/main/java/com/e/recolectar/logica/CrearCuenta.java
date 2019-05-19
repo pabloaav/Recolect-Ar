@@ -1,4 +1,4 @@
-package com.e.recolectar.Logica;
+package com.e.recolectar.logica;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

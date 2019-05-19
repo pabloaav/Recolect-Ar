@@ -1,9 +1,7 @@
-package com.e.recolectar.Logica;
+package com.e.recolectar.logica;
 
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -15,14 +13,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.e.recolectar.R;
-import com.e.recolectar.adaptadores.SeleccionTabAdapter;
 import com.e.recolectar.fragmentos.ContenedorFragment;
 import com.e.recolectar.fragmentos.EstadoFragment;
 import com.e.recolectar.fragmentos.PuntoVerdeFragment;
 import com.e.recolectar.fragmentos.SituacionFragment;
+import com.e.recolectar.validaciones.Utilidades;
 
 public class MenuInicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         PuntoVerdeFragment.OnFragmentInteractionListener, SituacionFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,
@@ -45,11 +42,11 @@ public class MenuInicio extends AppCompatActivity implements NavigationView.OnNa
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        if (Utilidades.validaPantalla) {
-//            Fragment fragment = new FormularioFragment();
-//            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
-//            Utilidades.validaPantalla = false;
-//        }
+        if (Utilidades.validaPantalla) {
+            Fragment fragment = new ContenedorFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+            Utilidades.validaPantalla = false;
+        }
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -89,7 +86,7 @@ public class MenuInicio extends AppCompatActivity implements NavigationView.OnNa
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -99,17 +96,17 @@ public class MenuInicio extends AppCompatActivity implements NavigationView.OnNa
         boolean fragmentSeleccionado = false;
 
 
-        if (id == R.id.nav_gallery) {
-            miFragment = new PuntoVerdeFragment();
-            fragmentSeleccionado = true;
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.hacer_reclamo) {
             miFragment = new SituacionFragment();
             fragmentSeleccionado = true;
-        } else if (id == R.id.nav_share) {
-            miFragment = new ContenedorFragment();
-            fragmentSeleccionado = true;
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.estados_situaciones) {
             miFragment = new EstadoFragment();
+            fragmentSeleccionado = true;
+        } else if (id == R.id.puntos_verdes) {
+            miFragment = new PuntoVerdeFragment();
+            fragmentSeleccionado = true;
+        } else if (id == R.id.ver_en_tabs) {
+            miFragment = new ContenedorFragment();
             fragmentSeleccionado = true;
         }
 

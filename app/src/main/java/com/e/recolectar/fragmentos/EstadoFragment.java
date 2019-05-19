@@ -4,11 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.e.recolectar.R;
+import com.e.recolectar.adaptadores.SituacionesAdapter;
+import com.e.recolectar.modelo.Situacion;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,9 @@ public class EstadoFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    RecyclerView recyclerEstado;
+    ArrayList<Situacion> listaSituaciones;
 
     public EstadoFragment() {
         // Required empty public constructor
@@ -65,8 +74,27 @@ public class EstadoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_estado, container, false);
+        View vista = inflater.inflate(R.layout.fragment_estado, container, false);
+
+        listaSituaciones = new ArrayList<>();
+        recyclerEstado = vista.findViewById(R.id.recyclerId);
+        recyclerEstado.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        llenarLista();
+
+        SituacionesAdapter adapter = new SituacionesAdapter(listaSituaciones);
+        recyclerEstado.setAdapter(adapter);
+
+        return vista;
     }
+
+    private void llenarLista() {
+        listaSituaciones.add(new Situacion("Solidos", "19 de mayo 2019", R.drawable.basura));
+        listaSituaciones.add(new Situacion("Secos", "19 de mayo 2019", R.drawable.basura));
+        listaSituaciones.add(new Situacion("Plásticos", "19 de mayo 2019", R.drawable.basura));
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

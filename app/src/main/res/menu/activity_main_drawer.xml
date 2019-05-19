@@ -3,30 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/mono1"
-            android:title="Formulario" />
+            android:id="@+id/hacer_reclamo"
+            android:icon="@drawable/ic_hacer_reclamo"
+            android:title="Hacer un reclamo" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/logo"
-            android:title="Rojo" />
+            android:id="@+id/estados_situaciones"
+            android:icon="@drawable/ic_report"
+            android:title="Estados de Situaciones" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/mono3"
-            android:title="Verde" />
+            android:id="@+id/puntos_verdes"
+            android:icon="@drawable/ic_puntos"
+            android:title="Puntos Verdes" />
+        <item
+            android:id="@+id/ver_en_tabs"
+            android:icon="@drawable/tabs"
+            android:title="Ver en Pestañas " />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="TABS" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/goku_cara"
-                android:title="Lista" />
-        </menu>
-    </item>
 
 </menu>
