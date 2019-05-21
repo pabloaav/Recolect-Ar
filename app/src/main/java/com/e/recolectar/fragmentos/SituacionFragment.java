@@ -1,14 +1,25 @@
 package com.e.recolectar.fragmentos;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.e.recolectar.R;
+
+import java.io.IOException;
+
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,11 +34,15 @@ public class SituacionFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static final int GALLERY_INTENT = 1;
+    private final int PICK_PHOTO = 1;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    final int COD_SELECCIONA = 10;
+    View vista;
+    Button btn_abrir;
+    ImageView imagen;
     private OnFragmentInteractionListener mListener;
 
     public SituacionFragment() {
@@ -58,6 +73,7 @@ public class SituacionFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -65,9 +81,22 @@ public class SituacionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_situacion, container, false);
+        vista = inflater.inflate(R.layout.fragment_situacion, container, false);
+        imagen = vista.findViewById(R.id.imagemId);
+
+        btn_abrir = vista.findViewById(R.id.bt_abrirGaleria);
+        btn_abrir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // cargarImagen();
+            }
+        });
+        return vista;
     }
 
+
+
+    //region Otros Metodos
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -92,6 +121,7 @@ public class SituacionFragment extends Fragment {
         mListener = null;
     }
 
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -106,4 +136,6 @@ public class SituacionFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    //endregion
+
 }

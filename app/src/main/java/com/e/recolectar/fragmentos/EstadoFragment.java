@@ -9,10 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.SituacionesAdapter;
 import com.e.recolectar.modelo.Situacion;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -35,6 +39,7 @@ public class EstadoFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
 
     RecyclerView recyclerEstado;
     ArrayList<Situacion> listaSituaciones;
@@ -67,6 +72,7 @@ public class EstadoFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -88,11 +94,21 @@ public class EstadoFragment extends Fragment {
         return vista;
     }
 
+
+
+
     private void llenarLista() {
         listaSituaciones.add(new Situacion("Solidos", "19 de mayo 2019", R.drawable.basura));
         listaSituaciones.add(new Situacion("Secos", "19 de mayo 2019", R.drawable.basura));
         listaSituaciones.add(new Situacion("Plásticos", "19 de mayo 2019", R.drawable.basura));
-
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference databaseReference = firebaseDatabase.getReference();
+//        Situacion situacion = new Situacion();
+//        try {
+//            listaSituaciones =  situacion.getDatos(databaseReference);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 

@@ -63,14 +63,14 @@ public class ContenedorFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_contenedor, container, false);
 
-
-        if (Utilidades.rotacion == 0) {
             View parent = (View) container.getParent();
 
             if (appBar == null) {
@@ -91,9 +91,7 @@ public class ContenedorFragment extends Fragment {
                 pestanas.setupWithViewPager(viewPager);
             }
             pestanas.setTabGravity(TabLayout.GRAVITY_FILL);
-        } else {
-            Utilidades.rotacion = 1;
-        }
+
 
 
         return vista;

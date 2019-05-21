@@ -2,6 +2,7 @@ package com.e.recolectar.logica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout til_correoLogin, til_contrasena;
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private GoogleSignInClient mGoogleSignInClient;
-
+    private static final int GALLERY_INTENT = 1;
     //endregion
 
     //region Metodos del SetUp
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             loguearEmailPassword(p_correoLogin, p_contrasena);
 
             try {
-                Intent irMenu = new Intent(this, MenuInicio.class);
+                Intent irMenu = new Intent(this, FotoActivity.class);
                 startActivity(irMenu);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -246,7 +247,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bt_logface:
                 // Hacer loguien en Facebook
                 break;
-
+            case R.id.bt_abrirGaleria:
+                //abrirGaleria();
+                break;
             default:
                 Toast.makeText(this, "No se pudo iniciar sesion", Toast.LENGTH_LONG).show();
                 break;
@@ -259,6 +262,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(crearCuenta);
 
     }
+
+//    private void abrirGaleria() {
+//        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        intent.setType("image/");
+//        startActivityForResult(Intent.createChooser(intent, "Seleccione la aplicacion"), 10);
+//    }
 
 
     //endregion
