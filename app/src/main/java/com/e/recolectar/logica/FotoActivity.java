@@ -1,5 +1,7 @@
 package com.e.recolectar.logica;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,34 +26,51 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
+import com.e.recolectar.modelo.Situacion;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.net.URI;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class FotoActivity extends AppCompatActivity {
 
-    private final String CARPETA_RAIZ="misImagenesPrueba/";
-    private final String RUTA_IMAGEN=CARPETA_RAIZ+"misFotos";
+    private final String CARPETA_RAIZ = "misImagenesPrueba/";
+    private final String RUTA_IMAGEN = CARPETA_RAIZ + "misFotos";
 
-    final int COD_SELECCIONA=10;
-    final int COD_FOTO=20;
+    final int COD_SELECCIONA = 10;
+    final int COD_FOTO = 20;
 
     Button botonCargar;
     ImageView imagen;
     String path;
+    private Uri miPath;
+    private StorageReference mStorageRef;
+    private Situacion situacion;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto);
 
-        imagen= (ImageView) findViewById(R.id.imagemId);
-        botonCargar= (Button) findViewById(R.id.btnCargarImg);
+        imagen = findViewById(R.id.imagemId);
+        botonCargar = findViewById(R.id.btnCargarImg);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        if(validaPermisos()){
+        if (validaPermisos()) {
             botonCargar.setEnabled(true);
-        }else{
+        } else {
             botonCargar.setEnabled(false);
         }
 
@@ -59,20 +78,20 @@ public class FotoActivity extends AppCompatActivity {
 
     private boolean validaPermisos() {
 
-        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
 
-        if((checkSelfPermission(CAMERA)== PackageManager.PERMISSION_GRANTED)&&
-                (checkSelfPermission(WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)){
+        if ((checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED) &&
+                (checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             return true;
         }
 
-        if((shouldShowRequestPermissionRationale(CAMERA)) ||
-                (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE))){
+        if ((shouldShowRequestPermissionRationale(CAMERA)) ||
+                (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE))) {
             cargarDialogoRecomendacion();
-        }else{
-            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+        } else {
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, 100);
         }
 
         return false;
@@ -82,11 +101,11 @@ public class FotoActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode==100){
-            if(grantResults.length==2 && grantResults[0]==PackageManager.PERMISSION_GRANTED
-                    && grantResults[1]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 100) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 botonCargar.setEnabled(true);
-            }else{
+            } else {
                 solicitarPermisosManual();
             }
         }
@@ -94,20 +113,20 @@ public class FotoActivity extends AppCompatActivity {
     }
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones={"si","no"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(FotoActivity.this);
+        final CharSequence[] opciones = {"si", "no"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(FotoActivity.this);
         alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("si")){
-                    Intent intent=new Intent();
+                if (opciones[i].equals("si")) {
+                    Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    Uri uri=Uri.fromParts("package",getPackageName(),null);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Los permisos no fueron aceptados",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }
@@ -116,7 +135,7 @@ public class FotoActivity extends AppCompatActivity {
     }
 
     private void cargarDialogoRecomendacion() {
-        AlertDialog.Builder dialogo=new AlertDialog.Builder(FotoActivity.this);
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(FotoActivity.this);
         dialogo.setTitle("Permisos Desactivados");
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
 
@@ -124,7 +143,7 @@ public class FotoActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, 100);
             }
         });
         dialogo.show();
@@ -136,20 +155,20 @@ public class FotoActivity extends AppCompatActivity {
 
     private void cargarImagen() {
 
-        final CharSequence[] opciones={"Tomar Foto","Cargar Imagen","Cancelar"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(FotoActivity.this);
+        final CharSequence[] opciones = {"Tomar Foto", "Cargar Imagen", "Cancelar"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(FotoActivity.this);
         alertOpciones.setTitle("Seleccione una Opción");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")){
+                if (opciones[i].equals("Tomar Foto")) {
                     tomarFotografia();
-                }else{
-                    if (opciones[i].equals("Cargar Imagen")){
-                        Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                } else {
+                    if (opciones[i].equals("Cargar Imagen")) {
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         intent.setType("image/");
-                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_SELECCIONA);
-                    }else{
+                        startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicación"), COD_SELECCIONA);
+                    } else {
                         dialogInterface.dismiss();
                     }
                 }
@@ -160,36 +179,34 @@ public class FotoActivity extends AppCompatActivity {
     }
 
     private void tomarFotografia() {
-        File fileImagen=new File(Environment.getExternalStorageDirectory(),RUTA_IMAGEN);
-        boolean isCreada=fileImagen.exists();
-        String nombreImagen="";
-        if(isCreada==false){
-            isCreada=fileImagen.mkdirs();
+        File fileImagen = new File(Environment.getExternalStorageDirectory(), RUTA_IMAGEN);
+        boolean isCreada = fileImagen.exists();
+        String nombreImagen = "";
+        if (isCreada == false) {
+            isCreada = fileImagen.mkdirs();
         }
 
-        if(isCreada==true){
-            nombreImagen=(System.currentTimeMillis()/1000)+".jpg";
+        if (isCreada == true) {
+            nombreImagen = (System.currentTimeMillis() / 1000) + ".jpg";
         }
 
 
-        path=Environment.getExternalStorageDirectory()+
-                File.separator+RUTA_IMAGEN+File.separator+nombreImagen;
+        path = Environment.getExternalStorageDirectory() +
+                File.separator + RUTA_IMAGEN + File.separator + nombreImagen;
 
-        File imagen=new File(path);
+        File imagen = new File(path);
 
-        Intent intent=null;
-        intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = null;
+        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         ////
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N)
-        {
-            String authorities=getApplicationContext().getPackageName()+".provider";
-            Uri imageUri= FileProvider.getUriForFile(this,authorities,imagen);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            String authorities = getApplicationContext().getPackageName() + ".provider";
+            Uri imageUri = FileProvider.getUriForFile(this, authorities, imagen);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        }else
-        {
+        } else {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagen));
         }
-        startActivityForResult(intent,COD_FOTO);
+        startActivityForResult(intent, COD_FOTO);
 
         ////
     }
@@ -197,11 +214,11 @@ public class FotoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
 
-            switch (requestCode){
+            switch (requestCode) {
                 case COD_SELECCIONA:
-                    Uri miPath=data.getData();
+                    miPath = data.getData();
                     imagen.setImageURI(miPath);
                     break;
 
@@ -210,17 +227,30 @@ public class FotoActivity extends AppCompatActivity {
                             new MediaScannerConnection.OnScanCompletedListener() {
                                 @Override
                                 public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("Ruta de almacenamiento","Path: "+path);
+                                    Log.i("Ruta de almacenamiento", "Path: " + path);
                                 }
                             });
 
-                    Bitmap bitmap= BitmapFactory.decodeFile(path);
+                    Bitmap bitmap = BitmapFactory.decodeFile(path);
+
                     imagen.setImageBitmap(bitmap);
 
                     break;
             }
 
 
+        }
+    }
+
+    public void subirSituacion(View view) {
+
+        String tipo = "Residuos verdes";
+        String fecha = "10-10-10";
+        situacion = new Situacion(this, mDatabase, mAuth, mStorageRef, fecha, tipo);
+        try {
+            situacion.cargarSituacion(tipo, fecha, miPath);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -98,17 +98,7 @@ public class EstadoFragment extends Fragment {
 
 
     private void llenarLista() {
-        listaSituaciones.add(new Situacion("Solidos", "19 de mayo 2019", R.drawable.basura));
-        listaSituaciones.add(new Situacion("Secos", "19 de mayo 2019", R.drawable.basura));
-        listaSituaciones.add(new Situacion("Plásticos", "19 de mayo 2019", R.drawable.basura));
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = firebaseDatabase.getReference();
-//        Situacion situacion = new Situacion();
-//        try {
-//            listaSituaciones =  situacion.getDatos(databaseReference);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
     }
 
 

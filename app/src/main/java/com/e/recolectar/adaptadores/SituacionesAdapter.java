@@ -34,7 +34,7 @@ public class SituacionesAdapter extends RecyclerView.Adapter<SituacionesAdapter.
     public void onBindViewHolder(SituacionViewHolder holder, int position) {
         holder.txtTipo.setText(listaSituaciones.get(position).gettipo());
         holder.txtFecha.setText(listaSituaciones.get(position).getfecha());
-        holder.foto.setImageResource(listaSituaciones.get(position).getImagenId());
+        //holder.foto.setImageResource(listaSituaciones.get(position).getImagenId());
     }
 
     @Override
