@@ -108,9 +108,9 @@ public class CrearCuenta extends AppCompatActivity {
             progressDialog.show();
 //        Crear un Usuario para guardar
 //            Primero creamos usuario con email y contraseña para la autentiacion de Firebase
-            String p_id = crearNuevoUsuario(p_email, p_password);
-//            Con el id que genera la autenticacion en Firebase, seteamos nuestro usuario
-            Usuario usuario = new Usuario(p_id, p_dni, p_nombre, p_apellido, p_email, p_password);
+            crearNuevoUsuario(p_email, p_password);
+//           Con el id que genera la autenticacion en Firebase, seteamos nuestro usuario
+            Usuario usuario = new Usuario(firebaseAuth.getCurrentUser().getUid(), p_dni, p_nombre, p_apellido, p_email, p_password);
 //            El Usuario con su id y demas datos se guarda en la base de datos
             guardar(usuario);
 
@@ -123,10 +123,10 @@ public class CrearCuenta extends AppCompatActivity {
     private void guardar(Usuario p_usuario) {
 
 //        Con la referencia a Base de Datos (BD), creamos un hijo (child) Usuarios, un child Id, y los datos
-        databaseReference.child("Usuarios").child(p_usuario.getIdUsuario()).setValue(p_usuario);
+        databaseReference.child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).setValue(p_usuario);
     }
 
-    private String crearNuevoUsuario(String p_email, String p_password) {
+    private void crearNuevoUsuario(String p_email, String p_password) {
 
         firebaseAuth.createUserWithEmailAndPassword(p_email, p_password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -137,8 +137,7 @@ public class CrearCuenta extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(CrearCuenta.this, "Se ha registrado el usuario con el email: " + email.getText(), Toast.LENGTH_LONG).show();
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            updateUI(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(CrearCuenta.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
@@ -151,7 +150,7 @@ public class CrearCuenta extends AppCompatActivity {
 
                 });
 
-        return firebaseAuth.getCurrentUser().getUid();
+
     }
     //endregion
 

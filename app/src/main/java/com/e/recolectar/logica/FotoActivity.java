@@ -244,6 +244,7 @@ public class FotoActivity extends AppCompatActivity {
 
     public void subirSituacion(View view) {
 
+        //Subir situacion a la tabla Usuarios //Subir situacion a ala tabla Situaciones
         String tipo = "Residuos verdes";
         String fecha = "10-10-10";
         situacion = new Situacion(this, mDatabase, mAuth, mStorageRef, fecha, tipo);

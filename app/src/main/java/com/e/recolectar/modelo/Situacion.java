@@ -115,7 +115,9 @@ public class Situacion {
                         situacion.put("tipo", tipoSituacion);
                         situacion.put("fecha", fechaSituacion);
                         situacion.put("imagen", downloadLink.toString());
-                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(situacion).addOnCompleteListener(new OnCompleteListener<Void>() {
+//      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(situacion).addOnCompleteListener(new ...
+                        mDatabase.child("Situaciones").child(mAuth.getCurrentUser().getUid()).push().setValue(situacion);
+                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().setValue(situacion).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
