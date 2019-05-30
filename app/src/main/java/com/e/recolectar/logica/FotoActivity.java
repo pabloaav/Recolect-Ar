@@ -1,7 +1,6 @@
 package com.e.recolectar.logica;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
-import com.e.recolectar.modelo.Situacion;
+import com.e.recolectar.logica.modelo.Situacion;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
-import java.net.URI;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;

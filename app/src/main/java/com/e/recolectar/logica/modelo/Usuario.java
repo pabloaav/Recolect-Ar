@@ -1,4 +1,4 @@
-package com.e.recolectar.modelo;
+package com.e.recolectar.logica.modelo;
 
 import java.io.Serializable;
 

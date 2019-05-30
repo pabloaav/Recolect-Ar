@@ -9,14 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.SituacionesAdapter;
-import com.e.recolectar.modelo.Situacion;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.e.recolectar.logica.modelo.Situacion;
 
 import java.util.ArrayList;
 

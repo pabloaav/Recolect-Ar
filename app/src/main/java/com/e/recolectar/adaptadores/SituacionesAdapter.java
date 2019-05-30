@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.e.recolectar.modelo.Situacion;
+import com.e.recolectar.logica.modelo.Situacion;
 import com.e.recolectar.R;
 
 import java.util.ArrayList;

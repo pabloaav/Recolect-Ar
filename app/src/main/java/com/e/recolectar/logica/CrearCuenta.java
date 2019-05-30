@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
-import com.e.recolectar.modelo.Usuario;
+import com.e.recolectar.logica.modelo.Usuario;
 import com.e.recolectar.validaciones.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
