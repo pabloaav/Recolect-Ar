@@ -1,8 +1,8 @@
-package com.e.recolectar.logica;
+package com.e.recolectar.logica.vista;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,10 @@ import android.widget.Toast;
 
 
 import com.e.recolectar.R;
-import com.e.recolectar.validaciones.Validar;
+import com.e.recolectar.logica.CrearCuenta;
+import com.e.recolectar.logica.LoginMVP;
+import com.e.recolectar.logica.MenuInicio;
+import com.e.recolectar.logica.presentacion.LoginPresentador;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,13 +27,12 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
 
     //region Declaracion de Variables
     private EditText correoLogin, contrasena;
@@ -39,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout til_correoLogin, til_contrasena;
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private GoogleSignInClient mGoogleSignInClient;
-    private static final int GALLERY_INTENT = 1;
+    private String p_correoLogin;
+    private String p_contrasena;
+    private LoginMVP.Presentacion loginPresentador;
+
     //endregion
 
     //region Metodos del SetUp
@@ -50,17 +55,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        Vinculacion Logica-Grafica
-
-        correoLogin = findViewById(R.id.txt_correoLogin);
-        contrasena = findViewById(R.id.txt_contrasena);
-        til_correoLogin = findViewById(R.id.til_correoLogin);
-        til_contrasena = findViewById(R.id.til_contrasena);
-
+        bindLayoutElements();
 
 //        inicializacion de Firebase
         inicializarFirebase();
 
-        // Configure Google Sign In
+
+        //Inicializacion del Presentador del Login
+        loginPresentador = new LoginPresentador(this, this, firebaseAuth, databaseReference);
+
+        //Configuracion de inicio con Cuenta Google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -72,8 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
     }// Fin de metodo onCreate()
 
-    //---------------------------------------------------------------------------------------------
+    private void bindLayoutElements() {
+        correoLogin = findViewById(R.id.txt_correoLogin);
+        contrasena = findViewById(R.id.txt_contrasena);
+        til_correoLogin = findViewById(R.id.til_correoLogin);
+        til_contrasena = findViewById(R.id.til_contrasena);
 
+    }
+
+    //---------------------------------------------------------------------------------------------
 
     //Inicializacion de objetos de Firebase
     private void inicializarFirebase() {
@@ -98,82 +109,6 @@ public class MainActivity extends AppCompatActivity {
     }
     //endregion
 
-    //region Ingreso Correo y Password
-
-    //Metodo de autenticar
-    public void autenticar() {
-
-//        Obtenemos el string de cada campo
-//        String p_correoLogin = correoLogin.getText().toString().trim();
-//        String p_contrasena = contrasena.getText().toString().trim();
-        String p_correoLogin = "juanro@gmail.com";
-        String p_contrasena = "prueba3";
-        boolean correOk;
-        boolean passOk;
-
-//        Validamos el correo
-        if (p_correoLogin.isEmpty()) {
-            til_correoLogin.setError("Ingresa tu correo por favor");
-            correOk = false;
-        } else if (!Validar.validarEmail(p_correoLogin)) {
-            til_correoLogin.setError("Ingresa un correo valido: nombre@ejemplo.com");
-            correOk = false;
-        } else {
-            til_correoLogin.setError(null);
-            correOk = true;
-        }
-//        Validamos la contrasena
-        if (p_contrasena.isEmpty()) {
-            til_contrasena.setError("Ingresa tu contraseña por favor");
-            passOk = false;
-        } else if (!Validar.validarPassword(p_contrasena)) {
-            til_contrasena.setError("Minimo 4 caracteres, incluido un numero");
-            passOk = false;
-        } else {
-            til_contrasena.setError(null);
-            passOk = true;
-        }
-
-//        Si todo esta OK procedemos...
-        if (correOk && passOk) {
-            loguearEmailPassword(p_correoLogin, p_contrasena);
-
-            try {
-                Intent irMenu = new Intent(this, FotoActivity.class);
-                startActivity(irMenu);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    //Metodo de Login con correo y contraseña
-    private void loguearEmailPassword(String p_correoLogin, String p_contrasena) {
-
-        firebaseAuth.signInWithEmailAndPassword(p_correoLogin, p_contrasena)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //checking if success
-                        if (task.isSuccessful()) {
-
-                            Toast.makeText(MainActivity.this, "Bienvenido: " + firebaseAuth.getCurrentUser(), Toast.LENGTH_LONG).show();
-//                            Intent inicio = new Intent(getApplication(), InicioActivity.class);
-//                            startActivity(inicio);
-                        } else {
-                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {//si se presenta una colisión
-                                Toast.makeText(MainActivity.this, "Ese usuario ya existe ", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(MainActivity.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                    }
-                });
-
-    }
-    //endregion
 
     //region Ingreso Google
 
@@ -228,12 +163,28 @@ public class MainActivity extends AppCompatActivity {
 
     //region Otros Metodos
 
+  //  private void bindInputData() {
+//        String p_correoLogin = "pabloperez@gmail.com";
+//        String p_contrasena = "prueba4";
+//        String p_correoLogin = correoLogin.getText().toString().trim();
+//        String p_contrasena = contrasena.getText().toString().trim();
+//    }
+
     public void onClick(View v) {
 
         switch (v.getId()) {
 
             case R.id.bt_loguear:
-                autenticar();
+                bindLayoutElements();
+                String p_correoLogin = "pabloperez@gmail.com";
+                String p_contrasena = "prueba4";
+
+                try {
+                    loginPresentador.doLoginWhitEmailPassword(p_correoLogin, p_contrasena);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
 
             case R.id.bt_loggoogle:
@@ -256,12 +207,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Metodo del boton Crear Nueva Cuenta
     public void crearNuevaCuenta() {
         Intent crearCuenta = new Intent(this, CrearCuenta.class);
         startActivity(crearCuenta);
 
     }
+
+    @Override
+    public void onEmailValidationError(String errorType) {
+        this.til_correoLogin.setError(errorType);
+    }
+
+    @Override
+    public void onPassValidationError(String errorType) {
+        this.til_contrasena.setError(errorType);
+    }
+
+    @Override
+    public void onError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+    }
+
 
 //    private void abrirGaleria() {
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

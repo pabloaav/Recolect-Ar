@@ -22,7 +22,7 @@
             android:name=".logica.CrearCuenta"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".logica.MainActivity"
+            android:name=".logica.vista.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
