@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/hacer_reclamo"
-            android:icon="@drawable/ic_hacer_reclamo"
+
             android:title="Hacer un reclamo" />
         <item
             android:id="@+id/estados_situaciones"

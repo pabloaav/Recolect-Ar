@@ -21,23 +21,23 @@ import java.util.Map;
  * Created by Pablo Aguirre Vicentin on 18/05/2019.
  */
 
-public class Situacion {
+public class Incidencia {
 
     private String tipo;
     private String fecha;
     private int imagenId;
-//    ArrayList<Situacion> mSituacionesArray;
+//    ArrayList<Incidencia> mSituacionesArray;
     private Context mContext;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
 
     //Constructor vacio
-    public Situacion() {
+    public Incidencia() {
     }
 
     //Constructor
-    public Situacion(Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth, StorageReference mStorageRef, String fecha, String tipo) {
+    public Incidencia(Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth, StorageReference mStorageRef, String fecha, String tipo) {
         this.fecha = fecha;
         this.tipo = tipo;
         this.mContext = mContext;
@@ -63,7 +63,7 @@ public class Situacion {
     }
 
 
-//    public ArrayList<Situacion> getDatos(DatabaseReference databaseReference) {
+//    public ArrayList<Incidencia> getDatos(DatabaseReference databaseReference) {
 //        mSituacionesArray.clear();
 //        databaseReference.child("Situaciones").addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -73,7 +73,7 @@ public class Situacion {
 //                        String tipo = ds.child("idTipo").getValue().toString();
 //                        String fecha = ds.child("fecha").getValue().toString();
 //                        int imagenId = (int) ds.child("idImagen").getValue();
-//                        mSituacionesArray.add(new Situacion(fecha, tipo, imagenId));
+//                        mSituacionesArray.add(new Incidencia(fecha, tipo, imagenId));
 //                    }
 //                }
 //            }

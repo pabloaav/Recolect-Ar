@@ -4,17 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.e.recolectar.R;
-import com.e.recolectar.adaptadores.SituacionesAdapter;
-import com.e.recolectar.logica.modelo.Situacion;
 
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,10 +30,6 @@ public class EstadoFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-
-    RecyclerView recyclerEstado;
-    ArrayList<Situacion> listaSituaciones;
 
     public EstadoFragment() {
         // Required empty public constructor
@@ -68,7 +59,6 @@ public class EstadoFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
     }
 
@@ -76,27 +66,8 @@ public class EstadoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_estado, container, false);
-
-        listaSituaciones = new ArrayList<>();
-        recyclerEstado = vista.findViewById(R.id.recyclerId);
-        recyclerEstado.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        llenarLista();
-
-        SituacionesAdapter adapter = new SituacionesAdapter(listaSituaciones);
-        recyclerEstado.setAdapter(adapter);
-
-        return vista;
+        return inflater.inflate(R.layout.fragment_estado, container, false);
     }
-
-
-
-
-    private void llenarLista() {
-
-    }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

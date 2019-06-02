@@ -16,8 +16,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".logica.FotoActivity"></activity>
         <activity
-            android:name=".logica.MenuInicio"
-            android:screenOrientation="portrait" />
+            android:name=".logica.vista.MenuInicio"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".logica.CrearCuenta"
             android:screenOrientation="portrait" />

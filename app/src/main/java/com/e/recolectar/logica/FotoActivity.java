@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
-import com.e.recolectar.logica.modelo.Situacion;
+import com.e.recolectar.logica.modelo.Incidencia;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,7 +50,7 @@ public class FotoActivity extends AppCompatActivity {
     String path;
     private Uri miPath;
     private StorageReference mStorageRef;
-    private Situacion situacion;
+    private Incidencia incidencia;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
@@ -242,12 +242,12 @@ public class FotoActivity extends AppCompatActivity {
 
     public void subirSituacion(View view) {
 
-        //Subir situacion a la tabla Usuarios //Subir situacion a ala tabla Situaciones
+        //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
         String tipo = "Residuos verdes";
         String fecha = "10-10-10";
-        situacion = new Situacion(this, mDatabase, mAuth, mStorageRef, fecha, tipo);
+        incidencia = new Incidencia(this, mDatabase, mAuth, mStorageRef, fecha, tipo);
         try {
-            situacion.cargarSituacion(tipo, fecha, miPath);
+            incidencia.cargarSituacion(tipo, fecha, miPath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,6 +9,8 @@
     <color name="colorBotonVerdeLima">#FFFFFF</color>
     <color name="colorBotonTransparente">#a5d6a7</color>  //COLOR CON TRANSPARENCIA PARA TABS
 
+    <color name="backgroundTabs">#C617C56B</color>
+
 </resources>
 
 

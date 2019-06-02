@@ -1,7 +1,7 @@
 package com.e.recolectar.logica.vista;
 
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -10,11 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.e.recolectar.R;
+import com.e.recolectar.fragmentos.EstadoFragment;
+import com.e.recolectar.fragmentos.IncidenciaFragment;
+import com.e.recolectar.fragmentos.PuntoReciclajeFragment;
 import com.e.recolectar.logica.CrearCuenta;
 import com.e.recolectar.logica.LoginMVP;
-import com.e.recolectar.logica.MenuInicio;
 import com.e.recolectar.logica.presentacion.LoginPresentador;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,7 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
+public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, EstadoFragment.OnFragmentInteractionListener, IncidenciaFragment.OnFragmentInteractionListener, PuntoReciclajeFragment.OnFragmentInteractionListener {
 
     //region Declaracion de Variables
     private EditText correoLogin, contrasena;
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
         contrasena = findViewById(R.id.txt_contrasena);
         til_correoLogin = findViewById(R.id.til_correoLogin);
         til_contrasena = findViewById(R.id.til_contrasena);
-
+        correoLogin.setText("pabloperez@gmail.com");
+        contrasena.setText("prueba4");
     }
 
     //---------------------------------------------------------------------------------------------
@@ -108,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
     private void updateUI(FirebaseUser user) {
     }
     //endregion
-
 
     //region Ingreso Google
 
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
 
     //region Otros Metodos
 
-  //  private void bindInputData() {
+    //  private void bindInputData() {
 //        String p_correoLogin = "pabloperez@gmail.com";
 //        String p_contrasena = "prueba4";
 //        String p_correoLogin = correoLogin.getText().toString().trim();
@@ -176,8 +177,8 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
 
             case R.id.bt_loguear:
                 bindLayoutElements();
-                String p_correoLogin = "pabloperez@gmail.com";
-                String p_contrasena = "prueba4";
+                String p_correoLogin = correoLogin.getText().toString().trim();
+                String p_contrasena = contrasena.getText().toString().trim();
 
                 try {
                     loginPresentador.doLoginWhitEmailPassword(p_correoLogin, p_contrasena);
@@ -228,6 +229,11 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
 
 //    private void abrirGaleria() {
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -238,4 +244,4 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista {
 
     //endregion
 
-}
+}//Fin de la clase MainActivity
