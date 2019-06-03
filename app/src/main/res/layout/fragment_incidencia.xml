@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragmentos.IncidenciaFragment">
+    tools:context="com.e.recolectar.fragmentos.IncidenciaFragment">
 
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@drawable/bg"
-        android:weightSum="10"
+        android:background="@drawable/fondo_main"
+        android:weightSum="7"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_weight="1"
@@ -23,7 +23,7 @@
                 android:id="@+id/textGrid"
                 android:text="Selecciona un tipo de Incidencia"
                 android:textSize="20sp"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/darker_gray"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -33,7 +33,7 @@
         <GridLayout
             android:id="@+id/mainGrid"
             android:columnCount="2"
-            android:rowCount="3"
+            android:rowCount="2"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
             android:layout_weight="3"

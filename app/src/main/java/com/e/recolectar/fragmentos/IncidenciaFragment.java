@@ -61,14 +61,18 @@ public class IncidenciaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        vista = inflater.inflate(R.layout.fragment_incidencia, container, false);
-        //--------------------------------------------
-        mainGrid = vista.findViewById(R.id.mainGrid);
+        try {
+            // Inflate the layout for this fragment
+            vista = inflater.inflate(R.layout.fragment_incidencia, container, false);
+            //--------------------------------------------
+            mainGrid = vista.findViewById(R.id.mainGrid);
 
-        //Set Event
-        setSingleEvent(mainGrid);
-        //setToggleEvent(mainGrid);
+            //Set Event
+            setSingleEvent(mainGrid);
+            //setToggleEvent(mainGrid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return vista;
     }
 
