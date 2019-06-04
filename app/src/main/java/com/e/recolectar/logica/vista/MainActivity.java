@@ -199,9 +199,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
             case R.id.bt_logface:
                 // Hacer loguien en Facebook
                 break;
-            case R.id.bt_abrirGaleria:
-                //abrirGaleria();
-                break;
+
             default:
                 Toast.makeText(this, "No se pudo iniciar sesion", Toast.LENGTH_LONG).show();
                 break;

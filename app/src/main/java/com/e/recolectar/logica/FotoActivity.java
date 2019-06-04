@@ -33,6 +33,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -243,13 +246,23 @@ public class FotoActivity extends AppCompatActivity {
     public void subirSituacion(View view) {
 
         //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
-        String tipo = "Residuos verdes";
-        String fecha = "10-10-10";
-        incidencia = new Incidencia(this, mDatabase, mAuth, mStorageRef, fecha, tipo);
+        String tipo = "Metales";
+        String fecha = this.obtenerFecha();
+        String descripcion = "chatarra y cacharros";
+        String ubicacion = "ubicacion geografica";
+        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, ubicacion, this, mDatabase, mAuth, mStorageRef);
+
         try {
-            incidencia.cargarSituacion(tipo, fecha, miPath);
+            incidencia.cargarSituacion();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String obtenerFecha() {
+
+        Date date = new Date();
+        String stringDate = DateFormat.getDateTimeInstance().format(date);
+        return stringDate;
     }
 }

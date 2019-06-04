@@ -30,6 +30,7 @@ public class CrearCuenta extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextInputLayout til_dni, til_nombre, til_apellido, til_email, til_password, til_reppass;
     private ProgressDialog progressDialog;//Objeto que muestra una barra de proceso
+    String userID;
     //endregion
 
     //region setUp
@@ -72,12 +73,18 @@ public class CrearCuenta extends AppCompatActivity {
     //region Registacion
     public void registrar(View view) {
         //        Obtenemos el string de cada campo
-        String p_dni = dni.getText().toString().trim();
-        String p_nombre = nombre.getText().toString().trim();
-        String p_apellido = apellido.getText().toString().trim();
-        String p_email = email.getText().toString().trim();
-        String p_password = password.getText().toString().trim();
-        String p_reppass = reppass.getText().toString().trim();
+//        String p_dni = dni.getText().toString().trim();
+//        String p_nombre = nombre.getText().toString().trim();
+//        String p_apellido = apellido.getText().toString().trim();
+//        String p_email = email.getText().toString().trim();
+//        String p_password = password.getText().toString().trim();
+//        String p_reppass = reppass.getText().toString().trim();
+        String p_dni = "23456789";
+        String p_nombre = "Pablo";
+        String p_apellido = "Perez";
+        String p_email = "pabloperez@gmail.com";
+        String p_password = "prueba4";
+        String p_reppass = "prueba4";
 
 
 //        Validar los campos del Registro de Usuario
@@ -109,8 +116,9 @@ public class CrearCuenta extends AppCompatActivity {
 //        Crear un Usuario para guardar
 //            Primero creamos usuario con email y contraseña para la autentiacion de Firebase
             crearNuevoUsuario(p_email, p_password);
+            userID = firebaseAuth.getCurrentUser().getUid();
 //           Con el id que genera la autenticacion en Firebase, seteamos nuestro usuario
-            Usuario usuario = new Usuario(firebaseAuth.getCurrentUser().getUid(), p_dni, p_nombre, p_apellido, p_email, p_password);
+            Usuario usuario = new Usuario(userID, p_dni, p_nombre, p_apellido, p_email, p_password);
 //            El Usuario con su id y demas datos se guarda en la base de datos
             guardar(usuario);
 
@@ -135,11 +143,11 @@ public class CrearCuenta extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in userID's information
                             Toast.makeText(CrearCuenta.this, "Se ha registrado el usuario con el email: " + email.getText(), Toast.LENGTH_LONG).show();
-
+                            //COlocar accion de exito uiUpdate()
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a message to the userID.
                             Toast.makeText(CrearCuenta.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }

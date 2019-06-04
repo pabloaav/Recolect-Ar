@@ -3,15 +3,16 @@ package com.e.recolectar.logica.modelo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Usuario implements Serializable {
+public class Usuario {
 
     //region Atributos
     private String nombre;
     private String apellido;
     private String email;
-    private String dni;
+    private String dniUsuario;
     private String password;
     private String idUsuario;
+    private Incidencia incidencias;
     //endregion
 
     //region Metodos
@@ -24,6 +25,7 @@ public class Usuario implements Serializable {
         this.setApellido(p_apellido);
         this.setEmail(p_email);
         this.setPassword(p_password);
+        this.incidencias = null;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class Usuario implements Serializable {
     }
 
     public void setUsuario(String dni) {
-        this.dni = dni;
+        this.dniUsuario = dni;
     }
 
     public void setPassword(String password) {
@@ -80,7 +82,7 @@ public class Usuario implements Serializable {
     }
 
     public String getUsuario() {
-        return dni;
+        return dniUsuario;
     }
 
     public String getPassword() {
