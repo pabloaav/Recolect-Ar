@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".logica.FotoActivity"></activity>
+        <activity android:name=".logica.Main2Activity"></activity>
+        <activity android:name=".logica.FotoActivity" />
         <activity
             android:name=".logica.vista.MenuInicio"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".logica.CrearCuenta"
             android:screenOrientation="portrait" />
