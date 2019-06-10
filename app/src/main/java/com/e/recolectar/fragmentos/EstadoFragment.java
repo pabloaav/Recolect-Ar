@@ -3,26 +3,15 @@ package com.e.recolectar.fragmentos;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.e.recolectar.R;
-import com.e.recolectar.adaptadores.AdaptadorRecyclerIncidencias;
-import com.e.recolectar.logica.modelo.Incidencia;
-import com.e.recolectar.logica.modelo.IncidenciaPojo;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -49,7 +38,7 @@ public class EstadoFragment extends Fragment {
     //endregion
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
-    private ArrayList<IncidenciaPojo> array;
+
     //endregion
 
     //region DEFAULT METODOS
@@ -138,59 +127,11 @@ public class EstadoFragment extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_estado, container, false);
 
-        //Instanciamos el objeto Recycler view
-        RecyclerView recyclerViewIncidencias = vista.findViewById(R.id.rv_estadosIncidencias);
-
-        //Se necesita un objeto Linear Layaout Manager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        //Seteamos el recycler con el LAyout Manager
-        recyclerViewIncidencias.setLayoutManager(linearLayoutManager);
-
-        cargarArrayRecycler(recyclerViewIncidencias);
 
         //Retornamos la vista que ha sido inflada
         return vista;
     }
 
-    private void cargarArrayRecycler(final RecyclerView recyclerViewIncidencias) {
-
-        DatabaseReference ref = mDataBase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                ArrayList<IncidenciaPojo> array = new ArrayList<>();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    IncidenciaPojo incidenciaPojo = snapshot.getValue(IncidenciaPojo.class);
-                    incidenciaPojo.setTipo(incidenciaPojo.getTipo());
-                    incidenciaPojo.setFecha(incidenciaPojo.getFecha());
-                    incidenciaPojo.setDescripcion(incidenciaPojo.getDescripcion());
-                    incidenciaPojo.setUbicacion(incidenciaPojo.getUbicacion());
-                    incidenciaPojo.setImagen(incidenciaPojo.getImagen());
-
-                    array.add(incidenciaPojo);
-
-                }//Fin del for
-
-                //Colocamos la clase adaptadora del recycler que creamos para instanciar el view holder y manejar el objeto RecyclerView. El primer parametro que recibe el constructor debe ser un array de objetos de Incidencia que se obtienen de la bsae de datos
-                AdaptadorRecyclerIncidencias adaptador = new AdaptadorRecyclerIncidencias(array, R.layout.cardview_incidencia, getActivity());
-
-                //Seteamos al recycler el adaptador correspondiente
-                recyclerViewIncidencias.setAdapter(adaptador);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }//Fin cargar recycler
 
     //endregion
 
