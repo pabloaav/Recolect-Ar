@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.e.recolectar.logica.LoginMVP;
 import com.e.recolectar.logica.Main2Activity;
+import com.e.recolectar.logica.MapsActivity;
 import com.e.recolectar.logica.vista.MenuInicio;
 import com.e.recolectar.validaciones.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -77,7 +78,7 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent menu = new Intent(context, MenuInicio.class);
+                                Intent menu = new Intent(context, MapsActivity.class);
                                 context.startActivity(menu);
 //                                Intent menu = new Intent(context, MenuInicio.class);
 //                                context.startActivity(menu);
