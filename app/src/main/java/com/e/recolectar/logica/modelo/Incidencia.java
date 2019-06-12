@@ -157,7 +157,7 @@ public class Incidencia {
 //        return mSituacionesArray;
 //    }
 
-    public void cargarSituacion() {
+    public void cargarIncidencia() {
 
         if (imagen != null) {
 

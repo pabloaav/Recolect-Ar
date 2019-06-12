@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:text="GESTIONAR IMAGEN"
+        android:text="GESTIONAR INCIDENCIA"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imagemId"
         android:background="@color/colorAccent"
-        android:onClick="subirSituacion"
-        android:text="Subir situacion"
+        android:onClick="subirIncidencia"
+        android:text="Subir Incidencia"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:padding="16dp"

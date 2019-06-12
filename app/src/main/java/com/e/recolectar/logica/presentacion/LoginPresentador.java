@@ -78,7 +78,7 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent menu = new Intent(context, MapsActivity.class);
+                                Intent menu = new Intent(context, MenuInicio.class);
                                 context.startActivity(menu);
 //                                Intent menu = new Intent(context, MenuInicio.class);
 //                                context.startActivity(menu);

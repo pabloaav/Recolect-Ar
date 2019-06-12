@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.FotoActivity;
+import com.e.recolectar.logica.MapsActivity;
 import com.e.recolectar.logica.modelo.IncidenciaPojo;
 
 import java.util.ArrayList;
@@ -143,7 +144,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         //Al hacer clic en un cardview debe llevarnos a una vista ampliada
         @Override
         public void onClick(View view) {
-            Intent mostrarDetalle = new Intent(mContext, FotoActivity.class);
+            Intent mostrarDetalle = new Intent(mContext, MapsActivity.class);
             mContext.startActivity(mostrarDetalle);
         }
     }

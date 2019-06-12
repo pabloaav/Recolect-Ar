@@ -34,7 +34,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.Manifest.permission.CAMERA;
@@ -243,7 +242,7 @@ public class FotoActivity extends AppCompatActivity {
         }
     }
 
-    public void subirSituacion(View view) {
+    public void subirIncidencia(View view) {
 
         //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
         String tipo = "Metales";
@@ -253,7 +252,7 @@ public class FotoActivity extends AppCompatActivity {
         incidencia = new Incidencia(tipo, fecha, miPath, descripcion, ubicacion, this, mDatabase, mAuth, mStorageRef);
 
         try {
-            incidencia.cargarSituacion();
+            incidencia.cargarIncidencia();
         } catch (Exception e) {
             e.printStackTrace();
         }
