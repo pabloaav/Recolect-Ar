@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBotonTransparente"
+    android:orientation="vertical"
+    android:text="@string/app_name_actionBar"
+    tools:context=".logica.RealizarIncidencia">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="Gestionar Incidendia"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imagemId"
+        android:layout_width="88dp"
+        android:layout_height="84dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/img_base"/>
+
+    <Button
+        android:id="@+id/btnCargarImg"
+        android:layout_width="60mm"
+        android:layout_height="55sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/stylo_boton_pressed"
+        android:onClick="onclick"
+        android:text="Selecciona Imagen"
+        android:textColor="#ffff"
+        android:textSize="18sp" />
+
+
+    <Button
+        android:id="@+id/btnSubir"
+        android:layout_width="60mm"
+        android:layout_height="55sp"
+        android:layout_below="@+id/imagemId"
+        android:layout_gravity="center"
+        android:layout_marginTop="320dp"
+        android:background="@drawable/stylo_boton_pressed"
+        android:onClick="subirIncidencia"
+        android:text="Subir Incidencia"
+        android:textColor="#ffff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="50mm"
+        android:layout_height="30sp"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="12sp"
+        android:layout_marginTop="-350dp"
+        android:layout_marginBottom="25sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ubicación no cargada aún..."
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="60mm"
+        android:layout_height="55sp"
+        android:layout_gravity="center"
+        android:background="@drawable/stylo_boton_pressed"
+        android:text="Subir Ubicación"
+        android:textColor="@color/colorBotonBlanco"
+        android:textSize="18sp" />
+
+
+
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="54mm"
+        android:layout_height="55sp"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="20sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ingrese su direccion particular (opcional)" />
+
+
+    <ImageButton
+        android:id="@+id/imgButton_2"
+        android:layout_width="55sp"
+        android:layout_height="55sp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-200sp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+    <ImageButton
+        android:id="@+id/imgButton3"
+        android:layout_width="55sp"
+        android:layout_height="55sp"
+        android:layout_gravity="right"
+        android:layout_marginTop="90sp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="54mm"
+        android:layout_height="55sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="30sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Describa la incidencia" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="32sp"
+        android:layout_height="32sp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-45sp"
+        android:layout_marginRight="12sp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+
+</LinearLayout>

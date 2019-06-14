@@ -37,4 +37,10 @@
     <string name="tab_text_2">Estados</string>
     <string name="tab_text_3">Reciclaje</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="app_name_actionBar">Gestionar Incidendia</string>
+
+    //FRAGMENT TAB 1 INCIDENCIAS
+    <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
+
 </resources>

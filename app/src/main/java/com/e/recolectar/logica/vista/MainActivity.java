@@ -1,13 +1,16 @@
 package com.e.recolectar.logica.vista;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
     private String p_correoLogin;
     private String p_contrasena;
     private LoginMVP.Presentacion loginPresentador;
+    private ProgressBar mProgressBar;
 
     //endregion
 
@@ -72,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        Toast.makeText(this, "Bienvenido a Recolect-Ar", Toast.LENGTH_LONG).show();
-
 
     }// Fin de metodo onCreate()
 
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
         til_contrasena = findViewById(R.id.til_contrasena);
         correoLogin.setText("pabloperez@gmail.com");
         contrasena.setText("prueba4");
+        mProgressBar = findViewById(R.id.progressBar2);
     }
 
     //---------------------------------------------------------------------------------------------
@@ -98,12 +101,40 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+//        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            Intent menu = new Intent(this, MenuInicio.class);
+//            menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            startActivity(menu);
+//            this.onSuccess();
+//        }
         updateUI(currentUser);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(MainActivity.this, "Verificando sus Datos", Toast.LENGTH_SHORT).show();
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String p_correoLogin = correoLogin.getText().toString().trim();
+                String p_contrasena = contrasena.getText().toString().trim();
+                try {
+                    loginPresentador.doLoginWhitEmailPassword(p_correoLogin, p_contrasena);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, 2000);
     }
 
     /*Actualizar la UI si ya esta logueado*/
@@ -225,6 +256,11 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
     @Override
     public void onError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        this.finish();
     }
 
     @Override

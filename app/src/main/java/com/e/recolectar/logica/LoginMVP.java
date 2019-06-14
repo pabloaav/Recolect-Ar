@@ -7,6 +7,8 @@ public interface LoginMVP {
         void onPassValidationError(String errorType);
 
         void onError(String error);
+
+        void onSuccess();
     }
 
     interface Presentacion {

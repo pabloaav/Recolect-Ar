@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.AdaptadorPaginas;
@@ -40,16 +41,8 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
         } catch (Exception e) {
             e.printStackTrace();
         }
-       /* FloatingActionButton fab = findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-    }
+        Toast.makeText(this, "Bienvenido a Recolect-Ar", Toast.LENGTH_LONG).show();
+    }//Fin de metodo onCreate()
 
     @Override
     public void onFragmentInteraction(Uri uri) {

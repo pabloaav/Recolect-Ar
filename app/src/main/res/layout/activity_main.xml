@@ -73,7 +73,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/login_user_32x"
+            android:drawableLeft="@drawable/icon_login_usuario_128x"
             android:minWidth="88dip"
             android:onClick="onClick"
             android:text="@string/bt_Loguear"
@@ -90,7 +90,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/icono_add_user_32x"
+            android:drawableLeft="@drawable/icon_crear_cuenta_128x"
             android:onClick="onClick"
             android:text="@string/bt_Registrarse"
             android:textColor="@color/colorBotonBlanco"
@@ -106,7 +106,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/google_icon_log_32x"
+            android:drawableLeft="@drawable/icon_gmail_login_128x"
             android:onClick="onClick"
             android:text="iniciar con google"
             android:textColor="@color/colorBotonBlanco"
@@ -121,13 +121,21 @@
             android:layout_gravity="center"
             android:layout_marginTop="5sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/facebook_icon_32x"
+            android:drawableLeft="@drawable/icon_facebook_material_128x"
             android:onClick="onClick"
             android:text="iniciar con facebook"
             android:textColor="@color/colorBotonBlanco"
             android:textSize="18sp"
             android:textStyle="normal" />
 
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:background="@color/colorBotonTransparente"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center"
+            android:visibility="visible" />
     </LinearLayout>
 
 

@@ -11,6 +11,16 @@
 
     <color name="backgroundTabs">#C617C56B</color>
 
+    <color name="colorSuperiorToogle">#3e3053</color>
+    <color name="colorActionBar">#009867</color>
+    <color name="colorFondoTab">#92d669</color>
+    <color name="colorIconTab">#D0F0C0</color>
+
+    <color name="colorPruebaFondoFarg">#009867</color>
+    <color name="colorPruebaActionBar">#009867</color>
+    <color name="colorPruebaMenuTab">#D0F0C0</color>
+    <color name="colorIconTabORIGINAL">#ffee8a</color>
+
 </resources>
 
 

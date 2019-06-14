@@ -14,8 +14,7 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
-import com.e.recolectar.logica.FotoActivity;
-import com.e.recolectar.logica.vista.MenuInicio;
+import com.e.recolectar.logica.RealizarIncidencia;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,7 +108,7 @@ public class IncidenciaFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(getActivity(), FotoActivity.class);
+                    Intent intent = new Intent(getActivity(), RealizarIncidencia.class);
                     startActivity(intent);
 
                 }

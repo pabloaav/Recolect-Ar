@@ -39,7 +39,9 @@ import java.util.Date;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class FotoActivity extends AppCompatActivity {
+public class RealizarIncidencia extends AppCompatActivity {
+
+    //region ATRIBUTOS
 
     private final String CARPETA_RAIZ = "misImagenesPrueba/";
     private final String RUTA_IMAGEN = CARPETA_RAIZ + "misFotos";
@@ -56,11 +58,14 @@ public class FotoActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
+    //endregion
+
+    //region METODOS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foto);
+        setContentView(R.layout.activity_realizar_incidencia);
 
         imagen = findViewById(R.id.imagemId);
         botonCargar = findViewById(R.id.btnCargarImg);
@@ -114,7 +119,7 @@ public class FotoActivity extends AppCompatActivity {
 
     private void solicitarPermisosManual() {
         final CharSequence[] opciones = {"si", "no"};
-        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(FotoActivity.this);
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
         alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -135,7 +140,7 @@ public class FotoActivity extends AppCompatActivity {
     }
 
     private void cargarDialogoRecomendacion() {
-        AlertDialog.Builder dialogo = new AlertDialog.Builder(FotoActivity.this);
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(RealizarIncidencia.this);
         dialogo.setTitle("Permisos Desactivados");
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
 
@@ -156,7 +161,7 @@ public class FotoActivity extends AppCompatActivity {
     private void cargarImagen() {
 
         final CharSequence[] opciones = {"Tomar Foto", "Cargar Imagen", "Cancelar"};
-        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(FotoActivity.this);
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
         alertOpciones.setTitle("Seleccione una Opción");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -258,10 +263,19 @@ public class FotoActivity extends AppCompatActivity {
         }
     }
 
+    public void subirUbicacion(View view){
+/**
+ * Acciones a realizar:
+ * Tomar la ubicacion en tiempo real del usuario
+ */
+    }
+
     private String obtenerFecha() {
 
         Date date = new Date();
         String stringDate = DateFormat.getDateTimeInstance().format(date);
         return stringDate;
     }
+
+    //endregion
 }

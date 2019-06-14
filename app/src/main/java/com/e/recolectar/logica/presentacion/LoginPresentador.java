@@ -79,10 +79,13 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Intent menu = new Intent(context, MenuInicio.class);
+                                menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 context.startActivity(menu);
+                                vista.onSuccess();
 //                                Intent menu = new Intent(context, MenuInicio.class);
 //                                context.startActivity(menu);
                                 Toast.makeText(context, "Bienvenido: " + getmAuth().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
+
                             } else {
                                 Toast.makeText(context, "Authentication failed.",
                                         Toast.LENGTH_LONG).show();
