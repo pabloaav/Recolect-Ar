@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -23,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
@@ -33,9 +37,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -59,6 +70,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
+    TextView textView_ubicacion;
     Location mUbicacion;
     Location location;
     //endregion
@@ -76,6 +88,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         location = null;
+        textView_ubicacion = findViewById(R.id.tv_ubicacion);
 
         if (validaPermisos()) {
             botonCargar.setEnabled(true);
@@ -86,26 +99,68 @@ public class RealizarIncidencia extends AppCompatActivity {
         //Recibir los datos a traves del Bundle
         Bundle extras = getIntent().getExtras();
 
-        if (extras != null ){
+        if (extras != null) {
             location = extras.getParcelable("locacion");
         }
         //Verificamos que no sea null
         if (location != null) {
             //Si es distinto de null tomamos los datos
             mUbicacion = location;
+            textView_ubicacion.setText(getStringUbicacion());
+            String cadenaDeUbicacion = getStringUbicacion();
+            textView_ubicacion.setText(cadenaDeUbicacion);
             Toast.makeText(this, "La ubicacion es:" + mUbicacion.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        //Verificamos que no sea null la location
+    private String getStringUbicacion() {
+        String cadenaDeUbicacion = "mi cadena";
+        /*
+        Hago la geodecoder
+         */
         if (location != null) {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
+
+            try {
+                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+                if (addresses.size() > 0) {
+//                    Address fetchedAddress = addresses.get(0);
+//                    StringBuilder strAddress = new StringBuilder();
+//                    for (int i = 0; i < fetchedAddress.getMaxAddressLineIndex(); i++) {
+//                        strAddress.append(fetchedAddress.getAddressLine(i).indexOf(1));
+//                        cadenaDeUbicacion = strAddress.toString();}
+                    String address = addresses.get(0).getAddressLine(0);
+                    String city = addresses.get(0).getLocality();
+                    String state = addresses.get(0).getAdminArea();
+                    String country = addresses.get(0).getCountryName();
+                    String postalCode = addresses.get(0).getPostalCode();
+                    String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+                    cadenaDeUbicacion = address;
+                } else {
+                    textView_ubicacion.setText("Searching Current Address");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Could not get address..!", Toast.LENGTH_SHORT).show();
+            }
         }
+        return cadenaDeUbicacion;
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        //Verificamos que no sea null la location
+//        if (location != null) {
+//            textView_ubicacion.setText((int) location.getLatitude());
+//        }
+//    }
 
 //    @Override
 //    public void onStart() {
