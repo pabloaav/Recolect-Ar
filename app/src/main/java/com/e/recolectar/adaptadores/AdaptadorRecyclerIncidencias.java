@@ -143,8 +143,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         //Al hacer clic en un cardview debe llevarnos a una vista ampliada
         @Override
         public void onClick(View view) {
-            Intent mostrarDetalle = new Intent(mContext, MapsActivity.class);
-            mContext.startActivity(mostrarDetalle);
+            //Vista correspondiente al click en el cardview de incidencia
         }
     }
 }

@@ -185,6 +185,7 @@ public class Incidencia {
                         incidencia.put("ubicacion", ubicacion);
 //      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
                         mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
+//                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
                         mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias").push().setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

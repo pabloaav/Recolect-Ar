@@ -264,10 +264,8 @@ public class RealizarIncidencia extends AppCompatActivity {
     }
 
     public void subirUbicacion(View view){
-/**
- * Acciones a realizar:
- * Tomar la ubicacion en tiempo real del usuario
- */
+        Intent geoLocalizacion = new Intent(this, MapsActivity.class);
+        startActivity(geoLocalizacion);
     }
 
     private String obtenerFecha() {

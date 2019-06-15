@@ -48,7 +48,7 @@
         android:layout_height="55sp"
         android:layout_below="@+id/imagemId"
         android:layout_gravity="center"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/stylo_boton_pressed"
         android:onClick="subirIncidencia"
         android:text="Subir Incidencia"
@@ -76,12 +76,10 @@
         android:layout_height="55sp"
         android:layout_gravity="center"
         android:background="@drawable/stylo_boton_pressed"
+        android:onClick="subirUbicacion"
         android:text="Subir Ubicación"
         android:textColor="@color/colorBotonBlanco"
         android:textSize="18sp" />
-
-
-
 
     <EditText
         android:id="@+id/editText2"
