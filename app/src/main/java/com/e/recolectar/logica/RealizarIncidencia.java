@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -58,6 +59,8 @@ public class RealizarIncidencia extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
+    Location mUbicacion;
+    Location location;
     //endregion
 
     //region METODOS
@@ -72,14 +75,43 @@ public class RealizarIncidencia extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        location = null;
 
         if (validaPermisos()) {
             botonCargar.setEnabled(true);
         } else {
             botonCargar.setEnabled(false);
         }
+        Toast.makeText(this, "Paso por onCreate()", Toast.LENGTH_SHORT).show();
+        //Recibir los datos a traves del Bundle
+        Bundle extras = getIntent().getExtras();
 
+        if (extras != null ){
+            location = extras.getParcelable("locacion");
+        }
+        //Verificamos que no sea null
+        if (location != null) {
+            //Si es distinto de null tomamos los datos
+            mUbicacion = location;
+            Toast.makeText(this, "La ubicacion es:" + mUbicacion.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Verificamos que no sea null la location
+        if (location != null) {
+
+        }
+    }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        Toast.makeText(this, "Pasa por onStart()", Toast.LENGTH_SHORT).show();
+//    }
 
     private boolean validaPermisos() {
 
@@ -263,7 +295,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
     }
 
-    public void subirUbicacion(View view){
+    public void subirUbicacion(View view) {
         Intent geoLocalizacion = new Intent(this, MapsActivity.class);
         startActivity(geoLocalizacion);
     }

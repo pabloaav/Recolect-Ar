@@ -42,5 +42,6 @@
 
     //FRAGMENT TAB 1 INCIDENCIAS
     <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
+    <string name="title_activity_main3">Main3Activity</string>
 
 </resources>
