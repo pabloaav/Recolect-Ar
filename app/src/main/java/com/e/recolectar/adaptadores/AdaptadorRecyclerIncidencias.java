@@ -61,7 +61,8 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         incidenciasViewHolder.tipo.setText(incidencia.getTipo());
         incidenciasViewHolder.fecha.setText(incidencia.getFecha());
         incidenciasViewHolder.descripcion.setText(incidencia.getDescripcion());
-        incidenciasViewHolder.ubicacion.setText(incidencia.getUbicacion());
+        incidenciasViewHolder.direccion.setText(incidencia.getDireccion());
+        incidenciasViewHolder.ubicacion.setText(incidencia.getCadenaUbicacion());
 //        incidenciasViewHolder.imagen.setImageResource(R.drawable.basura);
 
         String imagen = incidencia.getImagen();
@@ -118,6 +119,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         private TextView tipo;
         private TextView fecha;
         private TextView descripcion;
+        private TextView direccion;
         private TextView ubicacion;
         private ProgressBar progressBar;
 
@@ -136,6 +138,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
             tipo = itemView.findViewById(R.id.cv_tipo);
             fecha = itemView.findViewById(R.id.cv_fecha);
             descripcion = itemView.findViewById(R.id.cv_descripcion);
+            direccion = itemView.findViewById(R.id.cv_direccion);
             ubicacion = itemView.findViewById(R.id.cv_ubicacion);
             progressBar = itemView.findViewById(R.id.progressBar);
         }

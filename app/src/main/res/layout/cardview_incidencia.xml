@@ -34,15 +34,14 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginRight="10dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/cv_tipo"
@@ -70,12 +69,20 @@
                 android:text="descripcion" />
 
             <TextView
+                android:id="@+id/cv_direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="direccion" />
+
+            <TextView
                 android:id="@+id/cv_ubicacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="15dp"
-                android:text="cubicacion" />
+                android:text="ubicacion" />
 
         </LinearLayout>
 

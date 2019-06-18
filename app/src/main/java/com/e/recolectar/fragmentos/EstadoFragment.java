@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class EstadoFragment extends Fragment {
-    //region DEFAUL ATRIBUTOS
+
+    //region DEFAULT ATRIBUTOS
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,10 +48,6 @@ public class EstadoFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    //endregion
-    private DatabaseReference mDataBase;
-    private FirebaseAuth mAuth;
-    private ArrayList<IncidenciaPojo> array;
     //endregion
 
     //region DEFAULT METODOS
@@ -116,6 +114,12 @@ public class EstadoFragment extends Fragment {
     }
     //endregion
 
+    //region ATRIBUTOS
+    private DatabaseReference mDataBase;
+    private FirebaseAuth mAuth;
+    private ArrayList<IncidenciaPojo> array;
+    //endregion
+
     //region METODOS
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -170,9 +174,10 @@ public class EstadoFragment extends Fragment {
                     incidenciaPojo.setTipo(incidenciaPojo.getTipo());
                     incidenciaPojo.setFecha(incidenciaPojo.getFecha());
                     incidenciaPojo.setDescripcion(incidenciaPojo.getDescripcion());
-                    incidenciaPojo.setUbicacion(incidenciaPojo.getUbicacion());
+                    incidenciaPojo.setDireccion(incidenciaPojo.getDireccion());
                     incidenciaPojo.setImagen(incidenciaPojo.getImagen());
-
+                    Map<String, Object> ubicacion = incidenciaPojo.getUbicacion();
+                    incidenciaPojo.setCadenaUbicacion(incidenciaPojo.getCadenaUbicacion());
                     array.add(incidenciaPojo);
 
                 }//Fin del for

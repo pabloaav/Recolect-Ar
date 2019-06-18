@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#388E3C</color>           //COLOR ACTION BAR
-    <color name="colorPrimaryDark">#044605</color>      //COLOR BARRA SUPERIOR TOOGLE
-    <color name="colorAccent">#388E3C</color>           //COLOR EDITTEXT
+    <!--//COLOR ACTION BAR-->
+    <color name="colorPrimary">#388E3C</color>
+    <!--//COLOR BARRA SUPERIOR TOOGLE-->
+    <color name="colorPrimaryDark">#044605</color>
+    <!--//COLOR EDITTEXT-->
+    <color name="colorAccent">#388E3C</color>
 
     <color name="colorBotonVerde">#388E3C</color>
     <color name="colorBotonBlanco">#FFFFFF</color>
     <color name="colorBotonVerdeLima">#FFFFFF</color>
-    <color name="colorBotonTransparente">#a5d6a7</color>  //COLOR CON TRANSPARENCIA PARA TABS
+    <!--//COLOR CON TRANSPARENCIA PARA TABS-->
+    <color name="colorBotonTransparente">#a5d6a7</color>
 
     <color name="backgroundTabs">#C617C56B</color>
 

@@ -11,7 +11,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,6 +24,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,16 +37,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -70,9 +68,12 @@ public class RealizarIncidencia extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
-    TextView textView_ubicacion;
+    TextView textView_ubicacion, textView_tipo_incidencia;
+    EditText editText_descripcion, editText_direccion;
     Location mUbicacion;
     Location location;
+    String nombre_tipo_incidencia;
+    private static final int CODIGO_SELECCIONAR_UBICACION = 1;
     //endregion
 
     //region METODOS
@@ -89,6 +90,9 @@ public class RealizarIncidencia extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         location = null;
         textView_ubicacion = findViewById(R.id.tv_ubicacion);
+        textView_tipo_incidencia = findViewById(R.id.tv_tipo_incidencia);
+        editText_descripcion = findViewById(R.id.txt_descripcion);
+        editText_direccion = findViewById(R.id.txt_direccion_particular);
 
         if (validaPermisos()) {
             botonCargar.setEnabled(true);
@@ -96,33 +100,35 @@ public class RealizarIncidencia extends AppCompatActivity {
             botonCargar.setEnabled(false);
         }
         Toast.makeText(this, "Paso por onCreate()", Toast.LENGTH_SHORT).show();
-        //Recibir los datos a traves del Bundle
-        Bundle extras = getIntent().getExtras();
 
-        if (extras != null) {
-            location = extras.getParcelable("locacion");
+        //Recibir los datos a traves del Bundle
+        Bundle extraTipoResiduo = getIntent().getExtras();
+
+        //Recibimos los Bundle, de location y tipo de incidencia. Si no son vacios se procede a utilizar la informacion
+        if (extraTipoResiduo != null) {
+            nombre_tipo_incidencia = extraTipoResiduo.getString("tipo");
+            if (nombre_tipo_incidencia != null) {
+                textView_tipo_incidencia.setText(String.format("El tipo de residuo a recolectar es: %s", nombre_tipo_incidencia));
+            }
         }
-        //Verificamos que no sea null
-        if (location != null) {
-            //Si es distinto de null tomamos los datos
-            mUbicacion = location;
-            textView_ubicacion.setText(getStringUbicacion());
-            String cadenaDeUbicacion = getStringUbicacion();
-            textView_ubicacion.setText(cadenaDeUbicacion);
-            Toast.makeText(this, "La ubicacion es:" + mUbicacion.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
+
+//        //Verificamos que no sea null
+//        if (location != null) {
+//            //Si es distinto de null tomamos los datos
+//            mUbicacion = location;
+//            textView_ubicacion.setText(getStringUbicacion());
+//            String cadenaDeUbicacion = getStringUbicacion();
+//            textView_ubicacion.setText(cadenaDeUbicacion);
+//        }
+    }//Fin de onCreate()
 
     private String getStringUbicacion() {
         String cadenaDeUbicacion = "mi cadena";
-        /*
-        Hago la geodecoder
-         */
+
         if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
 
             try {
                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -324,8 +330,19 @@ public class RealizarIncidencia extends AppCompatActivity {
                             });
 
                     Bitmap bitmap = BitmapFactory.decodeFile(path);
-
                     imagen.setImageBitmap(bitmap);
+
+                    break;
+                case CODIGO_SELECCIONAR_UBICACION:
+                    location = data.getParcelableExtra("locacion");
+
+                    //Verificamos que no sea null
+                    if (location != null) {
+                        //Si es distinto de null tomamos los datos
+                        mUbicacion = location;
+                        String cadenaDeUbicacion = getStringUbicacion();
+                        textView_ubicacion.setText(cadenaDeUbicacion);
+                    }
 
                     break;
             }
@@ -336,12 +353,21 @@ public class RealizarIncidencia extends AppCompatActivity {
 
     public void subirIncidencia(View view) {
 
-        //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
-        String tipo = "Metales";
+        String tipo = nombre_tipo_incidencia;
         String fecha = this.obtenerFecha();
-        String descripcion = "chatarra y cacharros";
-        String ubicacion = "ubicacion geografica";
-        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, ubicacion, this, mDatabase, mAuth, mStorageRef);
+        Map<String, Object> HM_ubicacion = null;
+        String descripcion = editText_descripcion.getText().toString().trim();
+        String direccion_particular = editText_direccion.getText().toString().trim();
+        ;
+
+        if (mUbicacion != null) {
+            //Hacemos el Pojo de la Ubicacion con algunos datos del objeto Location
+            HM_ubicacion = crearHashMapUbicacion(mUbicacion);
+        }
+
+        //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
+
+        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular, this, mDatabase, mAuth, mStorageRef);
 
         try {
             incidencia.cargarIncidencia();
@@ -350,9 +376,31 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
     }
 
+    private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
+        double latitud = 0;
+        double longitud = 0;
+        String cadenaUbicacion = null;
+
+        //Obtenemos los datos de la ubicacion
+        if (miUbicacion != null) {
+            latitud = miUbicacion.getLatitude();
+            longitud = miUbicacion.getLongitude();
+            cadenaUbicacion = textView_ubicacion.getText().toString().trim();
+        }
+
+        //Ahora el objeto hashMap para subir a la base de datos
+        Map<String, Object> ubicacion = new HashMap<>();
+        //En el mismo orden de Firebase
+        ubicacion.put("latitud", latitud);
+        ubicacion.put("longitud", longitud);
+        ubicacion.put("cadenaUbicacion", cadenaUbicacion);
+
+        return ubicacion;
+    }
+
     public void subirUbicacion(View view) {
         Intent geoLocalizacion = new Intent(this, MapsActivity.class);
-        startActivity(geoLocalizacion);
+        startActivityForResult(geoLocalizacion, CODIGO_SELECCIONAR_UBICACION);
     }
 
     private String obtenerFecha() {

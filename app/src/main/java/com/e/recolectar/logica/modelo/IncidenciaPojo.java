@@ -1,11 +1,15 @@
 package com.e.recolectar.logica.modelo;
 
+import java.util.Map;
+
 public class IncidenciaPojo {
     private String tipo;
     private String fecha;
     private String imagen;
     private String descripcion;
-    private String ubicacion;
+    private String direccion;
+    private Map<String, Object> ubicacion;
+    private String cadenaUbicacion;
 
     public IncidenciaPojo() {
     }
@@ -42,11 +46,28 @@ public class IncidenciaPojo {
         this.descripcion = descripcion;
     }
 
-    public String getUbicacion() {
+    public Map<String, Object> getUbicacion() {
         return ubicacion;
     }
 
-    public void setUbicacion(String ubicacion) {
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setUbicacion(Map<String, Object> ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getCadenaUbicacion() {
+        String cadena = String.valueOf(this.ubicacion.get("cadenaUbicacion"));
+        return cadena;
+    }
+
+    public void setCadenaUbicacion(String cadenaUbicacion) {
+        this.cadenaUbicacion = cadenaUbicacion;
     }
 }

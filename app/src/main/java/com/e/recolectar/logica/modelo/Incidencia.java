@@ -33,6 +33,7 @@ public class Incidencia {
     private Uri imagen;
     private String descripcion;
     private String ubicacion;
+    private Map<String, Object> geo_ubicacion;
     //    ArrayList<Incidencia> mSituacionesArray;
     private Context mContext;
     private DatabaseReference mDatabase;
@@ -46,12 +47,13 @@ public class Incidencia {
     }
 
     //Constructor
-    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, String ubicacion, Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth, StorageReference mStorageRef) {
+    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, Map<String, Object> geo_ubicacion, String ubicacion, Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth, StorageReference mStorageRef) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.ubicacion = ubicacion;
+        this.geo_ubicacion = geo_ubicacion;
         this.mContext = mContext;
         this.mDatabase = mDatabase;
         this.mAuth = mAuth;
@@ -130,8 +132,15 @@ public class Incidencia {
         this.mStorageRef = mStorageRef;
     }
 
+    public Map<String, Object> getGeo_ubicacion() {
+        return geo_ubicacion;
+    }
 
-    //endregion
+    public void setGeo_ubicacion(Map<String, Object> geo_ubicacion) {
+        this.geo_ubicacion = geo_ubicacion;
+    }
+
+//endregion
 
 
 //    public ArrayList<Incidencia> getDatos(DatabaseReference databaseReference) {
@@ -182,7 +191,8 @@ public class Incidencia {
                         incidencia.put("fecha", fecha);
                         incidencia.put("imagen", downloadLink.toString());
                         incidencia.put("tipo", tipo);
-                        incidencia.put("ubicacion", ubicacion);
+                        incidencia.put("direccion", ubicacion);
+                        incidencia.put("ubicacion", geo_ubicacion);
 //      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
                         mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
 //                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
@@ -210,7 +220,6 @@ public class Incidencia {
 
 
     }
-
 
 
 }

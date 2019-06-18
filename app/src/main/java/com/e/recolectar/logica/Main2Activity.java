@@ -1,10 +1,14 @@
 package com.e.recolectar.logica;
 
+import android.content.Intent;
+import android.location.Location;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
@@ -29,47 +33,34 @@ import static android.widget.Toast.makeText;
 public class Main2Activity extends AppCompatActivity {
 
 
+    private static final int CODIGO_SELECCIONAR_UBICACION = 30 ;
+    private Location location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    }
 
 
-        final DatabaseReference usuarioIncidenciaRef = databaseReference.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias");
+    public void onClick(View view) {
+        Intent geoLocalizacion = new Intent(this, MapsActivity.class);
+        startActivityForResult(geoLocalizacion, CODIGO_SELECCIONAR_UBICACION);
+    }
 
-        usuarioIncidenciaRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<IncidenciaPojo> array = new ArrayList<>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
 
-                    IncidenciaPojo incidenciaPojo = snapshot.getValue(IncidenciaPojo.class);
-                    incidenciaPojo.setTipo(incidenciaPojo.getTipo());
-                    incidenciaPojo.setFecha(incidenciaPojo.getFecha());
-                    incidenciaPojo.setDescripcion(incidenciaPojo.getDescripcion());
-                    incidenciaPojo.setUbicacion(incidenciaPojo.getUbicacion());
-                    incidenciaPojo.setImagen(incidenciaPojo.getImagen());
-
-                    array.add(incidenciaPojo);
-
-
-                    Log.d("MyApp", "I am here");
-                    System.out.println(incidenciaPojo);
-
-                }
-
-
+            switch (requestCode) {
+                case CODIGO_SELECCIONAR_UBICACION:
+                    location = data.getParcelableExtra("locacion");
+                    break;
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        }
     }
 }

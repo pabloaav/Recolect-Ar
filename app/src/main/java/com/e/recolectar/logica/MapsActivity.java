@@ -1,26 +1,20 @@
 package com.e.recolectar.logica;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
-
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,9 +28,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MapsActivity extends FragmentActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
@@ -174,10 +165,10 @@ public class MapsActivity extends FragmentActivity
 
                     Location location = (Location) task.getResult();
                     //Pasar el Intent cargado al Activity Realizar Incidencia
-
-                    Intent devolverUbicacion = new Intent(MapsActivity.this, RealizarIncidencia.class);
-                    devolverUbicacion.putExtra("locacion", location);
-                    startActivity(devolverUbicacion);
+                    Intent devolverUbicacion = new Intent(MapsActivity.this, Main2Activity.class);
+                    devolverUbicacion.putExtra("locacion",location);
+                    setResult(RESULT_OK, devolverUbicacion);
+                    finish();
                 } else {
 
                     Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
