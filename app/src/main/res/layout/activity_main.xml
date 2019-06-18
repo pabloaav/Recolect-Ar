@@ -10,16 +10,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo_main"
+        android:background="@drawable/fondo_login_nuevo_1080x"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="72dp">
+        >
 
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_correoLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60sp">
 
 
             <EditText
@@ -32,11 +32,12 @@
                 android:drawableLeft="@drawable/ic_mail_black_24dp"
                 android:drawablePadding="10dp"
                 android:ems="10"
+                android:fontFamily="@font/roboto_mono_bold_italic"
                 android:hint="@string/txt_correoLogin"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorAccent"
                 android:textColorHighlight="@color/colorAccent"
-                android:textColorHint="@color/colorAccent"
+                android:textColorHint="@color/colorBotonVerde"
                 android:textSize="18sp" />
 
         </android.support.design.widget.TextInputLayout>
@@ -46,6 +47,7 @@
             android:id="@+id/til_contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -55,12 +57,14 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5sp"
                 android:drawableStart="@drawable/ic_vpn_key_black_24dp"
-                android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="@string/txt_Contrasena"
+                android:hint="@string/txt_contrasena"
+                android:fontFamily="@font/roboto_mono_bold_italic"
+                android:textColorHint="@color/colorBotonVerde"
                 android:inputType="textPassword"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -71,15 +75,16 @@
             android:layout_width="60mm"
             android:layout_height="55sp"
             android:layout_gravity="center"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="15sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/login_user_32x"
+            android:drawableLeft="@drawable/ic_action_login_usuario"
+            android:fontFamily="@font/roboto_mono_bold_italic"
+            android:hint="@string/bt_loguear"
             android:minWidth="88dip"
             android:onClick="onClick"
-            android:text="@string/bt_Loguear"
             android:textColor="@color/colorBotonBlanco"
             android:textColorHighlight="@color/colorAccent"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/colorBotonBlanco"
             android:textSize="18sp" />
 
         <Button
@@ -88,14 +93,15 @@
             android:layout_width="60mm"
             android:layout_height="55sp"
             android:layout_gravity="center"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="15sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/icono_add_user_32x"
+            android:drawableLeft="@drawable/ic_action_crear_cuenta"
+            android:fontFamily="@font/roboto_mono_bold_italic"
+            android:hint="@string/bt_registrarse"
             android:onClick="onClick"
-            android:text="@string/bt_Registrarse"
             android:textColor="@color/colorBotonBlanco"
             android:textColorHighlight="@color/colorAccent"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/colorBotonBlanco"
             android:textSize="18sp" />
 
         <Button
@@ -104,12 +110,14 @@
             android:layout_width="60mm"
             android:layout_height="55sp"
             android:layout_gravity="center"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="15sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/google_icon_log_32x"
+            android:drawableLeft="@drawable/ic_action_login_google"
+            android:fontFamily="@font/roboto_mono_bold_italic"
+            android:hint="@string/bt_log_google"
             android:onClick="onClick"
-            android:text="iniciar con google"
             android:textColor="@color/colorBotonBlanco"
+            android:textColorHint="@color/colorBotonBlanco"
             android:textSize="18sp"
             android:textStyle="normal" />
 
@@ -119,12 +127,14 @@
             android:layout_width="60mm"
             android:layout_height="55sp"
             android:layout_gravity="center"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="15sp"
             android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/facebook_icon_32x"
+            android:drawableLeft="@drawable/ic_action_login_face"
+            android:fontFamily="@font/roboto_mono_bold_italic"
+            android:hint="@string/bt_log_face"
             android:onClick="onClick"
-            android:text="iniciar con facebook"
             android:textColor="@color/colorBotonBlanco"
+            android:textColorHint="@color/colorBotonBlanco"
             android:textSize="18sp"
             android:textStyle="normal" />
 
