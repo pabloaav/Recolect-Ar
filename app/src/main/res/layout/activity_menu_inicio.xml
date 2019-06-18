@@ -15,22 +15,27 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_mono_bold_italic"
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
             android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/colorBotonBlanco" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/cardview_light_background"
+            app:tabBackground="@color/colorActionBar"
+            app:tabTextAppearance="@style/letrasTabs"
+            app:tabIndicatorColor="@color/colorBotonBlanco"
+            app:tabTextColor="@color/colorPruebaMenuTab"
+            app:tabSelectedTextColor="@color/colorPruebaMenuTab"
+            app:tabIconTint="@color/colorPruebaMenuTab"
             app:tabIndicatorHeight="3dp"
             android:minHeight="?actionBarSize"
-            app:tabTextAppearance="@style/letrasTabs"
             app:tabGravity="fill"
-            app:tabBackground="@color/backgroundTabs"
             app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
 
