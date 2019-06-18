@@ -137,6 +137,15 @@
             android:textColorHint="@color/colorBotonBlanco"
             android:textSize="18sp"
             android:textStyle="normal" />
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:background="@android:color/transparent"
+            android:visibility="visible" />
 
     </LinearLayout>
 
