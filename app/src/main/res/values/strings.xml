@@ -48,5 +48,7 @@
     <string name="tab_text_3">RECICLAJE</string>
 
 
+    <!--Cosas del Maps Activity-->
+    <string name="title_activity_maps">Map</string>
 
 </resources>
