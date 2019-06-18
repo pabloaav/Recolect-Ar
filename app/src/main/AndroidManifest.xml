@@ -33,7 +33,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".logica.MapsActivity" />
+        <activity
+            android:name=".logica.MapsActivity"
+            android:label="@string/title_activity_maps" />
         <activity android:name=".logica.Main2Activity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
