@@ -164,7 +164,7 @@ public class MapsActivity2 extends FragmentActivity implements GoogleMap.OnMyLoc
 
                     Location location = (Location) task.getResult();
                     //Pasar el Intent cargado al Activity Realizar Incidencia
-                    Intent devolverUbicacion = new Intent(MapsActivity2.this, Main2Activity.class);
+                    Intent devolverUbicacion = new Intent(MapsActivity2.this, RealizarIncidencia.class);
                     devolverUbicacion.putExtra("locacion",location);
                     setResult(RESULT_OK, devolverUbicacion);
                     finish();

@@ -19,7 +19,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.e.recolectar.R;
-import com.e.recolectar.logica.MapsActivity;
+
 import com.e.recolectar.logica.modelo.IncidenciaPojo;
 
 import java.util.ArrayList;
