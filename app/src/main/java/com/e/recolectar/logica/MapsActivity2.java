@@ -4,12 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,8 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class MapsActivity extends FragmentActivity
-        implements GoogleMap.OnMyLocationButtonClickListener,
+public class MapsActivity2 extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback {
 
@@ -165,13 +164,13 @@ public class MapsActivity extends FragmentActivity
 
                     Location location = (Location) task.getResult();
                     //Pasar el Intent cargado al Activity Realizar Incidencia
-                    Intent devolverUbicacion = new Intent(MapsActivity.this, Main2Activity.class);
+                    Intent devolverUbicacion = new Intent(MapsActivity2.this, Main2Activity.class);
                     devolverUbicacion.putExtra("locacion",location);
                     setResult(RESULT_OK, devolverUbicacion);
                     finish();
                 } else {
 
-                    Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity2.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                 }
             }
         });

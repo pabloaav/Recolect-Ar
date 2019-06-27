@@ -399,7 +399,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     }
 
     public void subirUbicacion(View view) {
-        Intent geoLocalizacion = new Intent(this, MapsActivity.class);
+        Intent geoLocalizacion = new Intent(this, MapsActivity2.class);
         startActivityForResult(geoLocalizacion, CODIGO_SELECCIONAR_UBICACION);
     }
 

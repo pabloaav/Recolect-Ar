@@ -2,7 +2,7 @@
     <string name="app_name">Recolect-Ar</string>
     <string name="app_name_actionBar">Gestionar Incidendia</string>
 
-  <!--Activity Inicio de Sesión-->
+    <!--Activity Inicio de Sesión-->
     <string name="txt_correoLogin">INGRESE SU CORREO ELECTRONICO:</string>
     <string name="txt_contrasena">INGRESE SU CONTRASEÑA:</string>
     <string name="tv_olvidoPass">HAS OLVIDADO TU CONTRASEÑA?</string>
@@ -11,7 +11,7 @@
     <string name="bt_log_google">INICIAR CON GOOGLE</string>
     <string name="bt_log_face">INICIAR CON FACEBOOK</string>
 
-   <!--Activity Crear Cuenta-->
+    <!--Activity Crear Cuenta-->
     <string name="txt_dni">INGRESE SU DNI: </string>
     <string name="txt_Nombre">INGRESE SU NOMBRE: </string>
     <string name="txt_Apellido">INGRESE SU APELLIDO: </string>
@@ -34,7 +34,6 @@
     <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
 
 
-
     <!--ATRIBUTOS DE ICONOS Y TITULOS BARRA TABS-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -50,5 +49,6 @@
 
     <!--Cosas del Maps Activity-->
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map2</string>
 
 </resources>
