@@ -2,7 +2,7 @@
     <string name="app_name">Recolect-Ar</string>
     <string name="app_name_actionBar">Gestionar Incidendia</string>
 
-    <!--Activity Inicio de Sesión-->
+  <!--Activity Inicio de Sesión-->
     <string name="txt_correoLogin">INGRESE SU CORREO ELECTRONICO:</string>
     <string name="txt_contrasena">INGRESE SU CONTRASEÑA:</string>
     <string name="tv_olvidoPass">HAS OLVIDADO TU CONTRASEÑA?</string>
@@ -11,7 +11,7 @@
     <string name="bt_log_google">INICIAR CON GOOGLE</string>
     <string name="bt_log_face">INICIAR CON FACEBOOK</string>
 
-    <!--Activity Crear Cuenta-->
+   <!--Activity Crear Cuenta-->
     <string name="txt_dni">INGRESE SU DNI: </string>
     <string name="txt_Nombre">INGRESE SU NOMBRE: </string>
     <string name="txt_Apellido">INGRESE SU APELLIDO: </string>
@@ -21,18 +21,15 @@
     <string name="bt_Registrarme">REGISTRARME </string>
 
 
-    <!--Activity TAB 1 RECLAMOS-->
-    <string name="tv_selecTipo">SELECCIONE EL RECLAMO A REALIZAR:</string>
-    <string name="spin_Tipos">SELECCIONE UN TIPO</string>
-    <string name="txt_descripcion">DESCRIBA LA SITUACION:</string>
-    <string name="txt_domicilio">INGRESE SU DOMICILIO:</string>
-    <string name="bt_agregarFoto">AÑADIR FOTO</string>
-    <string name="bt_abrirGaleria">ABRIR GALERIA</string>
-    <string name="bt_enviar">ENVIAR INFORMACION</string>
-
     <!--FRAGMENT TAB 1 INCIDENCIAS-->
     <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
 
+
+    <!--FRAGMENT REALIZAR INCIDENCIAS-->
+    <string name="tv_gestion_inc">GESTIONAR INCIDENCIA</string>
+    <string name="tv_ubicacion">Ubicación no cargada aún...</string>
+    <string name="txt_direccion">Ingrese su direccion (opcional)</string>
+    <string name="txt_descripcion">Describa la incidencia</string>
 
     <!--ATRIBUTOS DE ICONOS Y TITULOS BARRA TABS-->
     <!-- TODO: Remove or change this placeholder text -->
@@ -49,6 +46,5 @@
 
     <!--Cosas del Maps Activity-->
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_maps2">Map2</string>
 
 </resources>

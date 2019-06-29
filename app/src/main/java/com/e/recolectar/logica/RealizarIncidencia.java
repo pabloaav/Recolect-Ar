@@ -28,7 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.design.widget.TextInputLayout;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
 import com.google.firebase.auth.FirebaseAuth;

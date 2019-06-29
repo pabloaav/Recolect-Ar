@@ -19,7 +19,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_dni"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorBotonVerde">
 
             <EditText
                 android:id="@+id/txt_dni"
@@ -42,7 +43,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_nombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorBotonVerde">
 
             <EditText
                 android:id="@+id/txt_nombre"
@@ -63,7 +65,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_apellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorBotonVerde">
 
 
             <EditText
@@ -85,7 +88,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_mail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorBotonVerde">
 
             <EditText
                 android:id="@+id/txt_mail"
@@ -108,7 +112,8 @@
             android:id="@+id/til_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:textColorHint="@color/colorBotonVerde">
 
             <EditText
                 android:id="@+id/txt_pass"
@@ -130,7 +135,8 @@
             android:id="@+id/til_reppass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:textColorHint="@color/colorBotonVerde">
 
 
             <EditText
