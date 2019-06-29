@@ -21,19 +21,15 @@
     <string name="bt_Registrarme">REGISTRARME </string>
 
 
-    <!--Activity TAB 1 RECLAMOS-->
-    <string name="tv_selecTipo">SELECCIONE EL RECLAMO A REALIZAR:</string>
-    <string name="spin_Tipos">SELECCIONE UN TIPO</string>
-    <string name="txt_descripcion">DESCRIBA LA SITUACION:</string>
-    <string name="txt_domicilio">INGRESE SU DOMICILIO:</string>
-    <string name="bt_agregarFoto">AÑADIR FOTO</string>
-    <string name="bt_abrirGaleria">ABRIR GALERIA</string>
-    <string name="bt_enviar">ENVIAR INFORMACION</string>
-
     <!--FRAGMENT TAB 1 INCIDENCIAS-->
     <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
 
 
+    <!--FRAGMENT REALIZAR INCIDENCIAS-->
+    <string name="tv_gestion_inc">GESTIONAR INCIDENCIA</string>
+    <string name="tv_ubicacion">Ubicación no cargada aún...</string>
+    <string name="txt_direccion">Ingrese su direccion (opcional)</string>
+    <string name="txt_descripcion">Describa la incidencia</string>
 
     <!--ATRIBUTOS DE ICONOS Y TITULOS BARRA TABS-->
     <!-- TODO: Remove or change this placeholder text -->
