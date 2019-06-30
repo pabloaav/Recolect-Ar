@@ -41,7 +41,7 @@
     <string name="action_settings">Settings</string>
     <string name="tab_text_1">INCIDENCIAS</string>
     <string name="tab_text_2">ESTADOS</string>
-    <string name="tab_text_3">RECICLAJE</string>
+    <string name="tab_text_3">ECOPUNTOS</string>
 
 
     <!--Cosas del Maps Activity-->

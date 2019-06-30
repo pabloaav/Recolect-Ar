@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.design.widget.TextInputLayout;
+
+import com.bumptech.glide.Glide;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
 import com.google.firebase.auth.FirebaseAuth;
@@ -263,8 +265,8 @@ public class RealizarIncidencia extends AppCompatActivity {
                     tomarFotografia();
                 } else {
                     if (opciones[i].equals("Cargar Imagen")) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        intent.setType("image/");
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/*");
                         startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicación"), COD_SELECCIONA);
                     } else {
                         dialogInterface.dismiss();
@@ -317,7 +319,13 @@ public class RealizarIncidencia extends AppCompatActivity {
             switch (requestCode) {
                 case COD_SELECCIONA:
                     miPath = data.getData();
-                    imagen.setImageURI(miPath);
+//                    imagen.setImageURI(miPath);
+
+                    Glide
+                            .with(RealizarIncidencia.this)
+                            .load(miPath)
+                            .error(R.drawable.ic_error_black_24dp)
+                            .into(imagen);
                     break;
 
                 case COD_FOTO:
@@ -329,8 +337,13 @@ public class RealizarIncidencia extends AppCompatActivity {
                                 }
                             });
 
-                    Bitmap bitmap = BitmapFactory.decodeFile(path);
-                    imagen.setImageBitmap(bitmap);
+//                    Bitmap bitmap = BitmapFactory.decodeFile(path);
+//                    imagen.setImageBitmap(bitmap);
+                    Glide
+                            .with(RealizarIncidencia.this)
+                            .load(path)
+                            .error(R.drawable.ic_error_black_24dp)
+                            .into(imagen);
 
                     break;
                 case CODIGO_SELECCIONAR_UBICACION:

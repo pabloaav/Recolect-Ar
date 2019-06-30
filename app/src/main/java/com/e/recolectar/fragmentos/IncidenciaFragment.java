@@ -44,7 +44,7 @@ public class IncidenciaFragment extends Fragment {
 
     View vista;
     GridLayout mainGrid;
-    private static final String[] nombres_incidencias = new String[]{"vidrio","industrial","chatarra","domiciliario"};
+    private static final String[] nombres_incidencias = new String[]{"Vidrio","Industrial","Chatarra","Domiciliario"};
     //endregion
 
     //region METODOS
