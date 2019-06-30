@@ -40,8 +40,7 @@
         android:layout_height="84dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:foreground="@drawable/icono_sin_foto256x"
-        android:src="@drawable/img_base" />
+        android:src="@drawable/icono_sin_foto256x" />
 
     <Button
         android:id="@+id/btnCargarImg"
