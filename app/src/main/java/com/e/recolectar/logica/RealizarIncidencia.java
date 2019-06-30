@@ -101,7 +101,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         } else {
             botonCargar.setEnabled(false);
         }
-        Toast.makeText(this, "Paso por onCreate()", Toast.LENGTH_SHORT).show();
+
 
         //Recibir los datos a traves del Bundle
         Bundle extraTipoResiduo = getIntent().getExtras();
