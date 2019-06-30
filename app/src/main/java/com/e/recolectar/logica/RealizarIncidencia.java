@@ -142,12 +142,15 @@ public class RealizarIncidencia extends AppCompatActivity {
 //                        strAddress.append(fetchedAddress.getAddressLine(i).indexOf(1));
 //                        cadenaDeUbicacion = strAddress.toString();}
                     String address = addresses.get(0).getAddressLine(0);
+                    //Quiero obtener solo la calle y el numero; formo un array String
+                    String[] arrayCalleNumero = address.split(",");
+                    String calleNumero = arrayCalleNumero[0];
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
                     String country = addresses.get(0).getCountryName();
                     String postalCode = addresses.get(0).getPostalCode();
                     String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-                    cadenaDeUbicacion = address;
+                    cadenaDeUbicacion = calleNumero + ", " + city + ", " + state;
                 } else {
                     textView_ubicacion.setText("Searching Current Address");
                 }
