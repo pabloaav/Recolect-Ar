@@ -31,6 +31,7 @@ import android.widget.Toast;
 import android.support.design.widget.TextInputLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
 import com.google.firebase.auth.FirebaseAuth;
@@ -324,9 +325,11 @@ public class RealizarIncidencia extends AppCompatActivity {
                     miPath = data.getData();
 //                    imagen.setImageURI(miPath);
 
+
                     Glide
                             .with(RealizarIncidencia.this)
                             .load(miPath)
+                            .centerCrop()
                             .error(R.drawable.ic_error_black_24dp)
                             .into(imagen);
                     break;
