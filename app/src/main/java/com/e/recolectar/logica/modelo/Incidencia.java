@@ -1,8 +1,14 @@
 package com.e.recolectar.logica.modelo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -14,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +47,7 @@ public class Incidencia {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
+    private Bitmap rezisePhoto;
     //endregion
 
     //region CONSTRUCTOR, SETS Y GETS
@@ -140,37 +149,13 @@ public class Incidencia {
         this.geo_ubicacion = geo_ubicacion;
     }
 
-//endregion
-
-
-//    public ArrayList<Incidencia> getDatos(DatabaseReference databaseReference) {
-//        mSituacionesArray.clear();
-//        databaseReference.child("Situaciones").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                        String tipo = ds.child("idTipo").getValue().toString();
-//                        String fecha = ds.child("fecha").getValue().toString();
-//                        int imagenId = (int) ds.child("idImagen").getValue();
-//                        mSituacionesArray.add(new Incidencia(fecha, tipo, imagenId));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//        return mSituacionesArray;
-//    }
 
     public void cargarIncidencia() {
 
         if (imagen != null) {
+            String segmento = imagen.getLastPathSegment();
+            final StorageReference fotoRef = mStorageRef.child("Fotos").child(mAuth.getCurrentUser().getUid()).child(segmento);
 
-            final StorageReference fotoRef = mStorageRef.child("Fotos").child(mAuth.getCurrentUser().getUid()).child(imagen.getLastPathSegment());
             fotoRef.putFile(imagen).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -220,6 +205,5 @@ public class Incidencia {
 
 
     }
-
 
 }

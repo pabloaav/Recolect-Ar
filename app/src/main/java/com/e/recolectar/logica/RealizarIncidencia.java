@@ -21,6 +21,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +41,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,8 +60,8 @@ public class RealizarIncidencia extends AppCompatActivity {
 
     //region ATRIBUTOS
 
-    private final String CARPETA_RAIZ = "misImagenesPrueba/";
-    private final String RUTA_IMAGEN = CARPETA_RAIZ + "misFotos";
+    private final String CARPETA_RAIZ = "imagenesRecolectAr/";
+    private final String RUTA_IMAGEN = CARPETA_RAIZ + "RecolectAr";
 
     final int COD_SELECCIONA = 10;
     final int COD_FOTO = 20;
@@ -77,6 +81,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     Location location;
     String nombre_tipo_incidencia;
     private static final int CODIGO_SELECCIONAR_UBICACION = 1;
+    String nombreImagen = "";
     //endregion
 
     //region METODOS
@@ -285,7 +290,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     private void tomarFotografia() {
         File fileImagen = new File(Environment.getExternalStorageDirectory(), RUTA_IMAGEN);
         boolean isCreada = fileImagen.exists();
-        String nombreImagen = "";
+
         if (isCreada == false) {
             isCreada = fileImagen.mkdirs();
         }
@@ -315,6 +320,25 @@ public class RealizarIncidencia extends AppCompatActivity {
         ////
     }
 
+    public Bitmap resizeFoto(String foto) {
+        Bitmap fotoReducida = null;
+        try {
+            byte[] byteCode = Base64.decode(foto, Base64.DEFAULT);
+            //this.imagen= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
+
+//            int alto = 100;//alto en pixeles
+//            int ancho = 150;//ancho en pixeles
+
+            fotoReducida = BitmapFactory.decodeFile(foto);
+//            fotoReducida2 = Bitmap.createScaledBitmap(fotoReducida, alto, ancho, true);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fotoReducida;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -329,22 +353,53 @@ public class RealizarIncidencia extends AppCompatActivity {
                     Glide
                             .with(RealizarIncidencia.this)
                             .load(miPath)
-                            .centerCrop()
                             .error(R.drawable.ic_error_black_24dp)
                             .into(imagen);
                     break;
 
                 case COD_FOTO:
+
                     MediaScannerConnection.scanFile(this, new String[]{path}, null,
                             new MediaScannerConnection.OnScanCompletedListener() {
                                 @Override
                                 public void onScanCompleted(String path, Uri uri) {
                                     Log.i("Ruta de almacenamiento", "Path: " + path);
+                                    miPath = uri;
                                 }
                             });
 
 //                    Bitmap bitmap = BitmapFactory.decodeFile(path);
 //                    imagen.setImageBitmap(bitmap);
+                    //Transformo el String path a Uri
+
+                    Bitmap imagenMasReducida = resizeFoto(path);
+
+                    String fileName = nombreImagen;
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    imagenMasReducida.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+                    File ExternalStorageDirectory = Environment.getExternalStorageDirectory();
+                    File file = new File(ExternalStorageDirectory + File.separator + RUTA_IMAGEN + File.separator + fileName);
+                    FileOutputStream fileOutputStream = null;
+                    try {
+                        file.createNewFile();
+                        fileOutputStream = new FileOutputStream(file);
+                        fileOutputStream.write(bytes.toByteArray());
+
+                        Toast.makeText(RealizarIncidencia.this, "Tu imagen se guardo en: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } finally {
+                        if (fileOutputStream != null) {
+                            try {
+                                fileOutputStream.close();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
                     Glide
                             .with(RealizarIncidencia.this)
                             .load(path)
@@ -369,6 +424,7 @@ public class RealizarIncidencia extends AppCompatActivity {
 
         }
     }
+
 
     public void subirIncidencia(View view) {
 
