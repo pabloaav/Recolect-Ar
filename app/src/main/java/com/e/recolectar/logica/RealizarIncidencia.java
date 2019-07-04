@@ -35,11 +35,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -442,13 +447,69 @@ public class RealizarIncidencia extends AppCompatActivity {
 
         //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
 
-        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular, this, mDatabase, mAuth, mStorageRef);
+        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular);
 
         try {
-            incidencia.cargarIncidencia();
+            this.cargarIncidencia(incidencia);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void cargarIncidencia(final Incidencia p_incidencia) {
+
+        if (p_incidencia.getImagen() != null) {
+            String segmento = p_incidencia.getImagen().getLastPathSegment();
+            final StorageReference fotoRef = mStorageRef.child("Fotos").child(mAuth.getCurrentUser().getUid()).child(segmento);
+
+            fotoRef.putFile(p_incidencia.getImagen()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw new Exception();
+                    }
+
+                    return fotoRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadLink = task.getResult();
+                        Map<String, Object> incidencia = new HashMap<>();
+                        //En el mismo orden de Firebase
+                        incidencia.put("descripcion", p_incidencia.getDescripcion());
+                        incidencia.put("fecha", p_incidencia.getFecha());
+                        incidencia.put("imagen", downloadLink.toString());
+                        incidencia.put("tipo", p_incidencia.getTipo());
+                        incidencia.put("direccion",p_incidencia.getUbicacion());
+                        incidencia.put("ubicacion", p_incidencia.getUbicacion());
+//      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
+                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
+//                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
+                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias").push().setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                Toast.makeText(RealizarIncidencia.this, "Se cargo la incidencia correctamente.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(RealizarIncidencia.this, "Error al cargar la incidencia" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                }
+            });
+
+
+        }
+
+
     }
 
     private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
