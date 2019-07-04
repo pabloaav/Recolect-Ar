@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.e.recolectar.fragmentos.IncidenciaFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:scrollbarSize="5dp"
+        android:weightSum="8">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPruebaActionBar">
+
+            <TextView
+                android:id="@+id/textGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="35sp"
+                android:fontFamily="@font/roboto_mono_bold_italic"
+                android:hint="@string/textGrid"
+                android:textColor="#000000"
+                android:textColorHint="@color/colorBotonBlanco"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <GridLayout
+            android:id="@+id/mainGrid"
+            android:layout_width="match_parent"
+            android:layout_height="426dp"
+            android:alignmentMode="alignMargins"
+            android:background="@color/colorPruebaFondoFarg"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:padding="1dp"
+            android:rowCount="2">
+
+            <!-- Fila 1 -->
+            <!-- Columa 1 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardV_1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:id="@+id/imgv_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:srcCompat="@drawable/icono_contenedor_vidrio_final_480x" />
+            </android.support.v7.widget.CardView>
+            <!-- Columa 2 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardV_2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:id="@+id/imgv_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:srcCompat="@drawable/icono_contenedor_industrial_final_480x" />
+
+            </android.support.v7.widget.CardView>
+            <!-- Fila 2 -->
+            <!-- Columa 1 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardV_3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:id="@+id/imgv_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:srcCompat="@drawable/icono_contenedor_chatarra_final_480x" />
+            </android.support.v7.widget.CardView>
+            <!-- Columa 2 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardV_4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:id="@+id/imgv_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:srcCompat="@drawable/icono_contenedor_domiciliario_final_480x" />
+            </android.support.v7.widget.CardView>
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</ScrollView>

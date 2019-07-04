@@ -1,18 +1,22 @@
-package com.e.recolectar.ModeloDatos;
+package com.e.recolectar.logica.modelo;
 
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
 public class Usuario {
 
     //region Atributos
-    private String idUsuario;
     private String nombre;
     private String apellido;
     private String email;
-    private String dni;
+    private String dniUsuario;
     private String password;
+    private String idUsuario;
+    private Incidencia incidencias;
     //endregion
 
-
     //region Metodos
+
     //Constructor de Persona
     public Usuario(String p_id, String p_dni, String p_nombre, String p_apellido, String p_email, String p_password) {
         this.setIdUsuario(p_id);
@@ -21,6 +25,7 @@ public class Usuario {
         this.setApellido(p_apellido);
         this.setEmail(p_email);
         this.setPassword(p_password);
+        this.incidencias = null;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class Usuario {
     }
 
     public void setUsuario(String dni) {
-        this.dni = dni;
+        this.dniUsuario = dni;
     }
 
     public void setPassword(String password) {
@@ -77,7 +82,7 @@ public class Usuario {
     }
 
     public String getUsuario() {
-        return dni;
+        return dniUsuario;
     }
 
     public String getPassword() {

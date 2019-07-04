@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#388E3C</color>
-    <color name="colorPrimaryDark">#C8E6C9</color>
-    <color name="colorAccent">#00BCD4</color>
+    <color name="colorPrimaryDark">#3e3053</color>      //COLOR BARRA SUPERIOR TOOGLE
+    <color name="colorPrimary">#009867</color>           //COLOR ACTION BAR
+        <color name="colorAccent">#388E3C</color>           //COLOR EDITTEXT
+
+    <color name="colorBotonVerde">#388E3C</color>
+    <color name="colorBotonBlanco">#FFFFFF</color>
+    <color name="colorBotonVerdeLima">#FFFFFF</color>
+    <color name="colorBotonTransparente">#A5D6A7</color>  //COLOR CON TRANSPARENCIA PARA TABS
+
+    <color name="backgroundTabs">#D0F0C0</color>
 
 
+    <color name="colorSuperiorToogle">#3e3053</color>
+    <color name="colorActionBar">#009867</color>
+    <color name="colorFondoTab">#92d669</color>
+    <color name="colorIconTab">#D0F0C0</color>
+
+    <color name="colorPruebaFondoFarg">#009867</color>
+    <color name="colorPruebaActionBar">#009867</color>
+    <color name="colorPruebaMenuTab">#D0F0C0</color>
+    <color name="colorIconTabORIGINAL">#ffee8a</color>
 
 
 </resources>
+
+
+
+   <!--color que tenia por defecto CYAN-->
+    <!--<color name="colorAccent">#00BCD4</color>-->

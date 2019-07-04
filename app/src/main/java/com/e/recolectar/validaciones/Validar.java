@@ -1,4 +1,4 @@
-package com.e.recolectar;
+package com.e.recolectar.validaciones;
 
 import android.util.Patterns;
 

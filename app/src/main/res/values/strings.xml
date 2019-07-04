@@ -1,18 +1,50 @@
 <resources>
-    //main_activity
-    <string name="app_name">RecolectAr</string>
-    <string name="txt_Usuario">Email:</string>
-    <string name="txt_Contrasena">Contraseña:</string>
-    <string name="bt_Loguear">Iniciar Sesión</string>
-    <string name="bt_Registrarse">Crear Una Cuenta</string>
-    <string name="tv_olvidoPass">Has Olvidado Tu Contraseña?</string>
-    //CrearCuenta
-    <string name="txt_dni">Su Numero de DNI:</string>
-    <string name="txt_Nombre">Nombre: </string>
-    <string name="txt_Apellido">Apellido: </string>
-    <string name="txt_Mail">Correo Electrónico: </string>
-    <string name="txt_Pass">Contraseña: </string>
-    <string name="txt_Reppass">Repetir Contraseña: </string>
-    <string name="bt_Registrarme">Registrarme </string>
-    
+    <string name="app_name">Recolect-Ar</string>
+    <string name="app_name_actionBar">Gestionar Incidendia</string>
+
+  <!--Activity Inicio de Sesión-->
+    <string name="txt_correoLogin">INGRESE SU CORREO ELECTRONICO:</string>
+    <string name="txt_contrasena">INGRESE SU CONTRASEÑA:</string>
+    <string name="tv_olvidoPass">HAS OLVIDADO TU CONTRASEÑA?</string>
+    <string name="bt_loguear">INICIAR SESION</string>
+    <string name="bt_registrarse">CREAR UNA CUENTA</string>
+    <string name="bt_log_google">INICIAR CON GOOGLE</string>
+    <string name="bt_log_face">INICIAR CON FACEBOOK</string>
+
+   <!--Activity Crear Cuenta-->
+    <string name="txt_dni">INGRESE SU DNI: </string>
+    <string name="txt_Nombre">INGRESE SU NOMBRE: </string>
+    <string name="txt_Apellido">INGRESE SU APELLIDO: </string>
+    <string name="txt_Mail">INGRESE SU CORREO ELECTRONICO: </string>
+    <string name="txt_Pass">INGRESE SU CONTRASEÑA: </string>
+    <string name="txt_Reppass">REPITA SU CONTRASEÑA: </string>
+    <string name="bt_Registrarme">REGISTRARME </string>
+
+
+    <!--FRAGMENT TAB 1 INCIDENCIAS-->
+    <string name="textGrid">SELECCIONE UN TIPO DE INCIDENCIA</string>
+
+
+    <!--FRAGMENT REALIZAR INCIDENCIAS-->
+    <string name="tv_gestion_inc">GESTIONAR INCIDENCIA</string>
+    <string name="tv_ubicacion">Ubicación no cargada aún...</string>
+    <string name="txt_direccion">Ingrese su direccion (opcional)</string>
+    <string name="txt_descripcion">Describa la incidencia</string>
+
+    <!--ATRIBUTOS DE ICONOS Y TITULOS BARRA TABS-->
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="tab_text_1">INCIDENCIAS</string>
+    <string name="tab_text_2">ESTADOS</string>
+    <string name="tab_text_3">ECOPUNTOS</string>
+
+
+    <!--Cosas del Maps Activity-->
+    <string name="title_activity_maps2">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
