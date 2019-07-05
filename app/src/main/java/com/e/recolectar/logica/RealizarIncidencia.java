@@ -1,9 +1,11 @@
 package com.e.recolectar.logica;
 
 import android.app.ProgressDialog;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
@@ -13,6 +15,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -42,6 +45,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.Context;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -325,24 +329,6 @@ public class RealizarIncidencia extends AppCompatActivity {
         ////
     }
 
-    public Bitmap resizeFoto(String foto) {
-        Bitmap fotoReducida = null;
-        try {
-            byte[] byteCode = Base64.decode(foto, Base64.DEFAULT);
-            //this.imagen= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
-
-//            int alto = 100;//alto en pixeles
-//            int ancho = 150;//ancho en pixeles
-
-            fotoReducida = BitmapFactory.decodeFile(foto);
-//            fotoReducida2 = Bitmap.createScaledBitmap(fotoReducida, alto, ancho, true);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fotoReducida;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -352,13 +338,15 @@ public class RealizarIncidencia extends AppCompatActivity {
             switch (requestCode) {
                 case COD_SELECCIONA:
                     miPath = data.getData();
-//                    imagen.setImageURI(miPath);
 
+                    String realPath = getRealPathFromURI(miPath);
 
+                    reducirGuardarFotoString(realPath);
                     Glide
                             .with(RealizarIncidencia.this)
                             .load(miPath)
-                            .error(R.drawable.ic_error_black_24dp)
+                            .placeholder(R.drawable.icono_sin_foto512x)
+                            .error(R.drawable.icono_sin_foto512x)
                             .into(imagen);
                     break;
 
@@ -377,38 +365,13 @@ public class RealizarIncidencia extends AppCompatActivity {
 //                    imagen.setImageBitmap(bitmap);
                     //Transformo el String path a Uri
 
-                    Bitmap imagenMasReducida = resizeFoto(path);
-
-                    String fileName = nombreImagen;
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    imagenMasReducida.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-                    File ExternalStorageDirectory = Environment.getExternalStorageDirectory();
-                    File file = new File(ExternalStorageDirectory + File.separator + RUTA_IMAGEN + File.separator + fileName);
-                    FileOutputStream fileOutputStream = null;
-                    try {
-                        file.createNewFile();
-                        fileOutputStream = new FileOutputStream(file);
-                        fileOutputStream.write(bytes.toByteArray());
-
-                        Toast.makeText(RealizarIncidencia.this, "Tu imagen se guardo en: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } finally {
-                        if (fileOutputStream != null) {
-                            try {
-                                fileOutputStream.close();
-                            } catch (IOException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
-                        }
-                    }
+                    reducirGuardarFotoString(path);
 
                     Glide
                             .with(RealizarIncidencia.this)
                             .load(path)
-                            .error(R.drawable.ic_error_black_24dp)
+                            .placeholder(R.drawable.icono_sin_foto512x)
+                            .error(R.drawable.icono_sin_foto512x)
                             .into(imagen);
 
                     break;
@@ -430,6 +393,55 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
     }
 
+    public void reducirGuardarFotoString(String path) {
+
+        Bitmap imagenMasReducida = resizeFoto(path);
+
+        String fileName = nombreImagen;
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        imagenMasReducida.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+        File ExternalStorageDirectory = Environment.getExternalStorageDirectory();
+        File file = new File(ExternalStorageDirectory + File.separator + RUTA_IMAGEN + File.separator + fileName);
+        FileOutputStream fileOutputStream = null;
+        try {
+            file.createNewFile();
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(bytes.toByteArray());
+
+            Toast.makeText(RealizarIncidencia.this, "Tu imagen se guardo en: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public Bitmap resizeFoto(String foto) {
+        Bitmap fotoReducida = null;
+        try {
+//            byte[] byteCode = Base64.decode(foto, Base64.DEFAULT);
+//            //this.imagen= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
+//
+////            int alto = 100;//alto en pixeles
+////            int ancho = 150;//ancho en pixeles
+
+            fotoReducida = BitmapFactory.decodeFile(foto);
+//            fotoReducida2 = Bitmap.createScaledBitmap(fotoReducida, alto, ancho, true);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fotoReducida;
+    }
 
     public void subirIncidencia(View view) {
 
@@ -483,16 +495,16 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("fecha", p_incidencia.getFecha());
                         incidencia.put("imagen", downloadLink.toString());
                         incidencia.put("tipo", p_incidencia.getTipo());
-                        incidencia.put("direccion",p_incidencia.getUbicacion());
-                        incidencia.put("ubicacion", p_incidencia.getUbicacion());
+                        incidencia.put("direccion", p_incidencia.getUbicacion());
+                        incidencia.put("ubicacion", p_incidencia.getGeo_ubicacion());
 //      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
                         mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
 //                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
                         mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias").push().setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
-                                Toast.makeText(RealizarIncidencia.this, "Se cargo la incidencia correctamente.", Toast.LENGTH_SHORT).show();
+                                exitoIncidencia();
+//                                Toast.makeText(RealizarIncidencia.this, "Se cargo la incidencia correctamente.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -510,6 +522,24 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
 
 
+    }
+
+    private void exitoIncidencia() {
+        final CharSequence[] opciones = {"OK", "VER"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
+        alertOpciones.setTitle("Su Incidencia se cargó correctamente a la base de datos. La podes ver en la seccion 'Estados'. ");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("OK")) {
+                    Toast.makeText(RealizarIncidencia.this, "Hice click en OK", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RealizarIncidencia.this, "Hice click en ver", Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        alertOpciones.show();
     }
 
     private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
@@ -544,6 +574,18 @@ public class RealizarIncidencia extends AppCompatActivity {
         Date date = new Date();
         String stringDate = DateFormat.getDateTimeInstance().format(date);
         return stringDate;
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String path = null;
+        String[] proj = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
     }
 
     //endregion

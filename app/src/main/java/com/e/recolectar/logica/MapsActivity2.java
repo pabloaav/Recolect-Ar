@@ -96,7 +96,7 @@ public class MapsActivity2 extends FragmentActivity implements GoogleMap.OnMyLoc
         CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 17);
         if (marcador != null) marcador.remove();
         {
-            marcador = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marcador_incidencia_bmp)).anchor(0.0f, 1.0f).position(coordenadas).title("Mi Incidencia"));
+            marcador = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marcador_incidencia_maps_bmp)).anchor(0.0f, 1.0f).position(coordenadas).title("Mi Incidencia"));
             mMap.animateCamera(miUbicacion);
         }
     }
