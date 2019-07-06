@@ -38,6 +38,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
+import com.e.recolectar.logica.vista.MenuInicio;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -525,22 +526,31 @@ public class RealizarIncidencia extends AppCompatActivity {
     }
 
     private void exitoIncidencia() {
-        final CharSequence[] opciones = {"OK", "VER"};
+        final CharSequence[] opciones = {"OK"};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
-        alertOpciones.setTitle("Su Incidencia se cargó correctamente a la base de datos. La podes ver en la seccion 'Estados'. ");
+        alertOpciones.setTitle("Su Incidencia se cargó correctamente");
+        alertOpciones.setIcon(R.drawable.exito);
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (opciones[i].equals("OK")) {
-                    Toast.makeText(RealizarIncidencia.this, "Hice click en OK", Toast.LENGTH_SHORT).show();
+                    Intent irMenu = new Intent(RealizarIncidencia.this, MenuInicio.class);
+//        irMenu.putExtra("Algo");
+//                    setResult(RESULT_OK,irMenu);
+                    finish();
                 } else {
-                    Toast.makeText(RealizarIncidencia.this, "Hice click en ver", Toast.LENGTH_SHORT).show();
+                    Intent irMenu = new Intent(RealizarIncidencia.this, MenuInicio.class);
+//        irMenu.putExtra("Algo");
+//                    setResult(RESULT_OK,irMenu);
+                    finish();
                     dialogInterface.dismiss();
                 }
             }
         });
+
         alertOpciones.show();
     }
+
 
     private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
         double latitud = 0;
@@ -587,6 +597,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         cursor.close();
         return path;
     }
+
 
     //endregion
 }
