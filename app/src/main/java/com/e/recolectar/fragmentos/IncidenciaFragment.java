@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,8 @@ public class IncidenciaFragment extends Fragment {
 
     View vista;
     GridLayout mainGrid;
-    private static final String[] nombres_incidencias = new String[]{"Vidrio","Industrial","Chatarra","Domiciliario"};
+    private static final String[] nombres_incidencias = new String[]{"Vidrio", "Industrial", "Chatarra", "Domiciliario"};
+
     //endregion
 
     //region METODOS
@@ -109,15 +111,15 @@ public class IncidenciaFragment extends Fragment {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Intent intent = new Intent(getActivity(), RealizarIncidencia.class);
-                    intent.putExtra("tipo",nombres_incidencias[finalI]);
+                    intent.putExtra("tipo", nombres_incidencias[finalI]);
                     startActivity(intent);
-
                 }
             });
         }
     }
+
+
     //endregion
 
     //region DEFAULT METODOS

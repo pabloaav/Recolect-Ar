@@ -86,7 +86,8 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
                         return false;
                     }
                 })
-
+                .placeholder(R.drawable.icono_sin_foto256x)
+                .error(R.drawable.icono_sin_foto512x)
                 .into(incidenciasViewHolder.imagen);
 
     }//Fin de OnBind...
