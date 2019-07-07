@@ -1,13 +1,13 @@
 package com.e.recolectar.logica;
 
 import android.app.ProgressDialog;
-import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,7 +15,6 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -24,7 +23,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,10 +30,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.design.widget.TextInputLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Incidencia;
 import com.e.recolectar.logica.vista.MenuInicio;
@@ -46,7 +42,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.Context;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -55,7 +50,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,12 +64,15 @@ public class RealizarIncidencia extends AppCompatActivity {
 
     //region ATRIBUTOS
 
+    //region Atributos final y estaticos. Codigos de Results
     private final String CARPETA_RAIZ = "imagenesRecolectAr/";
     private final String RUTA_IMAGEN = CARPETA_RAIZ + "RecolectAr";
-
     final int COD_SELECCIONA = 10;
     final int COD_FOTO = 20;
+    private static final int CODIGO_SELECCIONAR_UBICACION = 1;
+    //endregion
 
+    //region Atributos comunes
     Button botonCargar;
     ImageView imagen;
     String path;
@@ -90,8 +87,10 @@ public class RealizarIncidencia extends AppCompatActivity {
     Location mUbicacion;
     Location location;
     String nombre_tipo_incidencia;
-    private static final int CODIGO_SELECCIONAR_UBICACION = 1;
     String nombreImagen = "";
+
+    //endregion
+
     //endregion
 
     //region METODOS
@@ -182,17 +181,7 @@ public class RealizarIncidencia extends AppCompatActivity {
 //    @Override
 //    public void onResume() {
 //        super.onResume();
-//
-//        //Verificamos que no sea null la location
-//        if (location != null) {
-//            textView_ubicacion.setText((int) location.getLatitude());
-//        }
-//    }
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        Toast.makeText(this, "Pasa por onStart()", Toast.LENGTH_SHORT).show();
+//        imagen_sin_foto = imagen.getDrawable();
 //    }
 
     private boolean validaPermisos() {
@@ -444,30 +433,103 @@ public class RealizarIncidencia extends AppCompatActivity {
         return fotoReducida;
     }
 
+    private boolean onValidationSuccess() {
+        boolean validar = false;
+        if (miPath == null) {
+            mostrarAlertaImagen();
+        } else if (textView_ubicacion.getText().toString().equals(getString(R.string.tv_ubicacion)) || textView_ubicacion.getText().toString().isEmpty()) {
+            mostrarAlertaUbicacion();
+        } else if (editText_descripcion.getText().toString().equals(getString(R.string.txt_descripcion)) || editText_descripcion.getText().toString().isEmpty()) {
+            mostrarAlertaDescripcion();
+        } else {
+            validar = true;
+        }
+
+        return validar;
+    }
+
+    private void mostrarAlertaDescripcion() {
+        final CharSequence[] opciones = {"OK"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
+        alertOpciones.setTitle("Por favor, describe la situación");
+        alertOpciones.setIcon(R.drawable.ic_error_black_24dp);
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("OK")) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+
+        alertOpciones.show();
+    }
+
+    private void mostrarAlertaUbicacion() {
+        final CharSequence[] opciones = {"OK"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
+        alertOpciones.setTitle("Por favor, escoge una ubicacion geografica");
+        alertOpciones.setIcon(R.drawable.ic_error_black_24dp);
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("OK")) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+
+        alertOpciones.show();
+    }
+
+    private void mostrarAlertaImagen() {
+        final CharSequence[] opciones = {"OK"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
+        alertOpciones.setTitle("Por favor, escoge una imagen");
+        alertOpciones.setIcon(R.drawable.ic_error_black_24dp);
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("OK")) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+
+        alertOpciones.show();
+    }
+
     public void subirIncidencia(View view) {
+        //Antes de cargar la incidencia deben llenarse ciertos campos
 
         String tipo = nombre_tipo_incidencia;
         String fecha = this.obtenerFecha();
         Map<String, Object> HM_ubicacion = null;
         String descripcion = editText_descripcion.getText().toString().trim();
         String direccion_particular = editText_direccion.getText().toString().trim();
-        ;
 
         if (mUbicacion != null) {
             //Hacemos el Pojo de la Ubicacion con algunos datos del objeto Location
             HM_ubicacion = crearHashMapUbicacion(mUbicacion);
         }
-
-        //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
-
+        if (direccion_particular.isEmpty()) {
+            direccion_particular = "Sin direccion particular";
+        }
+        //Se forma el objeto incidencia que va a Firebase
         incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular);
 
-        try {
-            this.cargarIncidencia(incidencia);
+        boolean pasoLasValidaciones = onValidationSuccess();
+        if (pasoLasValidaciones) {
+//            Toast.makeText(this, "Falta elegir foto", Toast.LENGTH_SHORT).show();
+            try {
+                //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
+                this.cargarIncidencia(incidencia);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void cargarIncidencia(final Incidencia p_incidencia) {
@@ -518,10 +580,7 @@ public class RealizarIncidencia extends AppCompatActivity {
 
                 }
             });
-
-
         }
-
 
     }
 
@@ -550,7 +609,6 @@ public class RealizarIncidencia extends AppCompatActivity {
 
         alertOpciones.show();
     }
-
 
     private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
         double latitud = 0;
