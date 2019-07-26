@@ -38,7 +38,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/fondo_prueba_ecopuntos"
+                android:background="@drawable/fondo_ecopunto_final_600x"
                 android:scaleType="centerCrop" />
 
         </FrameLayout>

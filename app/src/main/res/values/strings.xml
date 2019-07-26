@@ -26,7 +26,7 @@
 
 
     <!--FRAGMENT REALIZAR INCIDENCIAS-->
-    <string name="tv_gestion_inc">GESTIONAR INCIDENCIA</string>
+    <string name="tv_gestion_inc">REALIZAR INCIDENCIA</string>
     <string name="tv_ubicacion">Ubicación no cargada aún...</string>
     <string name="txt_direccion">Ingrese su direccion (opcional)</string>
     <string name="txt_descripcion">Describa la incidencia</string>

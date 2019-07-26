@@ -50,7 +50,6 @@
             android:layout_marginLeft="5sp">
 
 
-
             <TextView
                 android:id="@+id/cv_tipo"
                 android:layout_width="wrap_content"
@@ -109,6 +108,18 @@
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/roboto_mono_bold_italic"
                 android:text="Descripcion: "
+                android:textColor="@color/colorBotonVerde"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cv_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/roboto_mono_bold_italic"
+                android:text="Estado: En Proceso"
                 android:textColor="@color/colorBotonVerde"
                 android:textSize="14sp"
                 android:textStyle="bold" />
