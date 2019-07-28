@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
         contrasena = findViewById(R.id.txt_contrasena);
         til_correoLogin = findViewById(R.id.til_correoLogin);
         til_contrasena = findViewById(R.id.til_contrasena);
-        correoLogin.setText("pabloperez@gmail.com");
-        contrasena.setText("prueba4");
+//        correoLogin.setText("pabloperez@gmail.com");
+//        contrasena.setText("prueba4");
         mProgressBar = findViewById(R.id.progressBar2);
     }
 
