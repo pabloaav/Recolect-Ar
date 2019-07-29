@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CrearCuenta extends AppCompatActivity {
 
+    private static final String TAG ="error" ;
     //region Declaracion de Variables
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private EditText dni, nombre, apellido, email, password, reppass;
@@ -73,18 +75,18 @@ public class CrearCuenta extends AppCompatActivity {
     //region Registacion
     public void registrar(View view) {
         //        Obtenemos el string de cada campo
-//        String p_dni = dni.getText().toString().trim();
-//        String p_nombre = nombre.getText().toString().trim();
-//        String p_apellido = apellido.getText().toString().trim();
-//        String p_email = email.getText().toString().trim();
-//        String p_password = password.getText().toString().trim();
-//        String p_reppass = reppass.getText().toString().trim();
-        String p_dni = "23456789";
-        String p_nombre = "Pablo";
-        String p_apellido = "Perez";
-        String p_email = "pabloperez@gmail.com";
-        String p_password = "prueba4";
-        String p_reppass = "prueba4";
+        String p_dni = dni.getText().toString().trim();
+        String p_nombre = nombre.getText().toString().trim();
+        String p_apellido = apellido.getText().toString().trim();
+        String p_email = email.getText().toString().trim();
+        String p_password = password.getText().toString().trim();
+        String p_reppass = reppass.getText().toString().trim();
+//        String p_dni = "23456789";
+//        String p_nombre = "Pablo";
+//        String p_apellido = "Perez";
+//        String p_email = "pabloperez@gmail.com";
+//        String p_password = "prueba4";
+//        String p_reppass = "prueba4";
 
 
 //        Validar los campos del Registro de Usuario
@@ -149,6 +151,7 @@ public class CrearCuenta extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the userID.
                             Toast.makeText(CrearCuenta.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, "createUserWithEmail:failure", task.getException());
                             updateUI(null);
                         }
 
