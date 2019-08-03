@@ -73,18 +73,19 @@ public class CrearCuenta extends AppCompatActivity {
     //region Registacion
     public void registrar(View view) {
         //        Obtenemos el string de cada campo
-//        String p_dni = dni.getText().toString().trim();
-//        String p_nombre = nombre.getText().toString().trim();
-//        String p_apellido = apellido.getText().toString().trim();
-//        String p_email = email.getText().toString().trim();
-//        String p_password = password.getText().toString().trim();
-//        String p_reppass = reppass.getText().toString().trim();
-        String p_dni = "23456789";
-        String p_nombre = "Pablo";
-        String p_apellido = "Perez";
-        String p_email = "pabloperez@gmail.com";
-        String p_password = "prueba4";
-        String p_reppass = "prueba4";
+        String p_dni = dni.getText().toString().trim();
+        String p_nombre = nombre.getText().toString().trim();
+        String p_apellido = apellido.getText().toString().trim();
+        String p_email = email.getText().toString().trim();
+        String p_password = password.getText().toString().trim();
+        String p_reppass = reppass.getText().toString().trim();
+
+//        String p_dni = "23456789";
+//        String p_nombre = "Pablo";
+//        String p_apellido = "Perez";
+//        String p_email = "pabloperez@gmail.com";
+//        String p_password = "prueba4";
+//        String p_reppass = "prueba4";
 
 
 //        Validar los campos del Registro de Usuario
