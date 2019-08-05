@@ -140,15 +140,6 @@
             android:textSize="18sp"
             android:textStyle="normal" />
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="75sp"
-            android:background="@android:color/transparent"
-            android:visibility="visible" />
 
     </LinearLayout>
 

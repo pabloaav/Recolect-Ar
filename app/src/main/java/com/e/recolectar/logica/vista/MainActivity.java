@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
     private String p_correoLogin;
     private String p_contrasena;
     private LoginMVP.Presentacion loginPresentador;
-    private ProgressBar mProgressBar;
+
 
     //endregion
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
         til_contrasena = findViewById(R.id.til_contrasena);
 //        correoLogin.setText("pabloperez@gmail.com");
 //        contrasena.setText("prueba4");
-        mProgressBar = findViewById(R.id.progressBar2);
+
     }
 
     //---------------------------------------------------------------------------------------------
@@ -122,38 +122,38 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
 //        }, 2000);
 //    }
 
-    @SuppressLint("WrongConstant")
-    @Override
-    public void onStart() {
-        super.onStart();
-        Toast.makeText(MainActivity.this, "Verificando sus Datos", Toast.LENGTH_SHORT).show();
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Check if user is signed in (non-null) and update UI accordingly.
-                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                if (currentUser != null) {
-                    Intent menu = new Intent(MainActivity.this, MenuInicio.class);
-                    menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(menu);
-                    finish();
-                } else {
-//                    String p_correoLogin = correoLogin.getText().toString().trim();
-//                    String p_contrasena = contrasena.getText().toString().trim();
-//                    try {
-//                        loginPresentador.doLoginWhitEmailPassword(p_correoLogin, p_contrasena);
+//    @SuppressLint("WrongConstant")
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        Toast.makeText(MainActivity.this, "Verificando sus Datos", Toast.LENGTH_SHORT).show();
+//        Handler mHandler = new Handler();
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                // Check if user is signed in (non-null) and update UI accordingly.
+//                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//                if (currentUser != null) {
+//                    Intent menu = new Intent(MainActivity.this, MenuInicio.class);
+//                    menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                    startActivity(menu);
+//                    finish();
+//                } else {
+////                    String p_correoLogin = correoLogin.getText().toString().trim();
+////                    String p_contrasena = contrasena.getText().toString().trim();
+////                    try {
+////                        loginPresentador.doLoginWhitEmailPassword(p_correoLogin, p_contrasena);
+////
+////                    } catch (Exception e) {
+////                        e.printStackTrace();
+////                    }
+//                }
+//            }
 //
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-                }
-            }
-
-    },2000);
-
-//        updateUI(currentUser);
-}
+//    },2000);
+//
+////        updateUI(currentUser);
+//}
 
     /*Actualizar la UI si ya esta logueado*/
     private void updateUI(FirebaseUser user) {
