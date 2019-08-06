@@ -12,6 +12,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SplashScreen extends AppCompatActivity {
 
     //region Atributos
@@ -19,15 +22,44 @@ public class SplashScreen extends AppCompatActivity {
     private ProgressBar mProgressBar;
     //endregion
 
+
+    ProgressBar pb;
+    int counter = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        //inicializacion de Firebase
-        inicializarFirebase();
 
         //Binding de elementos visuales
         mProgressBar = findViewById(R.id.progressBar2);
+
+
+        //Comportamiento progressbar
+
+        pb = mProgressBar.findViewById(R.id.progressBar2);
+
+        final Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run()
+            {
+                counter++;
+                pb.setProgress(counter);
+
+                if(counter == 100)
+                    t.cancel();
+            }
+        };
+
+        t.schedule(tt,0,25);
+
+
+
+        //inicializacion de Firebase
+        inicializarFirebase();
+
+
 
     }//Fin de onCreate()
 

@@ -4,16 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBotonVerde"
+    android:background="@color/colorPruebaFondoProgressBar"
     tools:context=".logica.vista.SplashScreen">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/progressBar2"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@android:color/background_dark"
-        android:visibility="visible" />
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="18dp"
+        android:progressDrawable="@drawable/stylo_progressbar">
+
+    </ProgressBar>
 </RelativeLayout>
