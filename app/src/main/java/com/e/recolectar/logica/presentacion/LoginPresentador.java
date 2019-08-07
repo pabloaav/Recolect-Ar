@@ -3,6 +3,7 @@ package com.e.recolectar.logica.presentacion;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 import com.e.recolectar.logica.LoginMVP;
@@ -82,7 +83,7 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                                 vista.onSuccess();
 //                                Intent menu = new Intent(context, MenuInicio.class);
 //                                context.startActivity(menu);
-                                Toast.makeText(context, "Bienvenido: " + getmAuth().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context, "Bienvenido: " + getmAuth().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
 
                             } else {
                                 Toast.makeText(context, "Authentication failed.",

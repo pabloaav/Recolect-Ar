@@ -66,7 +66,6 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(SplashScreen.this, "Verificando sus Datos", Toast.LENGTH_SHORT).show();
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override

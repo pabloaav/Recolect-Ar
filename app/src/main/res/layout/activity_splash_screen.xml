@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPruebaFondoProgressBar"
+    android:background="@color/backgroundTabs"
     tools:context=".logica.vista.SplashScreen">
 
     <ImageView
@@ -28,4 +28,5 @@
         android:progressDrawable="@drawable/stylo_progressbar">
 
     </ProgressBar>
+
 </RelativeLayout>
