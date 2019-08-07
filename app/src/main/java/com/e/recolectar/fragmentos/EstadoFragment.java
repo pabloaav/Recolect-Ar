@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -117,7 +118,6 @@ public class EstadoFragment extends Fragment {
     //region ATRIBUTOS
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
-    private ArrayList<IncidenciaPojo> array;
     //endregion
 
     //region METODOS
@@ -147,6 +147,8 @@ public class EstadoFragment extends Fragment {
 
         //Se necesita un objeto Linear Layaout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         //Seteamos el recycler con el LAyout Manager
