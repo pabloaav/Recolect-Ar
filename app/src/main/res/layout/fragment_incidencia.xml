@@ -65,7 +65,7 @@
                     android:id="@+id/imgv_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:background="@drawable/stylo_boton_menu"
                     app:srcCompat="@drawable/icono_contenedor_vidrio_final_480x" />
             </android.support.v7.widget.CardView>
             <!-- Columa 2 -->
@@ -85,7 +85,7 @@
                     android:id="@+id/imgv_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:background="@drawable/stylo_boton_menu"
                     app:srcCompat="@drawable/icono_contenedor_industrial_final_480x" />
 
             </android.support.v7.widget.CardView>
@@ -107,7 +107,7 @@
                     android:id="@+id/imgv_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:background="@drawable/stylo_boton_menu"
                     app:srcCompat="@drawable/icono_contenedor_chatarra_final_480x" />
             </android.support.v7.widget.CardView>
             <!-- Columa 2 -->
@@ -127,7 +127,7 @@
                     android:id="@+id/imgv_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:background="@drawable/stylo_boton_menu"
                     app:srcCompat="@drawable/icono_contenedor_domiciliario_final_480x" />
             </android.support.v7.widget.CardView>
 
