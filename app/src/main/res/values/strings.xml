@@ -28,8 +28,11 @@
     <!--FRAGMENT REALIZAR INCIDENCIAS-->
     <string name="tv_gestion_inc">REALIZAR INCIDENCIA</string>
     <string name="tv_ubicacion">Ubicación no cargada aún...</string>
-    <string name="txt_direccion">Ingrese su direccion (opcional)</string>
+    <string name="txt_direccion">Ingrese su dirección (opcional)</string>
     <string name="txt_descripcion">Describa la incidencia</string>
+    <string name="bt_cargarFoto"> CARGAR FOTOGRAFÍA </string>
+    <string name="bt_cargarUbic"> CARGAR UBICACIÓN </string>
+    <string name="bt_realizarInc"> REALIZAR INCIDENCIA </string>
 
     <!--ATRIBUTOS DE ICONOS Y TITULOS BARRA TABS-->
     <!-- TODO: Remove or change this placeholder text -->
