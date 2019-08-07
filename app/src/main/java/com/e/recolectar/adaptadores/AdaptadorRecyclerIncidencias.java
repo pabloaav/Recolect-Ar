@@ -1,7 +1,6 @@
 package com.e.recolectar.adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,7 +18,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.e.recolectar.R;
-
 import com.e.recolectar.logica.modelo.IncidenciaPojo;
 
 import java.util.ArrayList;
@@ -61,8 +59,10 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         incidenciasViewHolder.tipo.setText(incidencia.getTipo());
         incidenciasViewHolder.fecha.setText(incidencia.getFecha());
         incidenciasViewHolder.descripcion.setText(incidencia.getDescripcion());
-        incidenciasViewHolder.direccion.setText(incidencia.getDireccion());
-        incidenciasViewHolder.ubicacion.setText(incidencia.getCadenaUbicacion());
+//        incidenciasViewHolder.direccion.setText(incidencia.getDireccion());
+        //Quitamos el state (Estado=Provincia) de la cadena de ubicacion
+        String cadenaSinProvincia = quitarProvincia(incidencia.getCadenaUbicacion());
+        incidenciasViewHolder.ubicacion.setText(cadenaSinProvincia);
 //        incidenciasViewHolder.imagen.setImageResource(R.drawable.basura);
 
         String imagen = incidencia.getImagen();
@@ -92,6 +92,13 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
 
     }//Fin de OnBind...
 
+    private String quitarProvincia(String cadenaUbicacionCompleta) {
+        //Buscamos la ultima ocurrencia de un caracter en un string o cadena
+       int coma = cadenaUbicacionCompleta.lastIndexOf(",");
+       //Extraemos un substring de un string, desde el indice 0 hasta el indice obtenido arriba
+        return  cadenaUbicacionCompleta.substring (0, coma);
+    }
+
     //Este metodo inicializa la vista del ViewHolder
     @Override
     public IncidenciasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -120,7 +127,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         private TextView tipo;
         private TextView fecha;
         private TextView descripcion;
-        private TextView direccion;
+//        private TextView direccion;
         private TextView ubicacion;
         private ProgressBar progressBar;
 
@@ -139,7 +146,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
             tipo = itemView.findViewById(R.id.cv_tipo);
             fecha = itemView.findViewById(R.id.cv_fecha);
             descripcion = itemView.findViewById(R.id.cv_descripcion);
-            direccion = itemView.findViewById(R.id.cv_direccion);
+//            direccion = itemView.findViewById(R.id.cv_direccion);
             ubicacion = itemView.findViewById(R.id.cv_ubicacion);
             progressBar = itemView.findViewById(R.id.progressBar);
         }

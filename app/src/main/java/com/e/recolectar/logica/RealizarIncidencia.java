@@ -166,7 +166,8 @@ public class RealizarIncidencia extends AppCompatActivity {
                     String country = addresses.get(0).getCountryName();
                     String postalCode = addresses.get(0).getPostalCode();
                     String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-                    cadenaDeUbicacion = calleNumero + ", " + city + ", " + state;
+//                    cadenaDeUbicacion = calleNumero + ", " + city + ", " + state;
+                    cadenaDeUbicacion = calleNumero + ", " + city;
                 } else {
                     textView_ubicacion.setText("Searching Current Address");
                 }
