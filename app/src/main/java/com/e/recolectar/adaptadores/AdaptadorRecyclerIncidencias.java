@@ -57,7 +57,9 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
 
         //De cada incidencia del modelo de datos, que se alimenta de la base de datos, tomamos os valores de los atributos de cada objeto, y se los pasamos a la vista, para que en cada atributo del ViewHolder muestre su correspondiente valor
         incidenciasViewHolder.tipo.setText(incidencia.getTipo());
-        incidenciasViewHolder.fecha.setText(incidencia.getFecha());
+        //Quitamos los segundos a la fecha y hora de la incidencia
+        String fechaSinSegundos = quitarSegundos(incidencia.getFecha());
+        incidenciasViewHolder.fecha.setText(fechaSinSegundos);
         incidenciasViewHolder.descripcion.setText(incidencia.getDescripcion());
 //        incidenciasViewHolder.direccion.setText(incidencia.getDireccion());
         //Quitamos el state (Estado=Provincia) de la cadena de ubicacion
@@ -91,6 +93,13 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
                 .into(incidenciasViewHolder.imagen);
 
     }//Fin de OnBind...
+
+    private String quitarSegundos(String fechaCompleta) {
+        //Buscamos la ultima ocurrencia de un caracter en un string o cadena
+        int dosPuntos = fechaCompleta.lastIndexOf(":");
+        //Extraemos un substring de un string, desde el indice 0 hasta el indice obtenido arriba
+        return  fechaCompleta.substring (0, dosPuntos);
+    }
 
     private String quitarProvincia(String cadenaUbicacionCompleta) {
         //Buscamos la ultima ocurrencia de un caracter en un string o cadena
