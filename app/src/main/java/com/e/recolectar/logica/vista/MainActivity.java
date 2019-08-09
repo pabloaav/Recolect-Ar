@@ -1,16 +1,14 @@
 package com.e.recolectar.logica.vista;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.e.recolectar.R;
@@ -155,8 +153,12 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
 ////        updateUI(currentUser);
 //}
 
-    /*Actualizar la UI si ya esta logueado*/
+    /*Se realizan acciones de exito al ingresar con cuenta de Google*/
     private void updateUI(FirebaseUser user) {
+        Intent menu = new Intent(MainActivity.this, MenuInicio.class);
+        menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(menu);
+        onSuccess();
     }
     //endregion
 
@@ -177,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            Toast.makeText(MainActivity.this, "Bienvenido: " + user.getEmail(), Toast.LENGTH_LONG).show();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -273,7 +274,8 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.Vista, E
 
     @Override
     public void onError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        View vista = findViewById(R.id.linearMainActivity);
+        Snackbar.make(vista, error, Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     @Override

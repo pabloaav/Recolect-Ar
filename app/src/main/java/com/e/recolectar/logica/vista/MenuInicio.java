@@ -11,15 +11,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.AdaptadorPaginas;
 import com.e.recolectar.fragmentos.EstadoFragment;
 import com.e.recolectar.fragmentos.IncidenciaFragment;
 import com.e.recolectar.fragmentos.PuntoReciclajeFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -91,7 +88,9 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null) {
                     //Do anything here which needs to be done after signout is complete
-                    startActivity(new Intent(MenuInicio.this, MainActivity.class));
+                    Intent login = new Intent(MenuInicio.this, MainActivity.class);
+                    login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(login);
                     finish();
                 } else {
                 }

@@ -93,8 +93,8 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                         }
                     });
         } else {
-            Toast.makeText(context, "Usuario Inexistente",
-                    Toast.LENGTH_LONG).show();
+            //En error de Login, pasamos a la vista el mensaje
+            onLoginError("Usuario Inexistente");
         }
 
     }
