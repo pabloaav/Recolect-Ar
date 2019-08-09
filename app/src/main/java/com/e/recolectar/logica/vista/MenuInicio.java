@@ -1,5 +1,7 @@
 package com.e.recolectar.logica.vista;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,29 +65,45 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
 
     }
 
-
     public void logOut(View v) {
         if (v.getId() == R.id.btn_cerrar_sesion) {
-            //Declaration and defination
-            FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    if (firebaseAuth.getCurrentUser() == null) {
-                        //Do anything here which needs to be done after signout is complete
-                        startActivity(new Intent(MenuInicio.this, MainActivity.class));
-                        finish();
-                    } else {
-                    }
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+            dialogo1.setTitle("Importante, atención por favor...");
+            dialogo1.setMessage("¿ Esta usted seguro de cerrar sesión ?");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    aceptar();
                 }
-            };
-
-            //Init and attach
-            mAuth = FirebaseAuth.getInstance();
-            mAuth.addAuthStateListener(authStateListener);
-
-            //Call signOut()
-            mAuth.signOut();
-
+            });
+            dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    dialogo1.dismiss();
+                }
+            });
+            dialogo1.show();
         }
     }
+
+    private void aceptar() {
+        FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    //Do anything here which needs to be done after signout is complete
+                    startActivity(new Intent(MenuInicio.this, MainActivity.class));
+                    finish();
+                } else {
+                }
+            }
+        };
+
+        //Init and attach
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.addAuthStateListener(authStateListener);
+
+        //Call signOut()
+        mAuth.signOut();
+    }
+
 }

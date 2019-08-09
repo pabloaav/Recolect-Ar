@@ -28,15 +28,15 @@
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/colorBotonBlanco" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_cerrar_sesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/incidencia"
-                android:padding="4dp"
-                android:text="Cerra Sesion"
-                android:textSize="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_cerrar_sesion_round"
                 android:onClick="logOut"/>
+
+
         </LinearLayout>
 
         <android.support.design.widget.TabLayout
