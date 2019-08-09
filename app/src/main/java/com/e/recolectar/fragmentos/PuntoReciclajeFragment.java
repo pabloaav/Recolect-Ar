@@ -131,7 +131,8 @@ public class PuntoReciclajeFragment extends Fragment {
     }
 
     private void llamarMapsApp() {
-        Uri gmmIntentUri = Uri.parse("geo:-27.4703795,-58.8244543,17");
+//        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
+        Uri gmmIntentUri = Uri.parse("geo:-27.4703795,-58.8244543,17?z=15&q=Plaza+Libertad");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
