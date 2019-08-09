@@ -1,12 +1,17 @@
 package com.e.recolectar.fragmentos;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.recolectar.R;
 
@@ -19,6 +24,8 @@ import com.e.recolectar.R;
  * create an instance of this fragment.
  */
 public class PuntoReciclajeFragment extends Fragment {
+
+    //region Atributos por Default
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +36,13 @@ public class PuntoReciclajeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    //endregion
 
+    //region Atributos
+    private TextView txt_ubicacion;
+    //endregion
+
+    //region Metodos por Default
     public PuntoReciclajeFragment() {
         // Required empty public constructor
     }
@@ -52,21 +65,6 @@ public class PuntoReciclajeFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_punto_reciclaje, container, false);
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -106,4 +104,53 @@ public class PuntoReciclajeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    //endregion
+
+    //region Metodos
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View vista = inflater.inflate(R.layout.fragment_punto_reciclaje, container, false);
+        //hacer el bind del textview de la ubicacion del ecopunto
+        txt_ubicacion = vista.findViewById(R.id.tv_Ubicacion);
+        txt_ubicacion.setTextColor(getResources().getColor(R.color.linkColor));
+        //Lo hacemos clickable
+        txt_ubicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Hacer lo del maps app
+                llamarMapsApp();
+              Toast.makeText(getActivity(), "Abriendo Ecopunto en Maps de Google", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        // Inflate the layout for this fragment
+        return vista;
+
+    }
+
+    private void llamarMapsApp() {
+        Uri gmmIntentUri = Uri.parse("geo:-27.4703795,-58.8244543,17");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        }
+
+    }
+
+
+    //endregion
+
 }
