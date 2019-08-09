@@ -18,10 +18,10 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="315dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_mono_bold_italic"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:minHeight="?actionBarSize"
                 android:padding="@dimen/appbar_padding"
                 android:text="@string/app_name"
@@ -30,11 +30,12 @@
 
             <ImageButton
                 android:id="@+id/btn_cerrar_sesion"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_cerrar_sesion_round"
-                android:onClick="logOut"/>
+                android:background="@color/colorActionBar"
+                android:onClick="logOut"
+                android:src="@drawable/icono_cerrar_sesion" />
 
 
         </LinearLayout>
