@@ -64,9 +64,9 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
 
     public void logOut(View v) {
         if (v.getId() == R.id.btn_cerrar_sesion) {
-            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
-            dialogo1.setTitle("Importante, atención por favor...");
-            dialogo1.setMessage("¿ Esta usted seguro de cerrar sesión ?");
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this );
+            dialogo1.setTitle("Cerrar Sesión ?");
+            dialogo1.setMessage("Estás seguro de que quieres cerrar la sesión ?");
             dialogo1.setCancelable(false);
             dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {
