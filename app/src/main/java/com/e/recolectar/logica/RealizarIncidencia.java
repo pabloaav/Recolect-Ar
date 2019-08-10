@@ -586,14 +586,15 @@ public class RealizarIncidencia extends AppCompatActivity {
     }
 
     private void exitoIncidencia() {
-        final CharSequence[] opciones = {"OK"};
+        final CharSequence[] opciones = {"Aceptar"};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RealizarIncidencia.this);
+
         alertOpciones.setTitle("Su incidencia se cargó correctamente");
-        alertOpciones.setIcon(R.drawable.icono_maps_check_white_48x);
+        alertOpciones.setIcon(R.drawable.icono_dialog_confirm_inc);
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("OK")) {
+                if (opciones[i].equals("Aceptar")) {
                     Intent irMenu = new Intent(RealizarIncidencia.this, MenuInicio.class);
 //        irMenu.putExtra("Algo");
 //                    setResult(RESULT_OK,irMenu);
