@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,10 +22,12 @@ import com.e.recolectar.fragmentos.PuntoReciclajeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 
 public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFragmentInteractionListener, IncidenciaFragment.OnFragmentInteractionListener, PuntoReciclajeFragment.OnFragmentInteractionListener {
+
 
     //region ATRIBUTOS
     private int[] tabIcons = {
@@ -32,6 +35,7 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
             R.drawable.ic_estado,
             R.drawable.puntos};
     private FirebaseAuth mAuth;
+    private static final String TAG = "Error: " ;
     //endregion
 
     @Override
@@ -90,7 +94,7 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
         if (v.getId() == R.id.btn_delete_user) {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
             dialogo1.setTitle("Eliminar datos de usuario");
-            dialogo1.setMessage("Vas a eliminar tus datos de usuario. Se mantendran las incidencias realizadas. ¿Deseas continuar?");
+            dialogo1.setMessage("Vas a eliminar tus datos de usuario. Se perderán las incidencias realizadas. ¿Deseas continuar?");
             dialogo1.setCancelable(false);
             dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {
@@ -113,16 +117,31 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                        //Do anything here which needs to be done after delete user is complete
+                        if (!task.isSuccessful()) {
+                            AlertDialog.Builder dialogo2 = new AlertDialog.Builder(MenuInicio.this);
+                            dialogo2.setTitle("Esta es una operación sensible");
+                            dialogo2.setMessage("Debes cerrar sesión y volver a autenticarte. ¿Deseas continuar?");
+                            dialogo2.setCancelable(false);
+                            dialogo2.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogo1, int id) {
+                                    aceptarCerrarSesion();
+                                }
+                            });
+                            dialogo2.setNegativeButton("Descartar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogo1, int id) {
+                                    dialogo1.dismiss();
+                                }
+                            });
+                            dialogo2.show();
+                            Log.e(TAG, "Delete user failure", task.getException());
+                        } else {
+                            //Do anything here which needs to be done after delete user is complete
                             Intent delete = new Intent(MenuInicio.this, MainActivity.class);
                             delete.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(delete);
                             finish();
-                        }else {
-                            Toast.makeText(MenuInicio.this, "No elimina", Toast.LENGTH_SHORT).show();
                         }
-                        
+
                     }
                 });
     }
