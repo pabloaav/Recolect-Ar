@@ -81,18 +81,18 @@ public class CrearCuenta extends AppCompatActivity {
     //region Registacion
     public void registrar(View view) {
         //        Obtenemos el string de cada campo
-        String p_dni = dni.getText().toString().trim();
-        String p_nombre = nombre.getText().toString().trim();
-        String p_apellido = apellido.getText().toString().trim();
-        String p_email = email.getText().toString().trim();
-        String p_password = password.getText().toString().trim();
-        String p_reppass = reppass.getText().toString().trim();
-//        String p_dni = "23456789";
-//        String p_nombre = "Pablo";
-//        String p_apellido = "Perez";
-//        String p_email = "pabloperez@gmail.com";
-//        String p_password = "prueba4";
-//        String p_reppass = "prueba4";
+        p_dni = dni.getText().toString().trim();
+        p_nombre = nombre.getText().toString().trim();
+        p_apellido = apellido.getText().toString().trim();
+        p_email = email.getText().toString().trim();
+        p_password = password.getText().toString().trim();
+        p_reppass = reppass.getText().toString().trim();
+//         p_dni = "23456789";
+//         p_nombre = "Pablo";
+//         p_apellido = "Perez";
+//         p_email = "pabloperez@gmail.com";
+//         p_password = "prueba4";
+//         p_reppass = "prueba4";
 
 
 //        Validar los campos del Registro de Usuario
@@ -152,6 +152,7 @@ public class CrearCuenta extends AppCompatActivity {
                                     startActivity(login);
 
                                     try {
+                                        //Creamos el nodo en la base
                                         crearNodoUsuario();
                                     } catch (Exception e) {
                                         e.printStackTrace();
