@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,7 +90,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     Location location;
     String nombre_tipo_incidencia;
     String nombreImagen = "";
-
+    private ProgressDialog cargandoIncidencia;
     //endregion
 
     //endregion
@@ -111,6 +112,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         textView_tipo_incidencia = findViewById(R.id.tv_tipo_incidencia);
         editText_descripcion = findViewById(R.id.txt_descripcion);
         editText_direccion = findViewById(R.id.txt_direccion_particular);
+        cargandoIncidencia = new ProgressDialog(this);
 
         if (validaPermisos()) {
             botonCargar.setEnabled(true);
@@ -130,14 +132,6 @@ public class RealizarIncidencia extends AppCompatActivity {
             }
         }
 
-//        //Verificamos que no sea null
-//        if (location != null) {
-//            //Si es distinto de null tomamos los datos
-//            mUbicacion = location;
-//            textView_ubicacion.setText(getStringUbicacion());
-//            String cadenaDeUbicacion = getStringUbicacion();
-//            textView_ubicacion.setText(cadenaDeUbicacion);
-//        }
     }//Fin de onCreate()
 
     private String getStringUbicacion() {
@@ -322,7 +316,6 @@ public class RealizarIncidencia extends AppCompatActivity {
         ////
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -503,6 +496,10 @@ public class RealizarIncidencia extends AppCompatActivity {
     }
 
     public void subirIncidencia(View view) {
+
+        //Mostramos una barra de progreso
+        cargandoIncidencia.setMessage("Registrando su incidencia, aguarde por favor...");
+
         //Antes de cargar la incidencia deben llenarse ciertos campos
 
         String tipo = nombre_tipo_incidencia;
@@ -526,7 +523,7 @@ public class RealizarIncidencia extends AppCompatActivity {
 //            Toast.makeText(this, "Falta elegir foto", Toast.LENGTH_SHORT).show();
             try {
                 //Subir incidencia a la tabla Usuarios //Subir incidencia a ala tabla Situaciones
-                this.cargarIncidencia(incidencia);
+                this.cargarIncidencia(incidencia, cargandoIncidencia);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -535,8 +532,8 @@ public class RealizarIncidencia extends AppCompatActivity {
 
     }
 
-    public void cargarIncidencia(final Incidencia p_incidencia) {
-
+    public void cargarIncidencia(final Incidencia p_incidencia, final ProgressDialog dialogCargando) {
+        dialogCargando.show();
         if (p_incidencia.getImagen() != null) {
             String segmento = p_incidencia.getImagen().getLastPathSegment();
             final StorageReference fotoRef = mStorageRef.child("Fotos").child(mAuth.getCurrentUser().getUid()).child(segmento);
@@ -570,6 +567,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 exitoIncidencia();
+                                dialogCargando.dismiss();
 //                                Toast.makeText(RealizarIncidencia.this, "Se cargo la incidencia correctamente.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {

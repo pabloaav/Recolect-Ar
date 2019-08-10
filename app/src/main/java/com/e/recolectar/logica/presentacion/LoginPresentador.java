@@ -86,7 +86,7 @@ public class LoginPresentador implements LoginMVP.Presentacion {
 //                                Toast.makeText(context, "Bienvenido: " + getmAuth().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
 
                             } else {
-                                Toast.makeText(context, "Authentication failed.",
+                                Toast.makeText(context, "Falló la autenticación. Verifique los datos",
                                         Toast.LENGTH_LONG).show();
                             }
 

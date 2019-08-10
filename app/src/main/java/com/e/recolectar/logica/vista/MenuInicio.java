@@ -11,13 +11,17 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.AdaptadorPaginas;
 import com.e.recolectar.fragmentos.EstadoFragment;
 import com.e.recolectar.fragmentos.IncidenciaFragment;
 import com.e.recolectar.fragmentos.PuntoReciclajeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFragmentInteractionListener, IncidenciaFragment.OnFragmentInteractionListener, PuntoReciclajeFragment.OnFragmentInteractionListener {
@@ -64,13 +68,13 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
 
     public void logOut(View v) {
         if (v.getId() == R.id.btn_cerrar_sesion) {
-            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this );
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
             dialogo1.setTitle("Cerrar Sesión ?");
             dialogo1.setMessage("Estás seguro de que quieres cerrar la sesión ?");
             dialogo1.setCancelable(false);
             dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {
-                    aceptar();
+                    aceptarCerrarSesion();
                 }
             });
             dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -82,7 +86,48 @@ public class MenuInicio extends AppCompatActivity implements EstadoFragment.OnFr
         }
     }
 
-    private void aceptar() {
+    public void deleteUser(View v) {
+        if (v.getId() == R.id.btn_delete_user) {
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+            dialogo1.setTitle("Eliminar datos de usuario");
+            dialogo1.setMessage("Vas a eliminar tus datos de usuario. Se mantendran las incidencias realizadas. ¿Deseas continuar?");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    aceptaDeleteUser();
+                }
+            });
+            dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    dialogo1.dismiss();
+                }
+            });
+            dialogo1.show();
+        }
+
+    }
+
+    private void aceptaDeleteUser() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                        //Do anything here which needs to be done after delete user is complete
+                            Intent delete = new Intent(MenuInicio.this, MainActivity.class);
+                            delete.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(delete);
+                            finish();
+                        }else {
+                            Toast.makeText(MenuInicio.this, "No elimina", Toast.LENGTH_SHORT).show();
+                        }
+                        
+                    }
+                });
+    }
+
+    private void aceptarCerrarSesion() {
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

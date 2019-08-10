@@ -29,6 +29,16 @@
                 android:textColor="@color/colorBotonBlanco" />
 
             <ImageButton
+                android:id="@+id/btn_delete_user"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorActionBar"
+                android:onClick="deleteUser"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icono_cerrar_sesion" />
+
+            <ImageButton
                 android:id="@+id/btn_cerrar_sesion"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"

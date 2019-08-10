@@ -1,7 +1,9 @@
 package com.e.recolectar.logica;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,9 @@ import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.Usuario;
+import com.e.recolectar.logica.vista.MainActivity;
+import com.e.recolectar.logica.vista.MenuInicio;
+import com.e.recolectar.logica.vista.SplashScreen;
 import com.e.recolectar.validaciones.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CrearCuenta extends AppCompatActivity {
 
-    private static final String TAG ="error" ;
+    private static final String TAG = "error";
     //region Declaracion de Variables
     private FirebaseAuth firebaseAuth; //Objeto de Firebase para autenticar
     private EditText dni, nombre, apellido, email, password, reppass;
@@ -32,7 +37,8 @@ public class CrearCuenta extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextInputLayout til_dni, til_nombre, til_apellido, til_email, til_password, til_reppass;
     private ProgressDialog progressDialog;//Objeto que muestra una barra de proceso
-    String userID;
+    String p_dni, p_nombre, p_apellido, p_email, p_password, p_reppass;
+
     //endregion
 
     //region setUp
@@ -118,11 +124,6 @@ public class CrearCuenta extends AppCompatActivity {
 //        Crear un Usuario para guardar
 //            Primero creamos usuario con email y contraseña para la autentiacion de Firebase
             crearNuevoUsuario(p_email, p_password);
-            userID = firebaseAuth.getCurrentUser().getUid();
-//           Con el id que genera la autenticacion en Firebase, seteamos nuestro usuario
-            Usuario usuario = new Usuario(userID, p_dni, p_nombre, p_apellido, p_email, p_password);
-//            El Usuario con su id y demas datos se guarda en la base de datos
-            guardar(usuario);
 
         } else {
             Toast.makeText(this, "Por Favor, verifique el password", Toast.LENGTH_LONG).show();
@@ -130,11 +131,6 @@ public class CrearCuenta extends AppCompatActivity {
 
     }
 
-    private void guardar(Usuario p_usuario) {
-
-//        Con la referencia a Base de Datos (BD), creamos un hijo (child) Usuarios, un child Id, y los datos
-        databaseReference.child("Usuarios").child(firebaseAuth.getCurrentUser().getUid()).setValue(p_usuario);
-    }
 
     private void crearNuevoUsuario(String p_email, String p_password) {
 
@@ -146,11 +142,34 @@ public class CrearCuenta extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in userID's information
-                            Toast.makeText(CrearCuenta.this, "Se ha registrado el usuario con el email: " + email.getText(), Toast.LENGTH_LONG).show();
-                            //COlocar accion de exito uiUpdate()
+                            Toast.makeText(CrearCuenta.this, "Se ha registrado el usuario exitosamente!", Toast.LENGTH_LONG).show();
+                            Handler mHandler = new Handler();
+                            mHandler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent login = new Intent(CrearCuenta.this, MainActivity.class);
+                                    login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    startActivity(login);
+
+                                    try {
+                                        crearNodoUsuario();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    finish();
+                                }
+
+                            }, 2000);
+
+
                         } else {
                             // If sign in fails, display a message to the userID.
-                            Toast.makeText(CrearCuenta.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
+                            String tipoError = task.getException().toString();
+                            if (tipoError.contains("The email address is already in use")) {
+                                Toast.makeText(CrearCuenta.this, "El email ya esta en uso. No se pudo registrar", Toast.LENGTH_LONG).show();
+                            }
+
                             Log.e(TAG, "createUserWithEmail:failure", task.getException());
                             updateUI(null);
                         }
@@ -163,6 +182,16 @@ public class CrearCuenta extends AppCompatActivity {
 
 
     }
+
+    public void crearNodoUsuario() {
+
+        Usuario usuario = new Usuario(firebaseAuth.getCurrentUser().getUid(), p_dni, p_nombre, p_apellido, p_email, p_password);
+
+        String idDeUsuario = usuario.getIdUsuario();
+
+        databaseReference.child("Usuarios").child(idDeUsuario).setValue(usuario);
+    }
+
     //endregion
 
     //region Otros Metodos
