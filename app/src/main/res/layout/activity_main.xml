@@ -20,7 +20,7 @@
             android:id="@+id/til_correoLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60sp"
+            android:layout_marginTop="80sp"
             android:textColorHint="@color/colorBotonVerde">
 
 
@@ -118,23 +118,6 @@
             android:drawableLeft="@drawable/ic_action_login_google"
             android:fontFamily="@font/roboto_mono_bold_italic"
             android:hint="@string/bt_log_google"
-            android:onClick="onClick"
-            android:textColor="@color/colorBotonBlanco"
-            android:textColorHint="@color/colorBotonBlanco"
-            android:textSize="18sp"
-            android:textStyle="normal" />
-
-        <Button
-            android:id="@+id/bt_logface"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="60mm"
-            android:layout_height="55sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15sp"
-            android:background="@drawable/stylo_boton_pressed"
-            android:drawableLeft="@drawable/ic_action_login_face"
-            android:fontFamily="@font/roboto_mono_bold_italic"
-            android:hint="@string/bt_log_face"
             android:onClick="onClick"
             android:textColor="@color/colorBotonBlanco"
             android:textColorHint="@color/colorBotonBlanco"
