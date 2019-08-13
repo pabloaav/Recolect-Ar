@@ -67,16 +67,15 @@
                 android:textStyle="bold"  />
 
 
-
             <TextView
 
                 android:id="@+id/tv_Ubicacion"
-                android:layout_width="wrap_content"
+                android:layout_width="251dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto_mono_bold_italic"
-                android:text="Ubicacion: Av. Hipólito Yrigoyen 2330"
+                android:text="Ubicacion: Av. Hipólito Yrigoyen 2330 (Ver En Mapas)"
                 android:textColor="@color/colorBotonVerde"
                 android:textSize="14sp"
                 android:textStyle="bold" />
