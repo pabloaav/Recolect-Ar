@@ -10,15 +10,30 @@
     android:orientation="vertical"
     tools:context="fragmentos.PuntoReciclajeFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_ecopuntos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <LinearLayout
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_reciclajeEnLaWeb"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLay_Reciclaje"
+        android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_reciclajeEnLaWeb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLay_eco"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_ecopuntos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </LinearLayout>
