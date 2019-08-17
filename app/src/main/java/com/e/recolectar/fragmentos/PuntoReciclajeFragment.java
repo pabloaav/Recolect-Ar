@@ -19,8 +19,10 @@ import android.widget.Toast;
 import com.e.recolectar.R;
 import com.e.recolectar.adaptadores.AdaptadorRecyclerEcopuntos;
 import com.e.recolectar.adaptadores.AdaptadorRecyclerIncidencias;
+import com.e.recolectar.adaptadores.AdaptadorRecyclerReciclaje;
 import com.e.recolectar.logica.modelo.EcopuntosPojo;
 import com.e.recolectar.logica.modelo.IncidenciaPojo;
+import com.e.recolectar.logica.modelo.ReciclajePojo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,7 +57,6 @@ public class PuntoReciclajeFragment extends Fragment {
     //endregion
 
     //region Atributos
-    private TextView tv_ubicacion;
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
     //endregion
@@ -144,60 +145,81 @@ public class PuntoReciclajeFragment extends Fragment {
         //Inflamos la vista del layout puntos de reciclaje
         View vista = inflater.inflate(R.layout.fragment_punto_reciclaje, container, false);
 
-        //Binding de elementos del layout
-//        tv_ubicacion = vista.findViewById(R.id.tv_Ubicacion);
-
         // Objetos de Firebase necesarios para referenciar DB y autenticacion
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         mDataBase = firebaseDatabase.getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        //Instanciamos el objeto Recycler view
+        //Instanciamos el objeto Recycler view ecopuntos
         RecyclerView recyclerViewEcopuntos = vista.findViewById(R.id.rv_ecopuntos);
 
-        //Se necesita un objeto Linear Layaout Manager
+        //Instanciamos el objeto Recycler view reciclaje
+        RecyclerView recyclerViewReciclaje = vista.findViewById(R.id.rv_reciclajeEnLaWeb);
+
+        //Se necesita un objeto Linear Layaout Manager para los ecopuntos
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
+        //Se necesita un objeto Linear Layaout Manager para la info de reciclaje
+        LinearLayoutManager linearReciclaje = new LinearLayoutManager(getContext());
+        linearReciclaje.setReverseLayout(true);
+        linearReciclaje.setStackFromEnd(true);
+        linearReciclaje.setOrientation(LinearLayoutManager.VERTICAL);
+
         //Seteamos el recycler con el Layout Manager
         recyclerViewEcopuntos.setLayoutManager(linearLayoutManager);
 
+        //Seteamos el recycler con el Layout Manager
+        recyclerViewReciclaje.setLayoutManager(linearReciclaje);
+
         //Cargamos el array de ecopuntos con los datos de la base de datos
-        cargarArrayRecycler(recyclerViewEcopuntos);
+        cargarArrayEcopuntos(recyclerViewEcopuntos);
 
-//        //hacer el bind del textview de la ubicacion del ecopunto
-//        tv_ubicacion = vista.findViewById(R.id.tv_Ubicacion);
-//        tv_ubicacion.setTextColor(getResources().getColor(R.color.linkColor));
-
-        //Lo hacemos clickable
-//        tv_ubicacion.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Hacer lo del maps app
-//                llamarMapsApp();
-//                Toast.makeText(getActivity(), "Abriendo Ecopunto en Maps de Google", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
+        //Cargamos el array de reciclaje con los datos de la base de datos
+        cargarArrayReciclaje(recyclerViewReciclaje);
 
         // Inflate the layout for this fragment
         return vista;
 
     }
 
-    private void llamarMapsApp() {
-//        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
-        Uri gmmIntentUri = Uri.parse("geo:-27.4703795,-58.8244543,17?z=15&q=Plaza+Libertad");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
+    private void cargarArrayReciclaje(final RecyclerView rvReciclaje) {
+
+        DatabaseReference ref = mDataBase.child("Reciclaje");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                ArrayList<ReciclajePojo> array = new ArrayList<>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //Se crea objeto desde el snapshot de la base de datos con los datos de cada ecopunto
+                    ReciclajePojo reciclaje = snapshot.getValue(ReciclajePojo.class);
+                    reciclaje.setNombre(reciclaje.getNombre());
+                    reciclaje.setDescripcion(reciclaje.getDescripcion());
+                    reciclaje.setEnlace(reciclaje.getEnlace());
+                    array.add(reciclaje);
+
+                }//Fin del for
+
+                //Colocamos la clase adaptadora del recycler que creamos para instanciar el view holder y manejar el objeto RecyclerView. El primer parametro que recibe el constructor debe ser un array de objetos de Ecopuntos que se obtienen de la base de datos
+                AdaptadorRecyclerReciclaje adaptador = new AdaptadorRecyclerReciclaje(array, R.layout.cardview_reciclaje, getActivity());
+
+                //Seteamos al recycler el adaptador correspondiente
+                rvReciclaje.setAdapter(adaptador);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private void cargarArrayRecycler(final RecyclerView rvEcopuntos) {
+    private void cargarArrayEcopuntos(final RecyclerView rvEcopuntos) {
 
         DatabaseReference ref = mDataBase.child("Ecopuntos");
 
@@ -231,6 +253,7 @@ public class PuntoReciclajeFragment extends Fragment {
         });
 
     }//Fin cargar recycler
+
 
     //endregion
 

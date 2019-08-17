@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.EcopuntosPojo;
@@ -99,18 +100,19 @@ public class AdaptadorRecyclerEcopuntos extends RecyclerView.Adapter<AdaptadorRe
         //Al hacer clic en un cardview debe llevarnos a una vista ampliada
         @Override
         public void onClick(View view) {
-            //Vista correspondiente al click en el cardview de incidencia
-//            llamarWeb(view);
-
+            //accion al hacer click en el card ecopunto
+            Toast.makeText(mContext, "Abriendo el Ecopunto en Mapas de Google, un momento por favor...", Toast.LENGTH_LONG).show();
+            llamarMapsApp(view);
         }
 
-        private void llamarWeb(View v) {
+        private void llamarMapsApp(View v) {
 //        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
-            String paginaWeb = "https://ecoplas.org.ar/reciclado-de-plasticos-2/";
-            Uri web = Uri.parse(paginaWeb);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, web);
-            v.getContext().startActivity(webIntent);
-
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=Plaza+Libertad,+ Corrientes");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (mapIntent.resolveActivity(v.getContext().getPackageManager()) != null) {
+                v.getContext().startActivity(mapIntent);
+            }
         }
     }
 }

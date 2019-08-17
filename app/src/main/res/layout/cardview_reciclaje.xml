@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cv_ecopuntos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -17,22 +16,10 @@
         android:layout_marginBottom="10sp"
         card_view:cardCornerRadius="10dp">
 
-            <ImageView
-                android:id="@+id/imageView_Foto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="right|center_vertical"
-                android:background="@drawable/fondo_ecopunto_final_600x"
-                android:padding="10dp"
-                android:scaleType="centerCrop" />
-
-
         <LinearLayout
-
-            android:id="@+id/linearLay_DatosPunto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -41,24 +28,23 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_NombrePunto"
+                    android:id="@+id/nombre_web"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
-                    android:text="EcoPunto N°1: "
+                    android:text="Nombre de la web: "
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cv_nombre"
+                    android:id="@+id/cv_nombre_web"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
+                    android:text="String de nombre de la web"
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -70,28 +56,29 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_Ubicacion"
+                    android:id="@+id/contenido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10sp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
-                    android:text="Ubicacion: "
+                    android:text="Contenido: "
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cv_ubicacion"
+                    android:id="@+id/cv_contenido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
-                    android:text="ubicacion"
+                    android:text="Descripcion del contenido de reciclaje de la web"
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -100,23 +87,24 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_Informacion"
+                    android:id="@+id/enlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
-                    android:text="Informacion: "
+                    android:text="Link: "
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cv_informacion"
+                    android:id="@+id/cv_enlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/roboto_mono_bold_italic"
-                    android:text="informacion"
+                    android:text="URL de la web de reciclaje"
                     android:textColor="@color/colorBotonVerde"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -128,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto_mono_bold_italic"
-                android:text="Click para ver en Mapas..."
+                android:text="Click para abrir en el navegador..."
                 android:textColor="@color/linkColor"
                 android:textSize="14sp"
                 android:textStyle="bold" />
