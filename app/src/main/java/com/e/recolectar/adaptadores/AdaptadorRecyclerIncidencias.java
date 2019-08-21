@@ -1,7 +1,9 @@
 package com.e.recolectar.adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 
 /**
  * La clase AdaptadorRecyclerIncidencias se encarga de sincronizar, vincular o asociar un arraylist (lista de objetos), con los elementos de cada Cardview, mostrandolos a medida que se solicitan los datos
- * <p>
+ *
  * Recibe una colecccion de objetos de tipo ViewHolder, que es la clase Inne declarada para manipular los objetos Incidencia
  */
 public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<AdaptadorRecyclerIncidencias.IncidenciasViewHolder> {
@@ -164,6 +166,17 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         @Override
         public void onClick(View view) {
             //Vista correspondiente al click en el cardview de incidencia
+//            llamarWeb(view);
+
+        }
+
+        private void llamarWeb(View v) {
+//        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
+            String paginaWeb = "https://ecoplas.org.ar/reciclado-de-plasticos-2/";
+            Uri web = Uri.parse(paginaWeb);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, web);
+            v.getContext().startActivity(webIntent);
+
         }
     }
 }
