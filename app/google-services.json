@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:162694115883:android:e60298240b69f283",
+        "android_client_info": {
+          "package_name": "com.e.recolect_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162694115883-8cmsiia1t43g7se6k5pvssggs4ileg5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.recolect_admin",
+            "certificate_hash": "65fb92758f9b4f34374725963ca44606bdc0c84e"
+          }
+        },
+        {
+          "client_id": "162694115883-e7m0qlsr5ivtag5d43l78jkhc4g4e94l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIURfDjLlKg0I3say9E0ElDKDmhgzrS00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162694115883-e7m0qlsr5ivtag5d43l78jkhc4g4e94l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:162694115883:android:ad564af82a29cb01",
         "android_client_info": {
           "package_name": "com.e.recolectar"
