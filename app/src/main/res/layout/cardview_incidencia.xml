@@ -108,32 +108,32 @@
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/direccion"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="10dp"-->
-                    <!--android:fontFamily="@font/roboto_mono_bold_italic"-->
-                    <!--android:text="Direccion: "-->
-                    <!--android:textColor="@color/colorBotonVerde"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/direccion"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:fontFamily="@font/roboto_mono_bold_italic"-->
+            <!--android:text="Direccion: "-->
+            <!--android:textColor="@color/colorBotonVerde"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textStyle="bold" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/cv_direccion"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:layout_marginBottom="10dp"-->
-                    <!--android:fontFamily="@font/roboto_mono_bold_italic"-->
-                    <!--android:text="Direccion: "-->
-                    <!--android:textColor="@color/colorBotonVerde"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/cv_direccion"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:fontFamily="@font/roboto_mono_bold_italic"-->
+            <!--android:text="Direccion: "-->
+            <!--android:textColor="@color/colorBotonVerde"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textStyle="bold" />-->
             <!--</LinearLayout>-->
 
             <LinearLayout
@@ -194,20 +194,34 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/cv_estado"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="@font/roboto_mono_bold_italic"
-                android:text="Estado: En Proceso"
-                android:textColor="@color/colorBotonVerde"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/estado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/roboto_mono_bold_italic"
+                    android:text="Estado: "
+                    android:textColor="@color/colorBotonVerde"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cv_estado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:fontFamily="@font/roboto_mono_bold_italic"
+                    android:text="estado de la incidencia"
+                    android:textColor="@color/colorBotonVerde"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
-
 
     </android.support.v7.widget.CardView>
 

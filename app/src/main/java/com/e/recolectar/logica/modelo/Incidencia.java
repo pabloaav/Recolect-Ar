@@ -42,6 +42,7 @@ public class Incidencia {
     private String descripcion;
     private String ubicacion;
     private Map<String, Object> geo_ubicacion;
+    private Map<String, Boolean> estado;
 
     //endregion
 
@@ -52,13 +53,14 @@ public class Incidencia {
     }
 
     //Constructor
-    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, Map<String, Object> geo_ubicacion, String ubicacion) {
+    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, Map<String, Object> geo_ubicacion, String ubicacion, Map<String, Boolean> estado) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.ubicacion = ubicacion;
         this.geo_ubicacion = geo_ubicacion;
+        this.estado = estado;
     }
 
     public String getTipo() {
@@ -109,6 +111,11 @@ public class Incidencia {
         this.geo_ubicacion = geo_ubicacion;
     }
 
+    public Map<String, Boolean> getEstado() {
+        return estado;
+    }
 
-
+    public void setEstado(Map<String, Boolean> estado) {
+        this.estado = estado;
+    }
 }
