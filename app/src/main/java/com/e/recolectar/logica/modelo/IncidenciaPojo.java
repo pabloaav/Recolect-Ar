@@ -10,6 +10,7 @@ public class IncidenciaPojo {
     private String direccion;
     private Map<String, Object> ubicacion;
     private String cadenaUbicacion;
+    private Map<String, Boolean> estado;
 
     public IncidenciaPojo() {
     }
@@ -69,5 +70,13 @@ public class IncidenciaPojo {
 
     public void setCadenaUbicacion(String cadenaUbicacion) {
         this.cadenaUbicacion = cadenaUbicacion;
+    }
+
+    public Map<String, Boolean> getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Map<String, Boolean> estado) {
+        this.estado = estado;
     }
 }

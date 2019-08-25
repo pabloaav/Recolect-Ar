@@ -23,10 +23,11 @@ import com.e.recolectar.R;
 import com.e.recolectar.logica.modelo.IncidenciaPojo;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * La clase AdaptadorRecyclerIncidencias se encarga de sincronizar, vincular o asociar un arraylist (lista de objetos), con los elementos de cada Cardview, mostrandolos a medida que se solicitan los datos
- *
+ * <p>
  * Recibe una colecccion de objetos de tipo ViewHolder, que es la clase Inne declarada para manipular los objetos Incidencia
  */
 public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<AdaptadorRecyclerIncidencias.IncidenciasViewHolder> {
@@ -67,8 +68,10 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         //Quitamos el state (Estado=Provincia) de la cadena de ubicacion
         String cadenaSinProvincia = quitarProvincia(incidencia.getCadenaUbicacion());
         incidenciasViewHolder.ubicacion.setText(cadenaSinProvincia);
-//        incidenciasViewHolder.imagen.setImageResource(R.drawable.basura);
+        //Tomamos el estado de la base de datos
+        incidenciasViewHolder.estado.setText(leerEstadoIncidencia(incidencia.getEstado()));
 
+//        incidenciasViewHolder.imagen.setImageResource(R.drawable.basura);
         String imagen = incidencia.getImagen();
 //cargar foto Firebase
         Glide
@@ -96,18 +99,30 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
 
     }//Fin de OnBind...
 
+    private CharSequence leerEstadoIncidencia(Map<String, Boolean> p_estado) {
+        boolean enProceso = p_estado.get("En Proceso");
+        boolean terminado = p_estado.get("Terminado");
+        CharSequence resultado = "resultado";
+        if (enProceso && terminado) {
+            resultado = "Terminado";
+        } else {
+            resultado = "En Proceso";
+        }
+        return resultado;
+    }
+
     private String quitarSegundos(String fechaCompleta) {
         //Buscamos la ultima ocurrencia de un caracter en un string o cadena
         int dosPuntos = fechaCompleta.lastIndexOf(":");
         //Extraemos un substring de un string, desde el indice 0 hasta el indice obtenido arriba
-        return  fechaCompleta.substring (0, dosPuntos);
+        return fechaCompleta.substring(0, dosPuntos);
     }
 
     private String quitarProvincia(String cadenaUbicacionCompleta) {
         //Buscamos la ultima ocurrencia de un caracter en un string o cadena
-       int coma = cadenaUbicacionCompleta.lastIndexOf(",");
-       //Extraemos un substring de un string, desde el indice 0 hasta el indice obtenido arriba
-        return  cadenaUbicacionCompleta.substring (0, coma);
+        int coma = cadenaUbicacionCompleta.lastIndexOf(",");
+        //Extraemos un substring de un string, desde el indice 0 hasta el indice obtenido arriba
+        return cadenaUbicacionCompleta.substring(0, coma);
     }
 
     //Este metodo inicializa la vista del ViewHolder
@@ -138,9 +153,10 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         private TextView tipo;
         private TextView fecha;
         private TextView descripcion;
-//        private TextView direccion;
+        //private TextView direccion;
         private TextView ubicacion;
         private ProgressBar progressBar;
+        private TextView estado;
 
         /**
          * Constructor: cada dato de una incidencia, se asocia con los los elementos de la vista del cardview representados por su nombre de id que figuran en el layout Cardview
@@ -159,6 +175,7 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
             descripcion = itemView.findViewById(R.id.cv_descripcion);
 //            direccion = itemView.findViewById(R.id.cv_direccion);
             ubicacion = itemView.findViewById(R.id.cv_ubicacion);
+            estado = itemView.findViewById(R.id.cv_estado);
             progressBar = itemView.findViewById(R.id.progressBar);
         }
 
@@ -166,16 +183,11 @@ public class AdaptadorRecyclerIncidencias extends RecyclerView.Adapter<Adaptador
         @Override
         public void onClick(View view) {
             //Vista correspondiente al click en el cardview de incidencia
-//            llamarWeb(view);
+//            detalleIncidencia(view);
 
         }
 
-        private void llamarWeb(View v) {
-//        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
-            String paginaWeb = "https://ecoplas.org.ar/reciclado-de-plasticos-2/";
-            Uri web = Uri.parse(paginaWeb);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, web);
-            v.getContext().startActivity(webIntent);
+        private void detalleIncidencia(View v) {
 
         }
     }
