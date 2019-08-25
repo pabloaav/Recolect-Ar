@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="583dp"
+        android:layout_height="500dp"
         android:layout_above="@+id/progressBar2"
         android:layout_marginBottom="10dp"
         app:srcCompat="@mipmap/ic_launcher_foreground" />
@@ -29,5 +29,28 @@
         android:progressDrawable="@drawable/stylo_progressbar">
 
     </ProgressBar>
+
+    <TextView
+        android:id="@+id/tv_verif_datos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="525dp"
+        android:fontFamily="@font/glegoo_bold"
+        android:hint="@string/tv_verif_datos"
+        android:textColorHint="@color/colorBotonVerde"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/tv_recolectar"
+        android:textColorHint="@color/colorBotonVerde"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/glegoo_bold"
+        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>

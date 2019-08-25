@@ -47,6 +47,10 @@
     <string name="tab_text_3">ECOPUNTOS</string>
 
 
+    <!--ATRIBUTOS DE SPLASH-->
+    <string name="tv_verif_datos">VERIFICANDO DATOS</string>
+    <string name="tv_recolectar">RECOLECT-AR</string>
+
     <!--Cosas del Maps Activity-->
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_maps">Map</string>
