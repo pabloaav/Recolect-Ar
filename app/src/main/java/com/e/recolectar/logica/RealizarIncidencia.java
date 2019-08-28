@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -28,7 +27,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,7 +80,7 @@ public class RealizarIncidencia extends AppCompatActivity {
     private StorageReference mStorageRef;
     private Incidencia incidencia;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, dbRefNodoIncidencia, dbRefNodoUsuario;
     private ProgressDialog progressDialog;
     TextView textView_ubicacion, textView_tipo_incidencia;
     EditText editText_descripcion, editText_direccion;
@@ -113,6 +111,8 @@ public class RealizarIncidencia extends AppCompatActivity {
         editText_descripcion = findViewById(R.id.txt_descripcion);
         editText_direccion = findViewById(R.id.txt_direccion_particular);
         cargandoIncidencia = new ProgressDialog(this);
+        dbRefNodoIncidencia = mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid());
+        dbRefNodoUsuario = mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid());
 
         if (validaPermisos()) {
             botonCargar.setEnabled(true);
@@ -173,12 +173,6 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
         return cadenaDeUbicacion;
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        imagen_sin_foto = imagen.getDrawable();
-//    }
 
     private boolean validaPermisos() {
 
@@ -565,15 +559,16 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("direccion", p_incidencia.getUbicacion());
                         incidencia.put("ubicacion", p_incidencia.getGeo_ubicacion());
                         incidencia.put("estado", p_incidencia.getEstado());
-//      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
-                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
-//                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
-                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("incidencias").push().setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                        String pushKey = dbRefNodoIncidencia.push().getKey();
+                        //Debajo del pushKey ponemos la incidencia
+                        dbRefNodoIncidencia.child(pushKey).setValue(incidencia);
+                        //Con el mismo pushKey cargamos la incidencia en Usuario correspondiente
+                        dbRefNodoUsuario.child("incidencias").child(pushKey).setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 exitoIncidencia();
                                 dialogCargando.dismiss();
-//                                Toast.makeText(RealizarIncidencia.this, "Se cargo la incidencia correctamente.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
