@@ -180,6 +180,7 @@ public class EstadoFragment extends Fragment {
                     incidenciaPojo.setImagen(incidenciaPojo.getImagen());
                     Map<String, Object> ubicacion = incidenciaPojo.getUbicacion();
                     incidenciaPojo.setCadenaUbicacion(incidenciaPojo.getCadenaUbicacion());
+                    incidenciaPojo.setEstado(incidenciaPojo.getEstado());
                     array.add(incidenciaPojo);
 
                 }//Fin del for

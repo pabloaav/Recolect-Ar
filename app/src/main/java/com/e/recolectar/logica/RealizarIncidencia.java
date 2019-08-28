@@ -515,8 +515,11 @@ public class RealizarIncidencia extends AppCompatActivity {
         if (direccion_particular.isEmpty()) {
             direccion_particular = "Sin direccion particular";
         }
+        //El estado de la incidencia debe contener dos campos: en proceso ó terminado
+        Map<String, Boolean> estado = crearHasMapEstado();
+
         //Se forma el objeto incidencia que va a Firebase
-        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular);
+        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular, estado);
 
         boolean pasoLasValidaciones = onValidationSuccess();
         if (pasoLasValidaciones) {
@@ -531,6 +534,7 @@ public class RealizarIncidencia extends AppCompatActivity {
         }
 
     }
+
 
     public void cargarIncidencia(final Incidencia p_incidencia, final ProgressDialog dialogCargando) {
         dialogCargando.show();
@@ -560,6 +564,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("tipo", p_incidencia.getTipo());
                         incidencia.put("direccion", p_incidencia.getUbicacion());
                         incidencia.put("ubicacion", p_incidencia.getGeo_ubicacion());
+                        incidencia.put("estado", p_incidencia.getEstado());
 //      otra opcion es: mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("situaciones").push().updateChildren(incidencia).addOnCompleteListener(new ...
                         mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(incidencia);
 //                        mDatabase.child("Incidencias").child(mAuth.getCurrentUser().getUid()).push().setValue(location);
@@ -610,6 +615,19 @@ public class RealizarIncidencia extends AppCompatActivity {
         });
 
         alertOpciones.show();
+    }
+
+    private Map<String, Boolean> crearHasMapEstado() {
+        boolean enProceso = true;
+        boolean terminado = false;
+
+        //Ahora el objeto hashMap para subir a la base de datos
+        Map<String, Boolean> nodoEstado = new HashMap<>();
+        //En el mismo orden de Firebase
+        nodoEstado.put("En Proceso", enProceso);
+        nodoEstado.put("Terminado", terminado);
+
+        return nodoEstado;
     }
 
     private Map<String, Object> crearHashMapUbicacion(Location miUbicacion) {
