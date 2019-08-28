@@ -29,6 +29,9 @@
             android:name=".logica.CrearCuenta"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".logica.RealizarIncidencia"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".logica.vista.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -52,6 +55,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 
