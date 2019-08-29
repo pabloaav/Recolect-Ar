@@ -512,8 +512,11 @@ public class RealizarIncidencia extends AppCompatActivity {
         //El estado de la incidencia debe contener dos campos: en proceso ó terminado
         Map<String, Boolean> estado = crearHasMapEstado();
 
+        //El usuario que genera la incidencia
+        String usuario = mAuth.getCurrentUser().getEmail();
+
         //Se forma el objeto incidencia que va a Firebase
-        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular, estado);
+        incidencia = new Incidencia(tipo, fecha, miPath, descripcion, HM_ubicacion, direccion_particular, estado, usuario);
 
         boolean pasoLasValidaciones = onValidationSuccess();
         if (pasoLasValidaciones) {
@@ -559,7 +562,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("direccion", p_incidencia.getUbicacion());
                         incidencia.put("ubicacion", p_incidencia.getGeo_ubicacion());
                         incidencia.put("estado", p_incidencia.getEstado());
-
+                        incidencia.put("usuario", p_incidencia.getUsuario());
                         String pushKey = dbRefNodoIncidencia.push().getKey();
                         //Debajo del pushKey ponemos la incidencia
                         dbRefNodoIncidencia.child(pushKey).setValue(incidencia);
