@@ -564,6 +564,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("estado", p_incidencia.getEstado());
                         incidencia.put("usuario", p_incidencia.getUsuario());
                         String pushKey = dbRefNodoIncidencia.push().getKey();
+                        incidencia.put("key",pushKey);
                         //Debajo del pushKey ponemos la incidencia
                         dbRefNodoIncidencia.child(pushKey).setValue(incidencia);
                         //Con el mismo pushKey cargamos la incidencia en Usuario correspondiente
