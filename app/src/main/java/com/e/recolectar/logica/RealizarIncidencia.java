@@ -563,6 +563,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                         incidencia.put("ubicacion", p_incidencia.getGeo_ubicacion());
                         incidencia.put("estado", p_incidencia.getEstado());
                         incidencia.put("usuario", p_incidencia.getUsuario());
+                        incidencia.put("claveUsuario",mAuth.getCurrentUser().getUid());
                         String pushKey = dbRefNodoIncidencia.push().getKey();
                         incidencia.put("key",pushKey);
                         //Debajo del pushKey ponemos la incidencia
