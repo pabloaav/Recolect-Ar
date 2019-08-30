@@ -43,7 +43,7 @@ public class Incidencia {
     private String ubicacion;
     private Map<String, Object> geo_ubicacion;
     private Map<String, Boolean> estado;
-
+    private String usuario;
     //endregion
 
     //region CONSTRUCTOR, SETS Y GETS
@@ -53,7 +53,7 @@ public class Incidencia {
     }
 
     //Constructor
-    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, Map<String, Object> geo_ubicacion, String ubicacion, Map<String, Boolean> estado) {
+    public Incidencia(String tipo, String fecha, Uri imagen, String descripcion, Map<String, Object> geo_ubicacion, String ubicacion, Map<String, Boolean> estado, String usuario) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.imagen = imagen;
@@ -61,6 +61,15 @@ public class Incidencia {
         this.ubicacion = ubicacion;
         this.geo_ubicacion = geo_ubicacion;
         this.estado = estado;
+        this.usuario = usuario;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getTipo() {
