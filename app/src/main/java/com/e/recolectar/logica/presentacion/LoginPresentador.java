@@ -13,7 +13,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginPresentador implements LoginMVP.Presentacion {
 
@@ -81,6 +85,7 @@ public class LoginPresentador implements LoginMVP.Presentacion {
                                 menu.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 context.startActivity(menu);
                                 vista.onSuccess();
+                                onSuccessLogin();
 //                                Intent menu = new Intent(context, MenuInicio.class);
 //                                context.startActivity(menu);
 //                                Toast.makeText(context, "Bienvenido: " + getmAuth().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
@@ -143,6 +148,26 @@ public class LoginPresentador implements LoginMVP.Presentacion {
     @Override
     public void onLoginError(String error) {
         this.getVista().onError(error);
+    }
+
+    @Override
+    public void onSuccessLogin() {
+        final DatabaseReference ref = mDatabaseReference.child("Estadisticas/Usuarios/logins");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snap) {
+                Integer logins = snap.getValue(Integer.class);
+                logins++;
+                ref.setValue(logins);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 

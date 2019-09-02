@@ -21,6 +21,8 @@ public interface LoginMVP {
         void onPassValidationError(String errorType);
 
         void onLoginError(String error);
+
+        void onSuccessLogin();
     }
 
 
