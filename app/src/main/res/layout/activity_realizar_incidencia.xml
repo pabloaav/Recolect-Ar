@@ -129,27 +129,6 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <ImageButton
-        android:id="@+id/imgButton_2"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:layout_gravity="right"
-        android:layout_marginTop="-190sp"
-        android:layout_marginRight="5sp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_info_dialog" />
-
-    <ImageButton
-        android:id="@+id/imgButton3"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:layout_gravity="right"
-        android:layout_marginTop="115sp"
-        android:layout_marginRight="5sp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_info_dialog" />
-
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_descripcionInc"
         android:layout_width="56mm"
@@ -169,16 +148,6 @@
             android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:layout_gravity="right"
-        android:layout_marginTop="-45sp"
-        android:layout_marginRight="5sp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_info_dialog" />
 
 
 </LinearLayout>
