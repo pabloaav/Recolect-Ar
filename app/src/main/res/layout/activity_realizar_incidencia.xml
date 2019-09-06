@@ -144,8 +144,10 @@
             android:ems="10"
             android:fontFamily="@font/roboto_mono_bold_italic"
             android:hint="@string/txt_descripcion"
-            android:inputType="textPersonName"
-            android:textSize="16sp" />
+            android:maxLength="80"
+            android:textSize="16sp"
+            />
+
 
     </android.support.design.widget.TextInputLayout>
 

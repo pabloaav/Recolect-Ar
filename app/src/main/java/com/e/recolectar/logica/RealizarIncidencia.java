@@ -22,6 +22,8 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -131,6 +133,7 @@ public class RealizarIncidencia extends AppCompatActivity {
                 textView_tipo_incidencia.setText(String.format("El tipo de residuo a recolectar es: %s", nombre_tipo_incidencia));
             }
         }
+
 
     }//Fin de onCreate()
 
