@@ -107,7 +107,7 @@ public class AdaptadorRecyclerEcopuntos extends RecyclerView.Adapter<AdaptadorRe
 
         private void llamarMapsApp(View v) {
 //        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=Plaza+Libertad,+ Corrientes");
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + nombre.getText().toString() + ", " + ubicacion.getText().toString());
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             if (mapIntent.resolveActivity(v.getContext().getPackageManager()) != null) {

@@ -107,7 +107,7 @@ public class AdaptadorRecyclerReciclaje extends RecyclerView.Adapter<AdaptadorRe
 
         private void llamarWeb(View v) {
 //        Uri gmmIntentUri = Uri.parse("google.navigation:q=Plaza+Libertad");
-            String paginaWeb = "https://ecoplas.org.ar/reciclado-de-plasticos-2/";
+            String paginaWeb = enlace.getText().toString();
             Uri web = Uri.parse(paginaWeb);
             Intent webIntent = new Intent(Intent.ACTION_VIEW, web);
             v.getContext().startActivity(webIntent);

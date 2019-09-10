@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLay_Ecopuntos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPruebaFondoFarg"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="fragmentos.PuntoReciclajeFragment">
+    tools:context=".fragmentos.PuntoReciclajeFragment"
+    tools:ignore="ScrollViewCount">
 
     <LinearLayout
         android:id="@+id/linearLay_eco"
@@ -21,18 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLay_Reciclaje"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_reciclajeEnLaWeb"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
